@@ -1,0 +1,37 @@
+{
+  "name": "random",
+  "version": "2.0.0",
+  "description": "Seedable random number generator supporting many common distributions.",
+  "main": "index.js",
+  "repository": "transitive-bullshit/random",
+  "author": "Travis Fischer <travis@automagical.ai>",
+  "license": "MIT",
+  "scripts": {
+    "docs": "update-markdown-jsdoc",
+    "test": "ava -v && standard"
+  },
+  "engines": {
+    "node": ">=4"
+  },
+  "keywords": [
+    "random",
+    "prng",
+    "d3-random",
+    "seedrandom",
+    "uniform",
+    "normal",
+    "gaussian",
+    "lognormal",
+    "bates",
+    "poisson",
+    "irwinhall",
+    "exponential"
+  ],
+  "devDependencies": {
+    "ava": "^0.25.0",
+    "standard": "^11.0.0",
+    "update-markdown-jsdoc": "^1.0.2"
+  },
+  "dependencies": {
+  }
+}
