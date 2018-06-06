@@ -19,8 +19,6 @@ npm install --save random
 ```js
 const random = require('random')
 
-// possibly... random() // alias for random.uniform
-
 // uniform
 random.uniform(min = 0, max = 1) // [ min, max )
 random.float(min = 0, max = 1) // alias for random.uniform
@@ -70,19 +68,18 @@ rng.unpatch()
 ## API
 
 ```js
-RandomNumberGenerator(seed, opts)
-  - next(): number // [ 0, 1 )
+RNG(seed, opts)
   - name: string
+  - next(): number // [ 0, 1 )
   - seed(seed, opts)
   - clone(seed, opts)
 ```
 
 ## Related
 
-https://github.com/crypto-browserify/randombytes
-
 - [d3-random](https://github.com/d3/d3-random)
 - [seedrandom](https://github.com/davidbau/seedrandom)
+- [randombytes](https://github.com/crypto-browserify/randombytes)
 
 ## License
 
