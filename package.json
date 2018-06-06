@@ -33,5 +33,6 @@
     "update-markdown-jsdoc": "^1.0.2"
   },
   "dependencies": {
+    "ow": "^0.4.0"
   }
 }
