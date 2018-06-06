@@ -1,7 +1,6 @@
 # random
 
 > Seedable random number generator supporting many common distributions.
-> AKA **The most random module on npm.**
 
 [![NPM](https://img.shields.io/npm/v/random.svg)](https://www.npmjs.com/package/random) [![Build Status](https://travis-ci.com/transitive-bullshit/random.svg?branch=master)](https://travis-ci.com/transitive-bullshit/random) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
@@ -20,12 +19,12 @@ npm install --save random
 ```js
 const random = require('random')
 
-random() // alias for random.uniform
+// possibly... random() // alias for random.uniform
 
 // uniform
 random.uniform(min = 0, max = 1) // [ min, max )
 random.float(min = 0, max = 1) // alias for random.uniform
-random.int(min = 0, max = 1) // [ min, max )
+random.int(min = 0, max = 1) // [ min, max ]
 random.boolean() // true or false
 
 // normal
@@ -33,7 +32,7 @@ random.normal(mu = 0, sigma = 1)
 random.logNormal(mu = 0, sigma = 1)
 random.chiSquared()
 random.cauchy()
-random.fisher()
+random.fisherF()
 random.studentT()
 
 // bernoulli
@@ -56,10 +55,12 @@ random.bates()
 random.irwinHall()
 random.pareto(alpha)
 
+// underlying pseudo random number generator
 random.use('rand48', seed, opts)
 random.use(seedrandom('foobar'))
 random.seed('foobar') // alias for random.rng.seed
 
+// creating an independent random number generator
 const rng = random.clone(seed, opts)
 
 rng.patch()
