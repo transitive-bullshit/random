@@ -19,11 +19,15 @@ npm install --save random
 ```js
 const random = require('random')
 
-// uniform
-random.uniform(min = 0, max = 1) // [ min, max )
+// quick uniform shortcuts
 random.float(min = 0, max = 1) // alias for random.uniform
 random.int(min = 0, max = 1) // [ min, max ]
 random.boolean() // true or false
+
+// uniform
+random.uniform(min = 0, max = 1) // () => [ min, max )
+random.uniformInt(min = 0, max = 1) // () => [ min, max ]
+random.uniformBoolean() // () => [ false, true ]
 
 // normal
 random.normal(mu = 0, sigma = 1)
@@ -56,7 +60,6 @@ random.pareto(alpha)
 // underlying pseudo random number generator
 random.use('rand48', seed, opts)
 random.use(seedrandom('foobar'))
-random.seed('foobar') // alias for random.rng.seed
 
 // creating an independent random number generator
 const rng = random.clone(seed, opts)
@@ -71,7 +74,6 @@ rng.unpatch()
 RNG(seed, opts)
   - name: string
   - next(): number // [ 0, 1 )
-  - seed(seed, opts)
   - clone(seed, opts)
 ```
 
