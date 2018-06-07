@@ -69,7 +69,7 @@ random.int(0, 100) // 72
 random.boolean()   // true
 ```
 
-All distribution methods return a thunk (function with no params), which will return
+**All distribution methods return a thunk** (function with no params), which will return
 a series of independent, identically distributed random variables from the specified distribution.
 
 Note that returning a thunk here is more efficient when generating multiple
