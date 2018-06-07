@@ -15,17 +15,23 @@
   },
   "keywords": [
     "random",
+    "number",
+    "generator",
+    "rng",
     "prng",
+    "stats",
     "d3-random",
     "seedrandom",
+    "distribution",
+    "pseudorandom",
     "uniform",
     "normal",
     "gaussian",
     "lognormal",
-    "bates",
     "poisson",
+    "exponential",
     "irwinhall",
-    "exponential"
+    "bates"
   ],
   "devDependencies": {
     "ava": "^0.25.0",
