@@ -70,11 +70,11 @@ random.boolean()   // true
 ```
 
 All distribution methods return a thunk (function with no params), which will return
-a series of independent, identically distributed random variables according to the
-distribution parameters that were given.
+a series of independent, identically distributed random variables from the distribution.
+which was created.
 
-Note that returning a thunk here can be much more efficient when generating multiple
-samples from the same distribution consecutively.
+Note that returning a thunk here is more efficient when generating multiple
+samples from the same distribution.
 
 ```js
 // create a normal distribution with default params mu=1 and sigma=0
