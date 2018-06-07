@@ -8,7 +8,7 @@
 
 Welcome to the most **random** module on npm! 😜
 
--   Simple API (*make easy things easy and hard things possible*)
+-   Simple API (_make easy things easy and hard things possible_)
 -   Seedable based on entropy or user input
 -   Plugin support for different pseudo random number generators (PRNGs)
 -   Sample from many common distributions
@@ -45,17 +45,17 @@ random.normal(mu = 0, sigma = 1)
 random.logNormal(mu = 0, sigma = 1)
 
 // bernoulli
-random.bernoulli(p)
-random.binomial(n, p)
-random.geometric(p)
+random.bernoulli(p = 0.5)
+random.binomial(n = 1, p = 0.5)
+random.geometric(p = 0.5)
 
 // poisson
-random.poisson()
+random.poisson(lambda = 1)
 random.exponential(lambda = 1)
 
 // misc
-random.irwinHall()
-random.bates()
+random.irwinHall(n)
+random.bates(n)
 random.pareto(alpha)
 ```
 
@@ -127,20 +127,21 @@ rng.unpatch()
     -   [integer](#integer)
     -   [bool](#bool)
     -   [boolean](#boolean)
+    -   [uniform](#uniform)
+    -   [uniformInt](#uniformint)
+    -   [uniformBoolean](#uniformboolean)
     -   [normal](#normal)
     -   [logNormal](#lognormal)
     -   [bernoulli](#bernoulli)
-    -   [bernoulli](#bernoulli-1)
     -   [binomial](#binomial)
     -   [geometric](#geometric)
     -   [poisson](#poisson)
     -   [exponential](#exponential)
     -   [irwinHall](#irwinhall)
-    -   [irwinHall](#irwinhall-1)
     -   [bates](#bates)
     -   [pareto](#pareto)
 
-### [Random](https://github.com/transitive-bullshit/random/blob/041e4df7a99b15c1d4968bce392204ce75d5c541/src/random.js#L37-L382)
+### [Random](https://github.com/transitive-bullshit/random/blob/9268fa56b6514f430e39e6e5fbedc9c3d1688309/src/random.js#L35-L381)
 
 Seedable random number generator supporting many common distributions.
 
@@ -152,13 +153,13 @@ Type: `function (rng)`
 
 * * *
 
-#### [rng](https://github.com/transitive-bullshit/random/blob/041e4df7a99b15c1d4968bce392204ce75d5c541/src/random.js#L47-L49)
+#### [rng](https://github.com/transitive-bullshit/random/blob/9268fa56b6514f430e39e6e5fbedc9c3d1688309/src/random.js#L45-L47)
 
 Type: `function ()`
 
 * * *
 
-#### [clone](https://github.com/transitive-bullshit/random/blob/041e4df7a99b15c1d4968bce392204ce75d5c541/src/random.js#L61-L63)
+#### [clone](https://github.com/transitive-bullshit/random/blob/9268fa56b6514f430e39e6e5fbedc9c3d1688309/src/random.js#L59-L61)
 
 -   **See: RNG.clone**
 
@@ -167,13 +168,13 @@ set a new seed.
 
 Type: `function (args, seed, opts): Random`
 
--   `args` **...any**
+-   `args` **...any** 
 -   `seed` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** Optional seed for new RNG.
 -   `opts` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)?** Optional config for new RNG options.
 
 * * *
 
-#### [use](https://github.com/transitive-bullshit/random/blob/041e4df7a99b15c1d4968bce392204ce75d5c541/src/random.js#L85-L90)
+#### [use](https://github.com/transitive-bullshit/random/blob/9268fa56b6514f430e39e6e5fbedc9c3d1688309/src/random.js#L83-L88)
 
 Sets the underlying pseudorandom number generator used via
 either an instance of `seedrandom`, a custom instance of RNG
@@ -183,7 +184,7 @@ RNG.
 
 Type: `function (args)`
 
--   `args` **...any**
+-   `args` **...any** 
 
 Example:
 
@@ -201,7 +202,7 @@ random.use(Math.random)
 
 * * *
 
-#### [patch](https://github.com/transitive-bullshit/random/blob/041e4df7a99b15c1d4968bce392204ce75d5c541/src/random.js#L95-L102)
+#### [patch](https://github.com/transitive-bullshit/random/blob/9268fa56b6514f430e39e6e5fbedc9c3d1688309/src/random.js#L93-L100)
 
 Patches `Math.random` with this Random instance's PRNG.
 
@@ -209,7 +210,7 @@ Type: `function ()`
 
 * * *
 
-#### [unpatch](https://github.com/transitive-bullshit/random/blob/041e4df7a99b15c1d4968bce392204ce75d5c541/src/random.js#L107-L112)
+#### [unpatch](https://github.com/transitive-bullshit/random/blob/9268fa56b6514f430e39e6e5fbedc9c3d1688309/src/random.js#L105-L110)
 
 Restores a previously patched `Math.random` to its original value.
 
@@ -217,7 +218,7 @@ Type: `function ()`
 
 * * *
 
-#### [next](https://github.com/transitive-bullshit/random/blob/041e4df7a99b15c1d4968bce392204ce75d5c541/src/random.js#L125-L127)
+#### [next](https://github.com/transitive-bullshit/random/blob/9268fa56b6514f430e39e6e5fbedc9c3d1688309/src/random.js#L123-L125)
 
 Convenience wrapper around `this.rng.next()`
 
@@ -227,7 +228,7 @@ Type: `function (): number`
 
 * * *
 
-#### [float](https://github.com/transitive-bullshit/random/blob/041e4df7a99b15c1d4968bce392204ce75d5c541/src/random.js#L139-L141)
+#### [float](https://github.com/transitive-bullshit/random/blob/9268fa56b6514f430e39e6e5fbedc9c3d1688309/src/random.js#L137-L139)
 
 Samples a uniform random floating point number, optionally specifying
 lower and upper bounds.
@@ -241,7 +242,7 @@ Type: `function (min, max): number`
 
 * * *
 
-#### [int](https://github.com/transitive-bullshit/random/blob/041e4df7a99b15c1d4968bce392204ce75d5c541/src/random.js#L153-L155)
+#### [int](https://github.com/transitive-bullshit/random/blob/9268fa56b6514f430e39e6e5fbedc9c3d1688309/src/random.js#L151-L153)
 
 Samples a uniform random integer, optionally specifying lower and upper
 bounds.
@@ -255,7 +256,7 @@ Type: `function (min, max): number`
 
 * * *
 
-#### [integer](https://github.com/transitive-bullshit/random/blob/041e4df7a99b15c1d4968bce392204ce75d5c541/src/random.js#L169-L171)
+#### [integer](https://github.com/transitive-bullshit/random/blob/9268fa56b6514f430e39e6e5fbedc9c3d1688309/src/random.js#L167-L169)
 
 Samples a uniform random integer, optionally specifying lower and upper
 bounds.
@@ -269,7 +270,7 @@ Type: `function (min, max): number`
 
 * * *
 
-#### [bool](https://github.com/transitive-bullshit/random/blob/041e4df7a99b15c1d4968bce392204ce75d5c541/src/random.js#L182-L184)
+#### [bool](https://github.com/transitive-bullshit/random/blob/9268fa56b6514f430e39e6e5fbedc9c3d1688309/src/random.js#L180-L182)
 
 Samples a uniform random boolean value.
 
@@ -279,7 +280,7 @@ Type: `function (): boolean`
 
 * * *
 
-#### [boolean](https://github.com/transitive-bullshit/random/blob/041e4df7a99b15c1d4968bce392204ce75d5c541/src/random.js#L193-L195)
+#### [boolean](https://github.com/transitive-bullshit/random/blob/9268fa56b6514f430e39e6e5fbedc9c3d1688309/src/random.js#L191-L193)
 
 Samples a uniform random boolean value.
 
@@ -289,138 +290,150 @@ Type: `function (): boolean`
 
 * * *
 
-#### [normal](https://github.com/transitive-bullshit/random/blob/041e4df7a99b15c1d4968bce392204ce75d5c541/src/random.js#L224-L226)
+#### [uniform](https://github.com/transitive-bullshit/random/blob/9268fa56b6514f430e39e6e5fbedc9c3d1688309/src/random.js#L206-L208)
+
+Generates a [Continuous uniform distribution](https://en.wikipedia.org/wiki/Uniform_distribution_(continuous)).
+
+Type: `function (args, min, max): function`
+
+-   `args` **...any** 
+-   `min` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** Lower bound (float, inclusive) (optional, default `0`)
+-   `max` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** Upper bound (float, exclusive) (optional, default `1`)
+
+* * *
+
+#### [uniformInt](https://github.com/transitive-bullshit/random/blob/9268fa56b6514f430e39e6e5fbedc9c3d1688309/src/random.js#L217-L219)
+
+Generates a [Discrete uniform distribution](https://en.wikipedia.org/wiki/Discrete_uniform_distribution).
+
+Type: `function (args, min, max): function`
+
+-   `args` **...any** 
+-   `min` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** Lower bound (integer, inclusive) (optional, default `0`)
+-   `max` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** Upper bound (integer, inclusive) (optional, default `1`)
+
+* * *
+
+#### [uniformBoolean](https://github.com/transitive-bullshit/random/blob/9268fa56b6514f430e39e6e5fbedc9c3d1688309/src/random.js#L229-L231)
+
+Generates a [Discrete uniform distribution](https://en.wikipedia.org/wiki/Discrete_uniform_distribution),
+with two possible outcomes, `true` or \`false.
+
+This method is analogous to flipping a coin.
+
+Type: `function (): function`
+
+* * *
+
+#### [normal](https://github.com/transitive-bullshit/random/blob/9268fa56b6514f430e39e6e5fbedc9c3d1688309/src/random.js#L244-L246)
 
 Generates a [Normal distribution](https://en.wikipedia.org/wiki/Normal_distribution).
 
 Type: `function (args, mu, sigma): function`
 
--   `args` **...any**
+-   `args` **...any** 
 -   `mu` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** Mean (optional, default `0`)
 -   `sigma` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** Standard deviation (optional, default `1`)
 
 * * *
 
-#### [logNormal](https://github.com/transitive-bullshit/random/blob/041e4df7a99b15c1d4968bce392204ce75d5c541/src/random.js#L235-L237)
+#### [logNormal](https://github.com/transitive-bullshit/random/blob/9268fa56b6514f430e39e6e5fbedc9c3d1688309/src/random.js#L255-L257)
 
 Generates a [Log-normal distribution](https://en.wikipedia.org/wiki/Log-normal_distribution).
 
 Type: `function (args, mu, sigma): function`
 
--   `args` **...any**
+-   `args` **...any** 
 -   `mu` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** Mean of underlying normal distribution (optional, default `0`)
 -   `sigma` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** Standard deviation of underlying normal distribution (optional, default `1`)
 
 * * *
 
-#### [bernoulli](https://github.com/transitive-bullshit/random/blob/041e4df7a99b15c1d4968bce392204ce75d5c541/src/random.js#L259-L261)
+#### [bernoulli](https://github.com/transitive-bullshit/random/blob/9268fa56b6514f430e39e6e5fbedc9c3d1688309/src/random.js#L269-L271)
 
 Generates a [Bernoulli distribution](https://en.wikipedia.org/wiki/Bernoulli_distribution).
 
 Type: `function (args, p): function`
 
--   `args` **...any**
+-   `args` **...any** 
 -   `p` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** Success probability of each trial. (optional, default `0.5`)
 
 * * *
 
-#### [bernoulli](https://github.com/transitive-bullshit/random/blob/041e4df7a99b15c1d4968bce392204ce75d5c541/src/random.js#L259-L261)
-
-Generates a [Chi-squared distribution](https://en.wikipedia.org/wiki/Chi-squared_distribution).
-
-Type: `function (args, k): function`
-
--   `args` **...any**
--   `k` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** Degrees of freedom (k > 0) (optional, default `1`)
-
-* * *
-
-#### [binomial](https://github.com/transitive-bullshit/random/blob/041e4df7a99b15c1d4968bce392204ce75d5c541/src/random.js#L270-L272)
+#### [binomial](https://github.com/transitive-bullshit/random/blob/9268fa56b6514f430e39e6e5fbedc9c3d1688309/src/random.js#L280-L282)
 
 Generates a [Binomial distribution](https://en.wikipedia.org/wiki/Binomial_distribution).
 
 Type: `function (args, n, p): function`
 
--   `args` **...any**
+-   `args` **...any** 
 -   `n` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** Number of trials. (optional, default `1`)
 -   `p` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** Success probability of each trial. (optional, default `0.5`)
 
 * * *
 
-#### [geometric](https://github.com/transitive-bullshit/random/blob/041e4df7a99b15c1d4968bce392204ce75d5c541/src/random.js#L280-L282)
+#### [geometric](https://github.com/transitive-bullshit/random/blob/9268fa56b6514f430e39e6e5fbedc9c3d1688309/src/random.js#L290-L292)
 
 Generates a [Geometric distribution](https://en.wikipedia.org/wiki/Geometric_distribution).
 
 Type: `function (args, p): function`
 
--   `args` **...any**
+-   `args` **...any** 
 -   `p` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** Success probability of each trial. (optional, default `0.5`)
 
 * * *
 
-#### [poisson](https://github.com/transitive-bullshit/random/blob/041e4df7a99b15c1d4968bce392204ce75d5c541/src/random.js#L294-L296)
+#### [poisson](https://github.com/transitive-bullshit/random/blob/9268fa56b6514f430e39e6e5fbedc9c3d1688309/src/random.js#L304-L306)
 
 Generates a [Poisson distribution](https://en.wikipedia.org/wiki/Poisson_distribution).
 
 Type: `function (args, lambda): function`
 
--   `args` **...any**
+-   `args` **...any** 
 -   `lambda` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** Mean (lambda > 0) (optional, default `1`)
 
 * * *
 
-#### [exponential](https://github.com/transitive-bullshit/random/blob/041e4df7a99b15c1d4968bce392204ce75d5c541/src/random.js#L304-L306)
+#### [exponential](https://github.com/transitive-bullshit/random/blob/9268fa56b6514f430e39e6e5fbedc9c3d1688309/src/random.js#L314-L316)
 
 Generates an [Exponential distribution](https://en.wikipedia.org/wiki/Exponential_distribution).
 
 Type: `function (args, lambda): function`
 
--   `args` **...any**
+-   `args` **...any** 
 -   `lambda` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** Inverse mean (lambda > 0) (optional, default `1`)
 
 * * *
 
-#### [irwinHall](https://github.com/transitive-bullshit/random/blob/041e4df7a99b15c1d4968bce392204ce75d5c541/src/random.js#L329-L331)
-
-Generates a [Gamma distribution](https://en.wikipedia.org/wiki/Gamma_distribution).
-
-Type: `function (args, alpha, beta): function`
-
--   `args` **...any**
--   `alpha` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** Shape (alpha > 0) (optional, default `1`)
--   `beta` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** Rate (beta > 0) (optional, default `1`)
-
-* * *
-
-#### [irwinHall](https://github.com/transitive-bullshit/random/blob/041e4df7a99b15c1d4968bce392204ce75d5c541/src/random.js#L329-L331)
+#### [irwinHall](https://github.com/transitive-bullshit/random/blob/9268fa56b6514f430e39e6e5fbedc9c3d1688309/src/random.js#L328-L330)
 
 Generates an [Irwin Hall distribution](https://en.wikipedia.org/wiki/Irwin%E2%80%93Hall_distribution).
 
 Type: `function (args, n): function`
 
--   `args` **...any**
+-   `args` **...any** 
 -   `n` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** Number of uniform samples to sum (n >= 0)
 
 * * *
 
-#### [bates](https://github.com/transitive-bullshit/random/blob/041e4df7a99b15c1d4968bce392204ce75d5c541/src/random.js#L339-L341)
+#### [bates](https://github.com/transitive-bullshit/random/blob/9268fa56b6514f430e39e6e5fbedc9c3d1688309/src/random.js#L338-L340)
 
 Generates a [Bates distribution](https://en.wikipedia.org/wiki/Bates_distribution).
 
 Type: `function (args, n): function`
 
--   `args` **...any**
+-   `args` **...any** 
 -   `n` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** Number of uniform samples to average (n >= 1)
 
 * * *
 
-#### [pareto](https://github.com/transitive-bullshit/random/blob/041e4df7a99b15c1d4968bce392204ce75d5c541/src/random.js#L349-L351)
+#### [pareto](https://github.com/transitive-bullshit/random/blob/9268fa56b6514f430e39e6e5fbedc9c3d1688309/src/random.js#L348-L350)
 
 Generates a [Pareto distribution](https://en.wikipedia.org/wiki/Pareto_distribution).
 
 Type: `function (args, alpha): function`
 
--   `args` **...any**
+-   `args` **...any** 
 -   `alpha` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** Alpha
 
 * * *

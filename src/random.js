@@ -10,7 +10,6 @@ import uniformBoolean from './distributions/uniform-boolean'
 
 import normal from './distributions/normal'
 import logNormal from './distributions/log-normal'
-// import chiSquared from './distributions/chi-squared'
 
 import bernoulli from './distributions/bernoulli'
 import binomial from './distributions/binomial'
@@ -18,7 +17,6 @@ import geometric from './distributions/geometric'
 
 import poisson from './distributions/poisson'
 import exponential from './distributions/exponential'
-// import gamma from './distributions/gamma'
 
 import irwinHall from './distributions/irwin-hall'
 import bates from './distributions/bates'
@@ -198,14 +196,36 @@ class Random {
   // Uniform distributions
   // --------------------------------------------------------------------------
 
+  /**
+   * Generates a [Continuous uniform distribution](https://en.wikipedia.org/wiki/Uniform_distribution_(continuous)).
+   *
+   * @param {number} [min=0] - Lower bound (float, inclusive)
+   * @param {number} [max=1] - Upper bound (float, exclusive)
+   * @return {function}
+   */
   uniform (...args) {
     return this._memoize('uniform', uniform, ...args)
   }
 
+  /**
+   * Generates a [Discrete uniform distribution](https://en.wikipedia.org/wiki/Discrete_uniform_distribution).
+   *
+   * @param {number} [min=0] - Lower bound (integer, inclusive)
+   * @param {number} [max=1] - Upper bound (integer, inclusive)
+   * @return {function}
+   */
   uniformInt (...args) {
     return this._memoize('uniformInt', uniformInt, ...args)
   }
 
+  /**
+   * Generates a [Discrete uniform distribution](https://en.wikipedia.org/wiki/Discrete_uniform_distribution),
+   * with two possible outcomes, `true` or `false.
+   *
+   * This method is analogous to flipping a coin.
+   *
+   * @return {function}
+   */
   uniformBoolean () {
     return this._memoize('uniformBoolean', uniformBoolean)
   }
@@ -235,16 +255,6 @@ class Random {
   logNormal (...args) {
     return this._memoize('logNormal', logNormal, ...args)
   }
-
-  /**
-   * Generates a [Chi-squared distribution](https://en.wikipedia.org/wiki/Chi-squared_distribution).
-   *
-   * @param {number} [k=1] - Degrees of freedom (k > 0)
-   * @return {function}
-   */
-  // chiSquared (...args) {
-  //   return this._memoize('chiSquared', chiSquared, ...args)
-  // }
 
   // --------------------------------------------------------------------------
   // Bernoulli distributions
@@ -304,17 +314,6 @@ class Random {
   exponential (...args) {
     return this._memoize('exponential', exponential, ...args)
   }
-
-  /**
-   * Generates a [Gamma distribution](https://en.wikipedia.org/wiki/Gamma_distribution).
-   *
-   * @param {number} [alpha=1] - Shape (alpha > 0)
-   * @param {number} [beta=1] - Rate (beta > 0)
-   * @return {function}
-   */
-  // gamma (...args) {
-  //   return this._memoize('gamma', gamma, ...args)
-  // }
 
   // --------------------------------------------------------------------------
   // Misc distributions
