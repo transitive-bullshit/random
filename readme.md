@@ -98,7 +98,7 @@ const seedrandom = require('seedrandom')
 // by default, Math.random is used as the underlying PRNG
 random.use(seedrandom('foobar'))
 
-// create an independent random number generator
+// create a new independent random number generator
 const rng = random.clone('my-new-seed')
 
 // create a second independent random number generator and use a seeded PRNG
