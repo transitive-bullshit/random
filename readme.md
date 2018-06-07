@@ -59,14 +59,42 @@ random.exponential(lambda = 1)
 random.irwinHall()
 random.bates()
 random.pareto(alpha)
+```
+
+For convenience, several common uniform samplers are exposed directly:
+
+```js
+random.float()     // 0.2149383367670885
+random.int(0, 100) // 72
+random.boolean()   // true
+```
+
+All distribution methods return a thunk (function with no params), which will return
+a series of independent, identically distributed random variables according to the
+distribution parameters that were given.
+
+Note that returning a thunk here can be much more efficient when generating multiple
+samples from the same distribution consecutively.
+
+```js
+// create a normal distribution with default params mu=1 and sigma=0
+const normal = random.normal()
+normal() // 0.4855465422678824
+normal() // -0.06696771815439678
+normal() // 0.7350852689834705
+```
+
+You can change the underlying PRNG or its seed as follows:
+
+```js
+const seedrandom = require('seedrandom')
 
 // change the underlying pseudo random number generator
 // by default, random uses Math.random as the underlying PRNG
-const seedrandom = require('seedrandom')
 random.use(seedrandom('foobar'))
 
 // create an independent random number generator
-const rng = random.clone()
+const rng = random.clone('my-new-seed')
 
 // create a second independent random number generator
 // and use a seeded PRNG

@@ -35,6 +35,7 @@
   ],
   "devDependencies": {
     "ava": "^0.25.0",
+    "esm": "^3.0.48",
     "standard": "^11.0.0",
     "update-markdown-jsdoc": "^1.0.2"
   },
