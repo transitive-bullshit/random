@@ -68,9 +68,6 @@ random.boolean()   // true
 **All distribution methods return a thunk** (function with no params), which will return
 a series of independent, identically distributed random variables from the specified distribution.
 
-Note that returning a thunk here is more efficient when generating multiple
-samples from the same distribution.
-
 ```js
 // create a normal distribution with default params (mu=1 and sigma=0)
 const normal = random.normal()
@@ -84,6 +81,9 @@ poisson() // 0
 poisson() // 4
 poisson() // 1
 ```
+
+Note that returning a thunk here is more efficient when generating multiple
+samples from the same distribution.
 
 You can change the underlying PRNG or its seed as follows:
 
@@ -166,7 +166,7 @@ set a new seed.
 
 Type: `function (args, seed, opts): Random`
 
--   `args` **...any** 
+-   `args` **...any**
 -   `seed` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** Optional seed for new RNG.
 -   `opts` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)?** Optional config for new RNG options.
 
@@ -182,7 +182,7 @@ RNG.
 
 Type: `function (args)`
 
--   `args` **...any** 
+-   `args` **...any**
 
 Example:
 
