@@ -15,7 +15,7 @@ Welcome to the most **random** module on npm! 😜
     -   uniform, normal, poisson, bernoulli, etc
 -   Validates all user input via [ow](https://github.com/sindresorhus/ow)
 -   Integrates with [seedrandom](https://github.com/davidbau/seedrandom)
--   Supports node >= 4 and browser
+-   Supports node >= 6 and browser
 
 ## Install
 
