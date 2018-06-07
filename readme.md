@@ -166,7 +166,7 @@ TODO
 
 Huge shoutout to [Roger Combs](https://github.com/rcombs) for donating the `random` npm package for this project!
 
-Lots of inspiration from [@mbostock](https://github.com/mbostock) and [@svanschooten](https://github.com/svanschooten)'s work on [d3-random](https://github.com/d3/d3-random).
+Lots of inspiration from [d3-random](https://github.com/d3/d3-random) ([@mbostock](https://github.com/mbostock) and [@svanschooten](https://github.com/svanschooten)).
 
 Some distributions and PRNGs are ported from C++ [boost::random](https://www.boost.org/doc/libs/1_66_0/doc/html/boost_random/reference.html#boost_random.reference.distributions).
 
