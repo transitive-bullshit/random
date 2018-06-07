@@ -83,8 +83,12 @@ RNG(seed, opts)
 - [seedrandom](https://github.com/davidbau/seedrandom)
 - [randombytes](https://github.com/crypto-browserify/randombytes)
 
-## License
+## Credit
 
 Huge shoutout to [Roger Combs](https://github.com/rcombs) for donating the `random` npm package for this project!
+
+Lots of inspiration from [@mbostock](https://github.com/mbostock) and [@svanschooten](https://github.com/svanschooten)'s work on [d3-random](https://github.com/d3/d3-random).
+
+## License
 
 MIT © [Travis Fischer](https://github.com/transitive-bullshit)
