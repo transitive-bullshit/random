@@ -68,7 +68,6 @@ class Random {
    * RNG.
    *
    * @example
-   * ```js
    * const random = require('random')
    *
    * random.use('xor128', 'foobar')
@@ -76,7 +75,6 @@ class Random {
    * random.use(seedrandom('kittens'))
    * // or
    * random.use(Math.random)
-   * ```
    *
    * @param {...*} args
    */
