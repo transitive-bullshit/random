@@ -4,13 +4,11 @@
 
 [![NPM](https://img.shields.io/npm/v/random.svg)](https://www.npmjs.com/package/random) [![Build Status](https://travis-ci.com/transitive-bullshit/random.svg?branch=master)](https://travis-ci.com/transitive-bullshit/random) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-> Wanna work with random numbers in javaScript, but `Math.random` isn't cutting it?
-
-Then welcome to the most **random** module on npm!
-
 ## Highlights
 
--   Simple API (make easy things easy and hard things possible)
+Welcome to the most **random** module on npm! 😜
+
+-   Simple API (*make easy things easy and hard things possible*)
 -   Seedable based on entropy or user input
 -   Plugin support for different pseudo random number generators (PRNGs)
 -   Sample from many common distributions
