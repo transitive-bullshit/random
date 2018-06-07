@@ -24,7 +24,7 @@ import irwinHall from './distributions/irwin-hall'
 import bates from './distributions/bates'
 import pareto from './distributions/pareto'
 
-export class Random {
+class Random {
   constructor (rng) {
     if (rng) ow(rng, ow.object.label('rng').instanceOf(RNG))
 

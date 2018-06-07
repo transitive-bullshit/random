@@ -144,6 +144,7 @@ TODO
   - [ ] custom entropy
 
 - Misc
+  - [ ] browser support via webpack
   - [ ] basic docs
   - [ ] basic tests
   - [ ] first release!
