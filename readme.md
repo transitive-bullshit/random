@@ -459,8 +459,9 @@ Type: `function (alpha): function`
 -   Misc
     -   [x] browser support via rollup
     -   [x] basic docs
-    -   [ ] basic tests
-    -   [ ] first release!
+    -   [x] basic tests
+    -   [ ] full test suite
+    -   [x] initial release!
 
 ## Related
 
