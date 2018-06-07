@@ -77,11 +77,17 @@ Note that returning a thunk here is more efficient when generating multiple
 samples from the same distribution.
 
 ```js
-// create a normal distribution with default params mu=1 and sigma=0
+// create a normal distribution with default params (mu=1 and sigma=0)
 const normal = random.normal()
 normal() // 0.4855465422678824
 normal() // -0.06696771815439678
 normal() // 0.7350852689834705
+
+// create a poisson distribution with default params (lambda=1)
+const poisson = random.poisson()
+poisson() // 0
+poisson() // 4
+poisson() // 1
 ```
 
 You can change the underlying PRNG or its seed as follows:
@@ -90,14 +96,13 @@ You can change the underlying PRNG or its seed as follows:
 const seedrandom = require('seedrandom')
 
 // change the underlying pseudo random number generator
-// by default, random uses Math.random as the underlying PRNG
+// by default, Math.random is used as the underlying PRNG
 random.use(seedrandom('foobar'))
 
 // create an independent random number generator
 const rng = random.clone('my-new-seed')
 
-// create a second independent random number generator
-// and use a seeded PRNG
+// create a second independent random number generator and use a seeded PRNG
 const rng2 = random.clone(seedrandom('kittyfoo'))
 
 // replace Math.random with rng.uniform
