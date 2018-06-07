@@ -24,6 +24,16 @@ import irwinHall from './distributions/irwin-hall'
 import bates from './distributions/bates'
 import pareto from './distributions/pareto'
 
+/**
+ * Seedable random number generator supporting many common distributions.
+ *
+ * Defaults to Math.random as its underlying pseudorandom number generator.
+ *
+ * @name Random
+ * @class
+ *
+ * @param {RNG|function} [rng=Math.random] - Underlying pseudorandom number generator.
+ */
 class Random {
   constructor (rng) {
     if (rng) ow(rng, ow.object.label('rng').instanceOf(RNG))
@@ -31,14 +41,47 @@ class Random {
     this.use(rng)
   }
 
+  /**
+   * @member {RNG} Underlying pseudo-random number generator
+   */
   get rng () {
     return this._rng
   }
 
+  /**
+   * Creates a new `Random` instance, optionally specifying parameters to
+   * set a new seed.
+   *
+   * @see RNG.clone
+   *
+   * @param {string} [seed] - Optional seed for new RNG.
+   * @param {object} [opts] - Optional config for new RNG options.
+   * @return {Random}
+   */
   clone (...args) {
     return new Random(this.rng.clone(...args))
   }
 
+  /**
+   * Sets the underlying pseudorandom number generator used via
+   * either an instance of `seedrandom`, a custom instance of RNG
+   * (for PRNG plugins), or a string specifying the PRNG to use
+   * along with an optional `seed` and `opts` to initialize the
+   * RNG.
+   *
+   * @example
+   * ```js
+   * const random = require('random')
+   *
+   * random.use('xor128', 'foobar')
+   * // or
+   * random.use(seedrandom('kittens'))
+   * // or
+   * random.use(Math.random)
+   * ```
+   *
+   * @param {...*} args
+   */
   use (...args) {
     this._rng = RNGFactory(...args)
 
@@ -46,6 +89,9 @@ class Random {
     this._cache = LRUCache({ max: 64 })
   }
 
+  /**
+   * Patches `Math.random` with this Random instance's PRNG.
+   */
   patch () {
     if (this._patch) {
       throw new Error('Math.random already patched')
@@ -55,6 +101,9 @@ class Random {
     Math.random = this.uniform()
   }
 
+  /**
+   * Restores a previously patched `Math.random` to its original value.
+   */
   unpatch () {
     if (this._patch) {
       Math.random = this._patch
@@ -66,26 +115,81 @@ class Random {
   // Uniform utility functions
   // --------------------------------------------------------------------------
 
+  /**
+   * Convenience wrapper around `this.rng.next()`
+   *
+   * Returns a floating point number in [0, 1).
+   *
+   * @return {number}
+   */
   next () {
     return this._rng.next()
   }
 
+  /**
+   * Samples a uniform random floating point number, optionally specifying
+   * lower and upper bounds.
+   *
+   * Convence wrapper around `random.uniform()`
+   *
+   * @param {number} [min=0] - Lower bound (float, inclusive)
+   * @param {number} [max=1] - Upper bound (float, exclusive)
+   * @return {number}
+   */
   float (min, max) {
     return this.uniform(min, max)()
   }
 
+  /**
+   * Samples a uniform random integer, optionally specifying lower and upper
+   * bounds.
+   *
+   * Convence wrapper around `random.uniformInt()`
+   *
+   * @param {number} [min=0] - Lower bound (integer, inclusive)
+   * @param {number} [max=1] - Upper bound (integer, inclusive)
+   * @return {number}
+   */
   int (min, max) {
     return this.uniformInt(min, max)()
   }
 
+  /**
+   * Samples a uniform random integer, optionally specifying lower and upper
+   * bounds.
+   *
+   * Convence wrapper around `random.uniformInt()`
+   *
+   * @alias `random.int`
+   *
+   * @param {number} [min=0] - Lower bound (integer, inclusive)
+   * @param {number} [max=1] - Upper bound (integer, inclusive)
+   * @return {number}
+   */
   integer (min, max) {
     return this.uniformInt(min, max)()
   }
 
+  /**
+   * Samples a uniform random boolean value.
+   *
+   * Convence wrapper around `random.uniformBoolean()`
+   *
+   * @alias `random.boolean`
+   *
+   * @return {boolean}
+   */
   bool () {
     return this.uniformBoolean()()
   }
 
+  /**
+   * Samples a uniform random boolean value.
+   *
+   * Convence wrapper around `random.uniformBoolean()`
+   *
+   * @return {boolean}
+   */
   boolean () {
     return this.uniformBoolean()()
   }

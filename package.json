@@ -9,7 +9,7 @@
   "author": "Travis Fischer <travis@automagical.ai>",
   "license": "MIT",
   "scripts": {
-    "docs": "update-markdown-jsdoc",
+    "docs": "update-markdown-jsdoc -f src/random.js --shallow",
     "prebuild": "yarn run clean",
     "build": "rollup -c",
     "buildWatch": "rollup -c -w",
