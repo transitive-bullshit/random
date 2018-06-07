@@ -201,8 +201,8 @@ class Random {
    * @param {number} [max=1] - Upper bound (float, exclusive)
    * @return {function}
    */
-  uniform (...args) {
-    return this._memoize('uniform', uniform, ...args)
+  uniform (min, max) {
+    return this._memoize('uniform', uniform, min, max)
   }
 
   /**
@@ -212,8 +212,8 @@ class Random {
    * @param {number} [max=1] - Upper bound (integer, inclusive)
    * @return {function}
    */
-  uniformInt (...args) {
-    return this._memoize('uniformInt', uniformInt, ...args)
+  uniformInt (min, max) {
+    return this._memoize('uniformInt', uniformInt, min, max)
   }
 
   /**
@@ -239,8 +239,8 @@ class Random {
    * @param {number} [sigma=1] - Standard deviation
    * @return {function}
    */
-  normal (...args) {
-    return this._memoize('normal', normal, ...args)
+  normal (mu, sigma) {
+    return this._memoize('normal', normal, mu, sigma)
   }
 
   /**
@@ -250,8 +250,8 @@ class Random {
    * @param {number} [sigma=1] - Standard deviation of underlying normal distribution
    * @return {function}
    */
-  logNormal (...args) {
-    return this._memoize('logNormal', logNormal, ...args)
+  logNormal (mu, sigma) {
+    return this._memoize('logNormal', logNormal, mu, sigma)
   }
 
   // --------------------------------------------------------------------------
@@ -264,8 +264,8 @@ class Random {
    * @param {number} [p=0.5] - Success probability of each trial.
    * @return {function}
    */
-  bernoulli (...args) {
-    return this._memoize('bernoulli', bernoulli, ...args)
+  bernoulli (p) {
+    return this._memoize('bernoulli', bernoulli, p)
   }
 
   /**
@@ -275,8 +275,8 @@ class Random {
    * @param {number} [p=0.5] - Success probability of each trial.
    * @return {function}
    */
-  binomial (...args) {
-    return this._memoize('binomial', binomial, ...args)
+  binomial (n, p) {
+    return this._memoize('binomial', binomial, n, p)
   }
 
   /**
@@ -285,8 +285,8 @@ class Random {
    * @param {number} [p=0.5] - Success probability of each trial.
    * @return {function}
    */
-  geometric (...args) {
-    return this._memoize('geometric', geometric, ...args)
+  geometric (p) {
+    return this._memoize('geometric', geometric, p)
   }
 
   // --------------------------------------------------------------------------
@@ -299,8 +299,8 @@ class Random {
    * @param {number} [lambda=1] - Mean (lambda > 0)
    * @return {function}
    */
-  poisson (...args) {
-    return this._memoize('poisson', poisson, ...args)
+  poisson (lambda) {
+    return this._memoize('poisson', poisson, lambda)
   }
 
   /**
@@ -309,8 +309,8 @@ class Random {
    * @param {number} [lambda=1] - Inverse mean (lambda > 0)
    * @return {function}
    */
-  exponential (...args) {
-    return this._memoize('exponential', exponential, ...args)
+  exponential (lambda) {
+    return this._memoize('exponential', exponential, lambda)
   }
 
   // --------------------------------------------------------------------------
@@ -323,8 +323,8 @@ class Random {
    * @param {number} n - Number of uniform samples to sum (n >= 0)
    * @return {function}
    */
-  irwinHall (...args) {
-    return this._memoize('irwinHall', irwinHall, ...args)
+  irwinHall (n) {
+    return this._memoize('irwinHall', irwinHall, n)
   }
 
   /**
@@ -333,8 +333,8 @@ class Random {
    * @param {number} n - Number of uniform samples to average (n >= 1)
    * @return {function}
    */
-  bates (...args) {
-    return this._memoize('bates', bates, ...args)
+  bates (n) {
+    return this._memoize('bates', bates, n)
   }
 
   /**
@@ -343,8 +343,8 @@ class Random {
    * @param {number} alpha - Alpha
    * @return {function}
    */
-  pareto (...args) {
-    return this._memoize('pareto', pareto, ...args)
+  pareto (alpha) {
+    return this._memoize('pareto', pareto, alpha)
   }
 
   // --------------------------------------------------------------------------
