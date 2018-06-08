@@ -1,6 +1,6 @@
 {
   "name": "random",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Seedable random number generator supporting many common distributions.",
   "main": "index.js",
   "module": "src/random.js",
