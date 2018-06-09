@@ -1,3 +1,4 @@
+import replace from 'rollup-plugin-replace' // rollup-plugin-alias'
 import babel from 'rollup-plugin-babel'
 import commonjs from 'rollup-plugin-commonjs'
 import resolve from 'rollup-plugin-node-resolve'
@@ -13,12 +14,17 @@ export default {
       sourceMap: true
     }
   ],
-  external: Object.keys(pkg.dependencies),
+  // external: Object.keys(pkg.dependencies),
   plugins: [
-    babel({
+    replace({
       exclude: 'node_modules/**',
-      externalHelpers: false,
-      runtimeHelpers: true
+      delimiters: [ '\'', '\'' ],
+      values: {
+        'ow': '\'ow-shim\''
+      }
+    }),
+    babel({
+      exclude: 'node_modules/**'
     }),
     resolve({
       browser: true
