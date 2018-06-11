@@ -1,7 +1,7 @@
 import test from 'ava'
 import seedrandom from 'seedrandom'
 
-import inDelta from '../../src/in-delta'
+import inDelta from '../_in-delta'
 import random from '../..'
 
 test('random.uniform() is in [0, 1)', (t) => {

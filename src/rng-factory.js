@@ -1,13 +1,13 @@
 import RNG from './rng'
 
 import RNGXOR128 from './generators/xor128'
-import RNGSeedRandom from './generators/seedrandom'
+import RNGFunction from './generators/function'
 import RNGMathRandom from './generators/math-random'
 
 const PRNG_BUILTINS = {
   // TODO: add more prng from C++11 lib
   'xor128': RNGXOR128,
-  'seedrandom': RNGSeedRandom,
+  'function': RNGFunction,
   'default': RNGMathRandom
 }
 
@@ -22,7 +22,7 @@ export default (...args) => {
       break
 
     case 'function':
-      return new RNGSeedRandom(arg0)
+      return new RNGFunction(arg0)
 
     case 'string':
       const PRNG = PRNG_BUILTINS[arg0]
