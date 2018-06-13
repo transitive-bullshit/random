@@ -13,6 +13,7 @@
     "prebuild": "yarn run clean",
     "clean": "del dist",
     "prepublishOnly": "yarn run build",
+    "pretest": "yarn run build",
     "test": "ava -v && standard"
   },
   "engines": {
