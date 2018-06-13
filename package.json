@@ -51,10 +51,10 @@
   "dependencies": {
     "ow": "^0.4.0"
   },
-  "files": {
+  "files": [
     "index.js",
     "dist"
-  },
+  ],
   "ava": {
     "require": [
       "esm"
