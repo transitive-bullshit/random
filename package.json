@@ -52,7 +52,8 @@
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",
-    "ow": "^0.4.0"
+    "ow": "^0.4.0",
+    "ow-shim": "^1.0.1"
   },
   "files": [
     "index.js",
