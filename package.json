@@ -1,6 +1,6 @@
 {
   "name": "random",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "Seedable random number generator supporting many common distributions.",
   "main": "index.js",
   "repository": "transitive-bullshit/random",
