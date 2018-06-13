@@ -1,4 +1,4 @@
-import ow from 'ow'
+// import ow from 'ow'
 import RNG from '../rng'
 
 export default class RNGFunction extends RNG {
@@ -17,7 +17,7 @@ export default class RNGFunction extends RNG {
   }
 
   seed (seed) {
-    ow(seed, ow.function)
+    // ow(seed, ow.function)
     this._rng = seed
   }
 

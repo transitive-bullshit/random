@@ -1,6 +1,6 @@
-import ow from 'ow'
+// import ow from 'ow'
 
-import RNG from './rng'
+// import RNG from './rng'
 import RNGFactory from './rng-factory'
 
 import uniform from './distributions/uniform'
@@ -33,7 +33,7 @@ import pareto from './distributions/pareto'
  */
 class Random {
   constructor (rng) {
-    if (rng) ow(rng, ow.object.label('rng').instanceOf(RNG))
+    // if (rng) ow(rng, ow.object.label('rng').instanceOf(RNG))
 
     this._cache = { }
     this.use(rng)

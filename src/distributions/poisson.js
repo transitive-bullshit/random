@@ -1,4 +1,4 @@
-import ow from 'ow'
+// import ow from 'ow'
 
 const logFactorialTable = [
   0.0,
@@ -20,7 +20,7 @@ const logFactorial = (k) => {
 const logSqrt2PI = 0.91893853320467267
 
 export default (random, lambda = 1) => {
-  ow(lambda, ow.number.positive.label('lambda'))
+  // ow(lambda, ow.number.positive.label('lambda'))
 
   if (lambda < 10) {
     // inversion method

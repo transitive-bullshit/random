@@ -1,4 +1,4 @@
-import ow from 'ow'
+// import ow from 'ow'
 
 export default (random, min, max) => {
   if (max === undefined) {
@@ -6,8 +6,8 @@ export default (random, min, max) => {
     min = 0
   }
 
-  ow(min, ow.number.label('min'))
-  ow(max, ow.number.label('max'))
+  // ow(min, ow.number.label('min'))
+  // ow(max, ow.number.label('max'))
 
   return () => {
     return random.next() * (max - min) + min

@@ -1,8 +1,8 @@
-import ow from 'ow'
+// import ow from 'ow'
 
 export default (random, mu = 0, sigma = 1) => {
-  ow(mu, ow.number.label('mu'))
-  ow(sigma, ow.number.label('sigma'))
+  // ow(mu, ow.number.label('mu'))
+  // ow(sigma, ow.number.label('sigma'))
 
   return () => {
     let x, y, r

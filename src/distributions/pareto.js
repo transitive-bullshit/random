@@ -1,7 +1,7 @@
-import ow from 'ow'
+// import ow from 'ow'
 
 export default (random, alpha) => {
-  ow(alpha, ow.number.greaterThanOrEqual(0).label('alpha'))
+  // ow(alpha, ow.number.greaterThanOrEqual(0).label('alpha'))
   const invAlpha = 1.0 / alpha
 
   return () => {
