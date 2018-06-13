@@ -42,6 +42,7 @@
   "devDependencies": {
     "ava": "^0.25.0",
     "babel-cli": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.7.0",
     "del-cli": "^1.1.0",
     "esm": "^3.0.48",
@@ -50,6 +51,7 @@
     "update-markdown-jsdoc": "^1.0.2"
   },
   "dependencies": {
+    "babel-runtime": "^6.26.0",
     "ow": "^0.4.0"
   },
   "files": [
@@ -64,6 +66,9 @@
   "babel": {
     "presets": [
       "env"
+    ],
+    "plugins": [
+      "transform-runtime"
     ]
   }
 }
