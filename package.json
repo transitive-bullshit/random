@@ -3,6 +3,7 @@
   "version": "2.0.7",
   "description": "Seedable random number generator supporting many common distributions.",
   "main": "index.js",
+  "module": "src/random.js",
   "repository": "transitive-bullshit/random",
   "author": "Travis Fischer <travis@automagical.ai>",
   "license": "MIT",
