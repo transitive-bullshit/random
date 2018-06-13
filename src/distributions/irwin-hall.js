@@ -1,7 +1,7 @@
-import ow from 'ow'
+import ow from 'ow-shim'
 
 export default (random, n) => {
-  ow(n, ow.number.integer.greaterThanOrEqual(0).label('n'))
+  ow(n, ow.number.integer.greaterThanOrEqual(0))
 
   return () => {
     let sum = 0

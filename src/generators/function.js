@@ -1,4 +1,4 @@
-import ow from 'ow'
+import ow from 'ow-shim'
 import RNG from '../rng'
 
 export default class RNGFunction extends RNG {

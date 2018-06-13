@@ -1,7 +1,7 @@
-import ow from 'ow'
+import ow from 'ow-shim'
 
 export default (random, n) => {
-  ow(n, ow.number.integer.positive.label('n'))
+  ow(n, ow.number.integer.positive)
   const irwinHall = random.irwinHall(n)
 
   return () => {
