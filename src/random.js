@@ -237,7 +237,7 @@ class Random {
    * @return {function}
    */
   normal (mu, sigma) {
-    return normal(mu, sigma)
+    return normal(this, mu, sigma)
   }
 
   /**
@@ -248,7 +248,7 @@ class Random {
    * @return {function}
    */
   logNormal (mu, sigma) {
-    return logNormal(mu, sigma)
+    return logNormal(this, mu, sigma)
   }
 
   // --------------------------------------------------------------------------
@@ -262,7 +262,7 @@ class Random {
    * @return {function}
    */
   bernoulli (p) {
-    return bernoulli(p)
+    return bernoulli(this, p)
   }
 
   /**
@@ -273,7 +273,7 @@ class Random {
    * @return {function}
    */
   binomial (n, p) {
-    return binomial(n, p)
+    return binomial(this, n, p)
   }
 
   /**
@@ -283,7 +283,7 @@ class Random {
    * @return {function}
    */
   geometric (p) {
-    return geometric(p)
+    return geometric(this, p)
   }
 
   // --------------------------------------------------------------------------
@@ -297,7 +297,7 @@ class Random {
    * @return {function}
    */
   poisson (lambda) {
-    return poisson(lambda)
+    return poisson(this, lambda)
   }
 
   /**
@@ -307,7 +307,7 @@ class Random {
    * @return {function}
    */
   exponential (lambda) {
-    return exponential(lambda)
+    return exponential(this, lambda)
   }
 
   // --------------------------------------------------------------------------
@@ -321,7 +321,7 @@ class Random {
    * @return {function}
    */
   irwinHall (n) {
-    return irwinHall(n)
+    return irwinHall(this, n)
   }
 
   /**
@@ -331,7 +331,7 @@ class Random {
    * @return {function}
    */
   bates (n) {
-    return bates(n)
+    return bates(this, n)
   }
 
   /**
@@ -341,7 +341,7 @@ class Random {
    * @return {function}
    */
   pareto (alpha) {
-    return pareto(alpha)
+    return pareto(this, alpha)
   }
 
   // --------------------------------------------------------------------------
