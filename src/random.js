@@ -1,4 +1,3 @@
-import LRUCache from 'lru-cache'
 import ow from 'ow'
 
 import RNG from './rng'
@@ -36,6 +35,7 @@ class Random {
   constructor (rng) {
     if (rng) ow(rng, ow.object.label('rng').instanceOf(RNG))
 
+    this._cache = { }
     this.use(rng)
   }
 
@@ -80,9 +80,6 @@ class Random {
    */
   use (...args) {
     this._rng = RNGFactory(...args)
-
-    // clear distribution cache when replacing underlying rng
-    this._cache = LRUCache({ max: 64 })
   }
 
   /**
@@ -240,7 +237,7 @@ class Random {
    * @return {function}
    */
   normal (mu, sigma) {
-    return this._memoize('normal', normal, mu, sigma)
+    return normal(mu, sigma)
   }
 
   /**
@@ -251,7 +248,7 @@ class Random {
    * @return {function}
    */
   logNormal (mu, sigma) {
-    return this._memoize('logNormal', logNormal, mu, sigma)
+    return logNormal(mu, sigma)
   }
 
   // --------------------------------------------------------------------------
@@ -265,7 +262,7 @@ class Random {
    * @return {function}
    */
   bernoulli (p) {
-    return this._memoize('bernoulli', bernoulli, p)
+    return bernoulli(p)
   }
 
   /**
@@ -276,7 +273,7 @@ class Random {
    * @return {function}
    */
   binomial (n, p) {
-    return this._memoize('binomial', binomial, n, p)
+    return binomial(n, p)
   }
 
   /**
@@ -286,7 +283,7 @@ class Random {
    * @return {function}
    */
   geometric (p) {
-    return this._memoize('geometric', geometric, p)
+    return geometric(p)
   }
 
   // --------------------------------------------------------------------------
@@ -300,7 +297,7 @@ class Random {
    * @return {function}
    */
   poisson (lambda) {
-    return this._memoize('poisson', poisson, lambda)
+    return poisson(lambda)
   }
 
   /**
@@ -310,7 +307,7 @@ class Random {
    * @return {function}
    */
   exponential (lambda) {
-    return this._memoize('exponential', exponential, lambda)
+    return exponential(lambda)
   }
 
   // --------------------------------------------------------------------------
@@ -324,7 +321,7 @@ class Random {
    * @return {function}
    */
   irwinHall (n) {
-    return this._memoize('irwinHall', irwinHall, n)
+    return irwinHall(n)
   }
 
   /**
@@ -334,7 +331,7 @@ class Random {
    * @return {function}
    */
   bates (n) {
-    return this._memoize('bates', bates, n)
+    return bates(n)
   }
 
   /**
@@ -344,7 +341,7 @@ class Random {
    * @return {function}
    */
   pareto (alpha) {
-    return this._memoize('pareto', pareto, alpha)
+    return pareto(alpha)
   }
 
   // --------------------------------------------------------------------------
@@ -366,15 +363,15 @@ class Random {
    * @return {function}
    */
   _memoize (label, getter, ...args) {
-    const key = `${label};${args.join(';')}`
-    let distribution = this._cache.get(key)
+    const key = `${args.join(';')}`
+    let value = this._cache[label]
 
-    if (distribution === undefined) {
-      distribution = getter(this, ...args)
-      this._cache.set(key, distribution)
+    if (value === undefined || value.key !== key) {
+      value = { key, distribution: getter(this, ...args) }
+      this._cache[label] = value
     }
 
-    return distribution
+    return value.distribution
   }
 }
 
