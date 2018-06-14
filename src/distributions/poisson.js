@@ -1,4 +1,4 @@
-import ow from 'ow-shim'
+import ow from 'ow-lite'
 
 const logFactorialTable = [
   0.0,

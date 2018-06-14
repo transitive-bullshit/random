@@ -4848,9 +4848,9 @@ output-file-sync@^1.1.2:
     mkdirp "^0.5.1"
     object-assign "^4.1.0"
 
-ow-shim@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/ow-shim/-/ow-shim-1.0.1.tgz#ed934d6195e857da79fa94fd28f09b2d56e5ada0"
+ow-lite@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/ow-lite/-/ow-lite-0.0.2.tgz#df9f500e6740b6590a1e9a965730d49a8eb597d1"
 
 ow@^0.4.0:
   version "0.4.0"

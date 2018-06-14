@@ -1,4 +1,4 @@
-import ow from 'ow-shim'
+import ow from 'ow-lite'
 
 import RNG from './rng'
 import RNGFactory from './rng-factory'

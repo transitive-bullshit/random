@@ -1,4 +1,4 @@
-import ow from 'ow-shim'
+import ow from 'ow-lite'
 
 export default (random, lambda = 1) => {
   ow(lambda, ow.number.positive)
