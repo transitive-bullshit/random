@@ -7,6 +7,7 @@
   "repository": "transitive-bullshit/random",
   "author": "Travis Fischer <travis@automagical.ai>",
   "license": "MIT",
+  "reveal": true,
   "scripts": {
     "docs": "update-markdown-jsdoc -f src/random.js --shallow",
     "build": "babel -s -d dist src",
