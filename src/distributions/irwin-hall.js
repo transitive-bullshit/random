@@ -1,7 +1,7 @@
 import ow from 'ow-lite'
 
-export default (random, n) => {
-  ow(n, ow.number.integer.greaterThanOrEqual(0))
+export default (random, n = 1) => {
+  ow(n, ow.number.integer.gte(0))
 
   return () => {
     let sum = 0

@@ -1,7 +1,7 @@
 import ow from 'ow-lite'
 
-export default (random, alpha) => {
-  ow(alpha, ow.number.greaterThanOrEqual(0))
+export default (random, alpha = 1) => {
+  ow(alpha, ow.number.gte(0))
   const invAlpha = 1.0 / alpha
 
   return () => {

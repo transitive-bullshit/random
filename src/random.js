@@ -317,7 +317,7 @@ class Random {
   /**
    * Generates an [Irwin Hall distribution](https://en.wikipedia.org/wiki/Irwin%E2%80%93Hall_distribution).
    *
-   * @param {number} n - Number of uniform samples to sum (n >= 0)
+   * @param {number} [n=1] - Number of uniform samples to sum (n >= 0)
    * @return {function}
    */
   irwinHall (n) {
@@ -327,7 +327,7 @@ class Random {
   /**
    * Generates a [Bates distribution](https://en.wikipedia.org/wiki/Bates_distribution).
    *
-   * @param {number} n - Number of uniform samples to average (n >= 1)
+   * @param {number} [n=1] - Number of uniform samples to average (n >= 1)
    * @return {function}
    */
   bates (n) {
@@ -337,7 +337,7 @@ class Random {
   /**
    * Generates a [Pareto distribution](https://en.wikipedia.org/wiki/Pareto_distribution).
    *
-   * @param {number} alpha - Alpha
+   * @param {number} [alpha=1] - Alpha
    * @return {function}
    */
   pareto (alpha) {
