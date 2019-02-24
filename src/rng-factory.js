@@ -1,15 +1,8 @@
+import seedrandom from 'seedrandom'
+
 import RNG from './rng'
 
-import RNGXOR128 from './generators/xor128'
 import RNGFunction from './generators/function'
-import RNGMathRandom from './generators/math-random'
-
-const PRNG_BUILTINS = {
-  // TODO: add more prng from C++11 lib
-  'xor128': RNGXOR128,
-  'function': RNGFunction,
-  'default': RNGMathRandom
-}
 
 export default (...args) => {
   const [ arg0 = 'default', ...rest ] = args
@@ -25,11 +18,8 @@ export default (...args) => {
       return new RNGFunction(arg0)
 
     case 'string':
-      const PRNG = PRNG_BUILTINS[arg0]
-      if (PRNG) {
-        return new PRNG(...rest)
-      }
-      break
+    case 'number':
+      return new RNGFunction(seedrandom(...rest))
   }
 
   throw new Error(`invalid RNG "${arg0}"`)

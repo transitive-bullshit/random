@@ -21,6 +21,8 @@ import irwinHall from './distributions/irwin-hall'
 import bates from './distributions/bates'
 import pareto from './distributions/pareto'
 
+export { RNG, RNGFactory }
+
 /**
  * Seedable random number generator supporting many common distributions.
  *
@@ -57,7 +59,11 @@ class Random {
    * @return {Random}
    */
   clone (...args) {
-    return new Random(this.rng.clone(...args))
+    if (args.length) {
+      return new Random(RNGFactory(...args))
+    } else {
+      return new Random(this.rng.clone())
+    }
   }
 
   /**
@@ -70,7 +76,7 @@ class Random {
    * @example
    * const random = require('random')
    *
-   * random.use('xor128', 'foobar')
+   * random.use('example_seedrandom_string')
    * // or
    * random.use(seedrandom('kittens'))
    * // or

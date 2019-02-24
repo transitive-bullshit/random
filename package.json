@@ -9,6 +9,7 @@
   "license": "MIT",
   "reveal": true,
   "scripts": {
+    "start": "yarn build:watch",
     "docs": "update-markdown-jsdoc -f src/random.js --shallow",
     "build": "babel -s -d dist src",
     "build:watch": "babel -w -s -d dist src",
@@ -47,7 +48,7 @@
     "babel-preset-env": "^1.7.0",
     "del-cli": "^1.1.0",
     "esm": "^3.0.48",
-    "seedrandom": "^2.4.3",
+    "seedrandom": "^2.4.4",
     "standard": "^11.0.0",
     "update-markdown-jsdoc": "^1.0.2"
   },
