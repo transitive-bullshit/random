@@ -5,7 +5,7 @@ import RNG from './rng'
 import RNGFunction from './generators/function'
 
 export default (...args) => {
-  const [ arg0 = 'default', ...rest ] = args
+  const [arg0 = 'default', ...rest] = args
 
   switch (typeof arg0) {
     case 'object':

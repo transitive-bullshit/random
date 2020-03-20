@@ -43,19 +43,20 @@
     "bates"
   ],
   "devDependencies": {
-    "ava": "^0.25.0",
+    "ava": "^3.5.0",
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "del-cli": "^1.1.0",
-    "esm": "^3.0.48",
-    "standard": "^11.0.0",
-    "update-markdown-jsdoc": "^1.0.2"
+    "dev-cli": "^0.0.0",
+    "esm": "^3.2.25",
+    "standard": "^14.3.3",
+    "update-markdown-jsdoc": "^1.0.11"
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",
     "ow": "^0.4.0",
     "ow-lite": "^0.0.2",
-    "seedrandom": "^2.4.4"
+    "seedrandom": "^3.0.5"
   },
   "files": [
     "index.js",

@@ -21,7 +21,7 @@ export default class RNG {
     if (seed === (seed | 0)) {
       return seed
     } else {
-      let strSeed = '' + seed
+      const strSeed = '' + seed
       let s = 0
 
       for (let k = 0; k < strSeed.length; ++k) {
