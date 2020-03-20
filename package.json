@@ -20,7 +20,7 @@
     "test": "ava -v && standard"
   },
   "engines": {
-    "node": ">=8"
+    "node": ">=10"
   },
   "keywords": [
     "random",
