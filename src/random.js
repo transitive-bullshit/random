@@ -54,6 +54,7 @@ class Random {
    *
    * @see RNG.clone
    *
+   * @param {RNG|function|string|number} [rng='default'] - Optional pseudorandom number generator.
    * @param {string} [seed] - Optional seed for new RNG.
    * @param {object} [opts] - Optional config for new RNG options.
    * @return {Random}

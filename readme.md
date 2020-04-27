@@ -95,7 +95,7 @@ const seedrandom = require('seedrandom')
 random.use(seedrandom('foobar'))
 
 // create a new independent random number generator (uses seedrandom under the hood)
-const rng = random.clone('my-new-seed')
+const rng = random.clone('default', 'my-new-seed')
 
 // create a second independent random number generator and use a seeded PRNG
 const rng2 = random.clone(seedrandom('kittyfoo'))
