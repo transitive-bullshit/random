@@ -1,21 +1,21 @@
 export default class RNG {
-  get name () {
+  get name() {
     throw new Error('RNG.name must be overridden')
   }
 
-  next () {
+  next() {
     throw new Error('RNG.next must be overridden')
   }
 
-  seed (seed, opts) {
+  seed(seed, opts) {
     throw new Error('RNG.seed must be overridden')
   }
 
-  clone (seed, opts) {
+  clone(seed, opts) {
     throw new Error('RNG.clone must be overridden')
   }
 
-  _seed (seed, opts) {
+  _seed(seed, opts) {
     // TODO: add entropy and stuff
 
     if (seed === (seed | 0)) {
