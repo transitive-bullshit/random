@@ -1,13 +1,13 @@
-import ow from 'ow-lite'
-import RNG from '../rng'
+import ow from 'ow'
+import RNG, { Opts, SeedFn } from '../rng'
 
-export type Fn = (...args) => number
+export type RNGFunctionType = seedrandom.prng | RNG | any
 
-export default class RNGFunction extends RNG {
+export default class RNGFunction<T extends SeedFn> extends RNG {
 
-  _rng: Fn
+  _rng: T
 
-  constructor(thunk: Fn, opts?: any[]) {
+  constructor(thunk: T, opts?: Opts) {
     super()
 
     this.seed(thunk, opts)
@@ -21,12 +21,12 @@ export default class RNGFunction extends RNG {
     return this._rng()
   }
 
-  seed(thunk: Fn, opts?: any[]) {
+  seed(thunk: T, opts?: Opts) {
     ow(thunk, ow.function)
     this._rng = thunk
   }
 
-  clone(...opts: any[]) {
+  clone(...opts: Opts) {
     return new RNGFunction(this._rng, ...opts)
   }
 }

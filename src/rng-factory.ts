@@ -18,6 +18,8 @@ export default <T extends any[]>(...args: T) => {
       return new RNGFunction(arg0)
 
     case 'string':
+
+    const r = seedrandom(...rest)
       return new RNGFunction(seedrandom(...rest))
   }
 

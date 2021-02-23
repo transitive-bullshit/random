@@ -60,7 +60,7 @@ class Random<R extends RNG> {
    * @param {object} [opts] - Optional config for new RNG options.
    * @return {Random}
    */
-  clone<T extends RNG>(...args:[T]):Random<RNG> {
+  clone<T extends RNG>(...args: [T]): Random<RNG> {
     if (args.length) {
       return new Random(RNGFactory(...args))
     } else {
@@ -86,7 +86,7 @@ class Random<R extends RNG> {
    *
    * @param {...*} args
    */
-  use(...args:[RNG]) {
+  use(...args: [RNG]) {
     this._rng = RNGFactory(...args)
   }
 
@@ -124,7 +124,7 @@ class Random<R extends RNG> {
    *
    * @return {number}
    */
-  next = ():number => {
+  next = (): number => {
     return this._rng.next()
   }
 
@@ -186,7 +186,7 @@ class Random<R extends RNG> {
    *
    * Convence wrapper around `random.uniformBoolean()`
    */
-  boolean = ()=> {
+  boolean = () => {
     return this.uniformBoolean()()
   }
 
@@ -298,7 +298,7 @@ class Random<R extends RNG> {
    *
    * @param {number} [lambda=1] - Inverse mean (lambda > 0)
    */
-  exponential = (lambda: number)=> {
+  exponential = (lambda: number) => {
     return exponential(this, lambda)
   }
 
@@ -320,7 +320,7 @@ class Random<R extends RNG> {
    *
    * @param {number} [n=1] - Number of uniform samples to average (n >= 1)
    */
-  bates = (n: number)=> {
+  bates = (n: number) => {
     return bates(this, n)
   }
 
