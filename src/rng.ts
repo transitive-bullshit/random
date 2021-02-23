@@ -1,21 +1,44 @@
-export default class RNG {
-  get name() {
+// TODO: Narrow these down
+export type Seed = any;
+
+export interface ISeedRandom {
+  seed?: string | undefined;
+  options?: seedrandom.seedRandomOptions | undefined
+  callback?: seedrandom.seedrandomCallback | undefined
+}
+
+export type IArgs = ISeedRandom & {
+  arg0: string;
+}
+
+interface IRNG {
+  name(): any;
+  next(): any
+  seed(seed: Seed, opts: IArgs): any
+  clone(seed: Seed, opts: IArgs): any
+}
+
+export default class RNG implements IRNG {
+
+  _rng: Function
+
+  get name(): any {
     throw new Error('RNG.name must be overridden')
   }
 
-  next() {
+  next(): any {
     throw new Error('RNG.next must be overridden')
   }
 
-  seed(seed, opts) {
+  seed(seed?: Seed, opts?: IArgs): any {
     throw new Error('RNG.seed must be overridden')
   }
 
-  clone(seed, opts) {
+  clone(seed?: Seed, opts?: IArgs): any {
     throw new Error('RNG.clone must be overridden')
   }
 
-  _seed(seed, opts) {
+  _seed(seed: Seed, opts?: IArgs): any {
     // TODO: add entropy and stuff
 
     if (seed === (seed | 0)) {

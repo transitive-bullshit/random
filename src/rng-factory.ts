@@ -1,10 +1,10 @@
 import seedrandom from 'seedrandom'
 
-import RNG from './rng'
-
+import RNG, { IArgs } from './rng'
 import RNGFunction from './generators/function'
 
-export default (...args) => {
+
+export default (...args: [IArgs]) => {
   const [arg0 = 'default', ...rest] = args
 
   switch (typeof arg0) {

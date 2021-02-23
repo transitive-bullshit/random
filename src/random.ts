@@ -1,6 +1,6 @@
-import ow from 'ow-lite'
+import ow from 'ow' // TODO: Using ow for now
 
-import RNG from './rng'
+import RNG, { IArgs } from './rng'
 import RNGFactory from './rng-factory'
 
 import uniform from './distributions/uniform'
@@ -34,11 +34,17 @@ export { RNG, RNGFactory }
  * @param {RNG|function} [rng=Math.random] - Underlying pseudorandom number generator.
  */
 class Random {
-  constructor (rng) {
-    if (rng) ow(rng, ow.object.instanceOf(RNG))
+  _rng: RNG;
+  _cache: any;
+  _patch:any;
+  constructor (_rng?:RNG) {
+    if (_rng) {
+      ow(_rng, ow.object.instanceOf(RNG))
+      this.use(_rng)
+    }
 
     this._cache = { }
-    this.use(rng)
+
   }
 
   /**
@@ -58,7 +64,7 @@ class Random {
    * @param {object} [opts] - Optional config for new RNG options.
    * @return {Random}
    */
-  clone (...args) {
+  clone (...args:[IArgs]): Random {
     if (args.length) {
       return new Random(RNGFactory(...args))
     } else {
@@ -83,8 +89,9 @@ class Random {
    * random.use(Math.random)
    *
    * @param {...*} args
+   * // TODO: Type this
    */
-  use (...args) {
+  use (...args: [any]) {
     this._rng = RNGFactory(...args)
   }
 
@@ -121,7 +128,7 @@ class Random {
    *
    * @return {number}
    */
-  next () {
+  next (): number {
     return this._rng.next()
   }
 
@@ -135,7 +142,7 @@ class Random {
    * @param {number} [max=1] - Upper bound (float, exclusive)
    * @return {number}
    */
-  float (min, max) {
+  float (min: number, max: number): number {
     return this.uniform(min, max)()
   }
 
@@ -149,7 +156,7 @@ class Random {
    * @param {number} [max=1] - Upper bound (integer, inclusive)
    * @return {number}
    */
-  int (min, max) {
+  int (min: number, max: number): number {
     return this.uniformInt(min, max)()
   }
 
@@ -165,7 +172,7 @@ class Random {
    * @param {number} [max=1] - Upper bound (integer, inclusive)
    * @return {number}
    */
-  integer (min, max) {
+  integer (min: number, max: number): number {
     return this.uniformInt(min, max)()
   }
 
@@ -178,7 +185,7 @@ class Random {
    *
    * @return {boolean}
    */
-  bool () {
+  bool (): boolean {
     return this.uniformBoolean()()
   }
 
@@ -189,7 +196,7 @@ class Random {
    *
    * @return {boolean}
    */
-  boolean () {
+  boolean (): boolean {
     return this.uniformBoolean()()
   }
 
@@ -204,7 +211,7 @@ class Random {
    * @param {number} [max=1] - Upper bound (float, exclusive)
    * @return {function}
    */
-  uniform (min, max) {
+  uniform (min?:number, max?:number) {
     return this._memoize('uniform', uniform, min, max)
   }
 
@@ -215,7 +222,7 @@ class Random {
    * @param {number} [max=1] - Upper bound (integer, inclusive)
    * @return {function}
    */
-  uniformInt (min, max) {
+  uniformInt (min: number, max: number) {
     return this._memoize('uniformInt', uniformInt, min, max)
   }
 
@@ -227,7 +234,7 @@ class Random {
    *
    * @return {function}
    */
-  uniformBoolean () {
+  uniformBoolean (): Function {
     return this._memoize('uniformBoolean', uniformBoolean)
   }
 
@@ -242,7 +249,7 @@ class Random {
    * @param {number} [sigma=1] - Standard deviation
    * @return {function}
    */
-  normal (mu, sigma) {
+  normal (mu: number, sigma: number) {
     return normal(this, mu, sigma)
   }
 
@@ -253,7 +260,7 @@ class Random {
    * @param {number} [sigma=1] - Standard deviation of underlying normal distribution
    * @return {function}
    */
-  logNormal (mu, sigma) {
+  logNormal (mu: number, sigma: number) {
     return logNormal(this, mu, sigma)
   }
 
@@ -267,7 +274,7 @@ class Random {
    * @param {number} [p=0.5] - Success probability of each trial.
    * @return {function}
    */
-  bernoulli (p) {
+  bernoulli (p: number) {
     return bernoulli(this, p)
   }
 
@@ -278,7 +285,7 @@ class Random {
    * @param {number} [p=0.5] - Success probability of each trial.
    * @return {function}
    */
-  binomial (n, p) {
+  binomial (n: number, p: number) {
     return binomial(this, n, p)
   }
 
@@ -288,7 +295,7 @@ class Random {
    * @param {number} [p=0.5] - Success probability of each trial.
    * @return {function}
    */
-  geometric (p) {
+  geometric (p: number) {
     return geometric(this, p)
   }
 
@@ -302,7 +309,7 @@ class Random {
    * @param {number} [lambda=1] - Mean (lambda > 0)
    * @return {function}
    */
-  poisson (lambda) {
+  poisson (lambda: number){
     return poisson(this, lambda)
   }
 
@@ -312,7 +319,7 @@ class Random {
    * @param {number} [lambda=1] - Inverse mean (lambda > 0)
    * @return {function}
    */
-  exponential (lambda) {
+  exponential (lambda: number) {
     return exponential(this, lambda)
   }
 
@@ -326,7 +333,7 @@ class Random {
    * @param {number} [n=1] - Number of uniform samples to sum (n >= 0)
    * @return {function}
    */
-  irwinHall (n) {
+  irwinHall (n: number){
     return irwinHall(this, n)
   }
 
@@ -336,7 +343,7 @@ class Random {
    * @param {number} [n=1] - Number of uniform samples to average (n >= 1)
    * @return {function}
    */
-  bates (n) {
+  bates (n: number) {
     return bates(this, n)
   }
 
@@ -346,7 +353,7 @@ class Random {
    * @param {number} [alpha=1] - Alpha
    * @return {function}
    */
-  pareto (alpha) {
+  pareto (alpha: number) {
     return pareto(this, alpha)
   }
 
@@ -368,7 +375,7 @@ class Random {
    *
    * @return {function}
    */
-  _memoize (label, getter, ...args) {
+  _memoize (label: string, getter: Function, ...args: any[]) {
     const key = `${args.join(';')}`
     let value = this._cache[label]
 

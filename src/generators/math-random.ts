@@ -1,4 +1,4 @@
-import RNG from '../rng'
+import RNG, { IArgs, Seed } from '../rng'
 
 export default class RNGMathRandom extends RNG {
   get name () {
@@ -9,7 +9,7 @@ export default class RNGMathRandom extends RNG {
     return Math.random()
   }
 
-  seed (seed, opts) {
+  seed (seed:Seed, opts:IArgs) {
     // intentionally empty
   }
 
