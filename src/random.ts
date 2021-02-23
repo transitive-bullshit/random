@@ -32,7 +32,12 @@ export { RNG, RNGFactory }
  */
 class Random<R extends RNG> {
 
-  _cache: any
+  _cache: {
+    [x: string]: {
+      key: string,
+      distribution: any // TODO: Narrow down
+    }
+  }
   _rng: RNG
   _patch: typeof Math.random
 
@@ -349,7 +354,7 @@ class Random<R extends RNG> {
    * @param {function} getter - Function which generates a new distribution
    * @param {...*} args - Distribution-specific arguments
    */
-  _memoize = <T>(label: string | number, getter: (...args: any[]) => any, ...args: any[]): T => {
+  _memoize = <T>(label: string, getter: (...args: any[]) => any, ...args: any[]): T => {
     const key = `${args.join(';')}`
     let value = this._cache[label]
 

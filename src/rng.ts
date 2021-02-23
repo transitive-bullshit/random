@@ -1,12 +1,8 @@
-
-export type SeedFn = (...args) => number
-export type Seed = string | SeedFn
-export type Opts = any[];
-
-interface IRNG {
+export interface IRNG {
   next(): number
-  seed(seed?: Seed, opts?: Opts): void
-  clone(seed?: Seed, opts?: Opts): any
+  seed<S,O>(seed?: S, opts?: O): void
+  clone<S,O>(seed?: S, opts?: O): any
+  _seed?<S,O>(seed: S, opts: O): any
 }
 
 export default class RNG implements IRNG {
@@ -18,15 +14,15 @@ export default class RNG implements IRNG {
     throw new Error('RNG.next must be overridden')
   }
 
-  seed(seed?: Seed, opts?: Opts) {
+  seed(seed?, opts?) {
     throw new Error('RNG.seed must be overridden')
   }
 
-  clone(seed?: Seed, opts?: Opts):any {
+  clone(seed?, opts?): any {
     throw new Error('RNG.clone must be overridden')
   }
 
-  _seed(seed: any, opts: Opts) {
+  _seed(seed, opts) {
     // TODO: add entropy and stuff
 
     if (seed === (seed || 0)) {

@@ -1,4 +1,4 @@
-import RNG, { Seed } from '../rng'
+import RNG from '../rng'
 
 export default class RNGMathRandom extends RNG {
   get name() {
@@ -9,7 +9,7 @@ export default class RNGMathRandom extends RNG {
     return Math.random()
   }
 
-  seed(seed: Seed, opts: any) {
+  seed(seed: unknown, opts: unknown) {
     // intentionally empty
   }
 

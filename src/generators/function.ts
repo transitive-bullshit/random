@@ -1,13 +1,13 @@
 import ow from 'ow'
-import RNG, { Opts, SeedFn } from '../rng'
+import RNG from '../rng'
 
-export type RNGFunctionType = seedrandom.prng | RNG | any
+type SeedFn = <T>(...args:T[]) => number
 
-export default class RNGFunction<T extends SeedFn> extends RNG {
+export default class RNGFunction<T> extends RNG {
 
-  _rng: T
+  _rng: SeedFn
 
-  constructor(thunk: T, opts?: Opts) {
+  constructor(thunk: SeedFn, opts?: T[]) {
     super()
 
     this.seed(thunk, opts)
@@ -21,12 +21,12 @@ export default class RNGFunction<T extends SeedFn> extends RNG {
     return this._rng()
   }
 
-  seed(thunk: T, opts?: Opts) {
+  seed(thunk: SeedFn, opts?: T[]) {
     ow(thunk, ow.function)
     this._rng = thunk
   }
 
-  clone(...opts: Opts) {
-    return new RNGFunction(this._rng, ...opts)
+  clone(opts: T[]) {
+    return new RNGFunction(this._rng, opts)
   }
 }
