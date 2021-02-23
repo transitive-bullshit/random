@@ -1,9 +1,15 @@
-export default class RNG {
-  get name():string {
+
+interface IRNG {
+  next(): number
+  seed(seed?: any, opts?: any): void
+}
+
+export default class RNG implements IRNG {
+  get name(): string {
     throw new Error('RNG.name must be overridden')
   }
 
-  next() {
+  next(): number {
     throw new Error('RNG.next must be overridden')
   }
 
@@ -11,7 +17,7 @@ export default class RNG {
     throw new Error('RNG.seed must be overridden')
   }
 
-  clone(seed, opts) {
+  clone(seed?, opts?):any {
     throw new Error('RNG.clone must be overridden')
   }
 
@@ -32,3 +38,4 @@ export default class RNG {
     }
   }
 }
+

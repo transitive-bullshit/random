@@ -6,23 +6,17 @@ import RNGFactory from './rng-factory'
 import uniform from './distributions/uniform'
 import uniformInt from './distributions/uniform-int'
 import uniformBoolean from './distributions/uniform-boolean'
-
 import normal from './distributions/normal'
 import logNormal from './distributions/log-normal'
-
 import bernoulli from './distributions/bernoulli'
 import binomial from './distributions/binomial'
 import geometric from './distributions/geometric'
-
 import poisson from './distributions/poisson'
 import exponential from './distributions/exponential'
-
 import irwinHall from './distributions/irwin-hall'
 import bates from './distributions/bates'
 import pareto from './distributions/pareto'
 
-
-type Fn = () => number
 
 export { RNG, RNGFactory }
 
@@ -36,13 +30,13 @@ export { RNG, RNGFactory }
  *
  * @param {RNG|function} [rng=Math.random] - Underlying pseudorandom number generator.
  */
-class Random {
+class Random<R extends RNG> {
 
   _cache: any
-  _rng: any
-  _patch: any
+  _rng: RNG
+  _patch: typeof Math.random
 
-  constructor(rng?: any) {
+  constructor(rng?: R) {
     if (rng) ow(rng, ow.object.instanceOf(RNG))
 
     this._cache = {}
@@ -66,7 +60,7 @@ class Random {
    * @param {object} [opts] - Optional config for new RNG options.
    * @return {Random}
    */
-  clone(...args) {
+  clone<T extends RNG>(...args:[T]):Random<RNG> {
     if (args.length) {
       return new Random(RNGFactory(...args))
     } else {
@@ -92,7 +86,7 @@ class Random {
    *
    * @param {...*} args
    */
-  use(...args) {
+  use(...args:[RNG]) {
     this._rng = RNGFactory(...args)
   }
 
@@ -156,9 +150,8 @@ class Random {
    *
    * @param {number} [min=0] - Lower bound (integer, inclusive)
    * @param {number} [max=1] - Upper bound (integer, inclusive)
-   * @return {number}
    */
-  int = (min: number, max: number): number => {
+  int = (min: number, max: number) => {
     return this.uniformInt(min, max)()
   }
 
@@ -172,9 +165,8 @@ class Random {
    *
    * @param {number} [min=0] - Lower bound (integer, inclusive)
    * @param {number} [max=1] - Upper bound (integer, inclusive)
-   * @return {number}
    */
-  integer = (min: number, max: number):number => {
+  integer = (min: number, max: number) => {
     return this.uniformInt(min, max)()
   }
 
@@ -184,10 +176,8 @@ class Random {
    * Convence wrapper around `random.uniformBoolean()`
    *
    * @alias `random.boolean`
-   *
-   * @return {boolean}
    */
-  bool = (): boolean => {
+  bool = () => {
     return this.uniformBoolean()()
   }
 
@@ -195,10 +185,8 @@ class Random {
    * Samples a uniform random boolean value.
    *
    * Convence wrapper around `random.uniformBoolean()`
-   *
-   * @return {boolean}
    */
-  boolean = ():boolean => {
+  boolean = ()=> {
     return this.uniformBoolean()()
   }
 
@@ -211,10 +199,9 @@ class Random {
    *
    * @param {number} [min=0] - Lower bound (float, inclusive)
    * @param {number} [max=1] - Upper bound (float, exclusive)
-   * @return {function}
    */
-  uniform = (min: number, max: number): Fn => {
-    return this._memoize('uniform', uniform, min, max)
+  uniform = (min: number, max: number) => {
+    return this._memoize<() => number>('uniform', uniform, min, max)
   }
 
   /**
@@ -222,10 +209,9 @@ class Random {
    *
    * @param {number} [min=0] - Lower bound (integer, inclusive)
    * @param {number} [max=1] - Upper bound (integer, inclusive)
-   * @return {function}
    */
-  uniformInt = (min: number, max: number): Function => {
-    return this._memoize('uniformInt', uniformInt, min, max)
+  uniformInt = (min: number, max: number) => {
+    return this._memoize<() => number>('uniformInt', uniformInt, min, max)
   }
 
   /**
@@ -233,11 +219,9 @@ class Random {
    * with two possible outcomes, `true` or `false.
    *
    * This method is analogous to flipping a coin.
-   *
-   * @return {function}
    */
-  uniformBoolean = (): () => boolean => {
-    return this._memoize('uniformBoolean', uniformBoolean)
+  uniformBoolean = () => {
+    return this._memoize<() => boolean>('uniformBoolean', uniformBoolean)
   }
 
   // --------------------------------------------------------------------------
@@ -249,10 +233,8 @@ class Random {
    *
    * @param {number} [mu=0] - Mean
    * @param {number} [sigma=1] - Standard deviation
-   * @return {function}
    */
-  normal = (mu: number, sigma: number): () => number => {
-    const v = normal(this, mu, sigma)
+  normal = (mu: number, sigma: number) => {
     return normal(this, mu, sigma)
   }
 
@@ -261,7 +243,6 @@ class Random {
    *
    * @param {number} [mu=0] - Mean of underlying normal distribution
    * @param {number} [sigma=1] - Standard deviation of underlying normal distribution
-   * @return {function}
    */
   logNormal = (mu: number, sigma: number) => {
     return logNormal(this, mu, sigma)
@@ -275,9 +256,8 @@ class Random {
    * Generates a [Bernoulli distribution](https://en.wikipedia.org/wiki/Bernoulli_distribution).
    *
    * @param {number} [p=0.5] - Success probability of each trial.
-   * @return {function}
    */
-  bernoulli = (p: number): () => number => {
+  bernoulli = (p: number) => {
     return bernoulli(this, p)
   }
 
@@ -286,9 +266,8 @@ class Random {
    *
    * @param {number} [n=1] - Number of trials.
    * @param {number} [p=0.5] - Success probability of each trial.
-   * @return {function}
    */
-  binomial = (n: number, p: number): () => number => {
+  binomial = (n: number, p: number) => {
     return binomial(this, n, p)
   }
 
@@ -296,9 +275,8 @@ class Random {
    * Generates a [Geometric distribution](https://en.wikipedia.org/wiki/Geometric_distribution).
    *
    * @param {number} [p=0.5] - Success probability of each trial.
-   * @return {function}
    */
-  geometric = (p: number): () => number => {
+  geometric = (p: number) => {
     return geometric(this, p)
   }
 
@@ -310,9 +288,8 @@ class Random {
    * Generates a [Poisson distribution](https://en.wikipedia.org/wiki/Poisson_distribution).
    *
    * @param {number} [lambda=1] - Mean (lambda > 0)
-   * @return {function}
    */
-  poisson = (lambda: number): () => number => {
+  poisson = (lambda: number) => {
     return poisson(this, lambda)
   }
 
@@ -320,9 +297,8 @@ class Random {
    * Generates an [Exponential distribution](https://en.wikipedia.org/wiki/Exponential_distribution).
    *
    * @param {number} [lambda=1] - Inverse mean (lambda > 0)
-   * @return {function}
    */
-  exponential = (lambda: number): () => number => {
+  exponential = (lambda: number)=> {
     return exponential(this, lambda)
   }
 
@@ -334,9 +310,8 @@ class Random {
    * Generates an [Irwin Hall distribution](https://en.wikipedia.org/wiki/Irwin%E2%80%93Hall_distribution).
    *
    * @param {number} [n=1] - Number of uniform samples to sum (n >= 0)
-   * @return {function}
    */
-  irwinHall = (n: number): () => number => {
+  irwinHall = (n: number) => {
     return irwinHall(this, n)
   }
 
@@ -344,9 +319,8 @@ class Random {
    * Generates a [Bates distribution](https://en.wikipedia.org/wiki/Bates_distribution).
    *
    * @param {number} [n=1] - Number of uniform samples to average (n >= 1)
-   * @return {function}
    */
-  bates = (n: number): () => number => {
+  bates = (n: number)=> {
     return bates(this, n)
   }
 
@@ -354,9 +328,8 @@ class Random {
    * Generates a [Pareto distribution](https://en.wikipedia.org/wiki/Pareto_distribution).
    *
    * @param {number} [alpha=1] - Alpha
-   * @return {function}
    */
-  pareto = (alpha: number): () => number => {
+  pareto = (alpha: number) => {
     return pareto(this, alpha)
   }
 
@@ -375,8 +348,6 @@ class Random {
    * @param {string} label - Name of distribution
    * @param {function} getter - Function which generates a new distribution
    * @param {...*} args - Distribution-specific arguments
-   *
-   * @return {function}
    */
   _memoize = <T>(label: string | number, getter: (...args: any[]) => any, ...args: any[]): T => {
     const key = `${args.join(';')}`

@@ -1,10 +1,10 @@
 import seedrandom from 'seedrandom'
 
 import RNG from './rng'
-
 import RNGFunction from './generators/function'
 
-export default <T extends any[]>(...args:T) => {
+// TODO: Narrow down
+export default <T extends any[]>(...args: T) => {
   const [arg0 = 'default', ...rest] = args
 
   switch (typeof arg0) {
@@ -18,7 +18,6 @@ export default <T extends any[]>(...args:T) => {
       return new RNGFunction(arg0)
 
     case 'string':
-    case 'number':
       return new RNGFunction(seedrandom(...rest))
   }
 

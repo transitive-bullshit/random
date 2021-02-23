@@ -32,7 +32,6 @@ export default class RNGXOR128 extends RNG {
   }
 
   seed(seed: any, opts: any) {
-    // this._rng = seedrandom(this._seed(seed, opts))
 
     this.x = this._seed(seed, opts)
 

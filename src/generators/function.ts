@@ -1,11 +1,13 @@
 import ow from 'ow-lite'
 import RNG from '../rng'
 
+export type Fn = (...args) => number
+
 export default class RNGFunction extends RNG {
 
-  _rng: any
+  _rng: Fn
 
-  constructor(thunk: Function, opts?: any[]) {
+  constructor(thunk: Fn, opts?: any[]) {
     super()
 
     this.seed(thunk, opts)
@@ -19,7 +21,7 @@ export default class RNGFunction extends RNG {
     return this._rng()
   }
 
-  seed(thunk: Function, opts?: any[]) {
+  seed(thunk: Fn, opts?: any[]) {
     ow(thunk, ow.function)
     this._rng = thunk
   }

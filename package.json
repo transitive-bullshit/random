@@ -43,6 +43,8 @@
     "bates"
   ],
   "devDependencies": {
+    "@types/node": "^14.14.31",
+    "@types/seedrandom": "^2.4.28",
     "ava": "^3.5.0",
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
