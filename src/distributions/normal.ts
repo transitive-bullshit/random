@@ -1,11 +1,11 @@
-import ow from 'ow-lite'
+import ow from 'ow'
 
-export default (random, mu = 0, sigma = 1) => {
+export default (random: { next: () => number }, mu = 0, sigma = 1) => {
   ow(mu, ow.number)
   ow(sigma, ow.number)
 
   return () => {
-    let x, y, r
+    let x:number, y:number, r:number
 
     do {
       x = random.next() * 2 - 1

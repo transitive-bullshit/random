@@ -11,7 +11,7 @@
   "scripts": {
     "start": "yarn build:watch",
     "docs": "update-markdown-jsdoc -f src/random.js --shallow",
-    "build": "tsc && babel -s -d dist src",
+    "build": "tsc",
     "build:watch": "babel -w -s -d dist src",
     "prebuild": "yarn run clean",
     "clean": "del dist",
@@ -43,7 +43,6 @@
     "bates"
   ],
   "devDependencies": {
-    "@types/seedrandom": "^2.4.28",
     "ava": "^3.5.0",
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
@@ -57,7 +56,7 @@
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",
-    "ow": "^0.23.0",
+    "ow": "^0.4.0",
     "ow-lite": "^0.0.2",
     "seedrandom": "^3.0.5"
   },

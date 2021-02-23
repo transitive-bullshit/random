@@ -1,6 +1,6 @@
-import ow from 'ow-lite'
+import ow from 'ow'
 
-export default (random, min, max) => {
+export default (random: { next: () => number }, min?: number, max?: number) => {
   if (max === undefined) {
     max = (min === undefined ? 1 : min)
     min = 0

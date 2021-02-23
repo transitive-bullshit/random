@@ -1,29 +1,30 @@
 import ow from 'ow-lite'
-import RNG, { IArgs } from '../rng'
+import RNG from '../rng'
 
 export default class RNGFunction extends RNG {
 
-  thunk:Function
-  opts:IArgs
-  constructor (thunk:Function,opts?:IArgs) {
+  _rng: any
+
+  constructor(thunk: Function, opts?: any[]) {
     super()
-    this.seed(thunk)
+
+    this.seed(thunk, opts)
   }
 
-  get name () {
+  get name() {
     return 'function'
   }
 
-  next () {
+  next() {
     return this._rng()
   }
 
-  seed (thunk:Function) {
+  seed(thunk: Function, opts?: any[]) {
     ow(thunk, ow.function)
     this._rng = thunk
   }
 
-  clone (...opts:[IArgs]) {
+  clone(...opts: any[]) {
     return new RNGFunction(this._rng, ...opts)
   }
 }
