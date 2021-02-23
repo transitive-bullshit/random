@@ -17,6 +17,8 @@ import irwinHall from './distributions/irwin-hall'
 import bates from './distributions/bates'
 import pareto from './distributions/pareto'
 
+// TODO: Expand
+type V = any
 
 export { RNG, RNGFactory }
 
@@ -32,12 +34,9 @@ export { RNG, RNGFactory }
  */
 class Random<R extends RNG> {
 
-  _cache: {
-    [x: string]: {
-      key: string,
-      distribution: any // TODO: Narrow down
-    }
-  }
+  _cache: Record<
+    string, { key: string, distribution: V }
+  >
   _rng: RNG
   _patch: typeof Math.random
 
@@ -206,7 +205,7 @@ class Random<R extends RNG> {
    * @param {number} [max=1] - Upper bound (float, exclusive)
    */
   uniform = (min: number, max: number) => {
-    return this._memoize<() => number>('uniform', uniform, min, max)
+    return this._memoize('uniform', uniform, min, max)
   }
 
   /**
@@ -216,7 +215,7 @@ class Random<R extends RNG> {
    * @param {number} [max=1] - Upper bound (integer, inclusive)
    */
   uniformInt = (min: number, max: number) => {
-    return this._memoize<() => number>('uniformInt', uniformInt, min, max)
+    return this._memoize('uniformInt', uniformInt, min, max)
   }
 
   /**
@@ -226,7 +225,7 @@ class Random<R extends RNG> {
    * This method is analogous to flipping a coin.
    */
   uniformBoolean = () => {
-    return this._memoize<() => boolean>('uniformBoolean', uniformBoolean)
+    return this._memoize('uniformBoolean', uniformBoolean)
   }
 
   // --------------------------------------------------------------------------
@@ -354,7 +353,7 @@ class Random<R extends RNG> {
    * @param {function} getter - Function which generates a new distribution
    * @param {...*} args - Distribution-specific arguments
    */
-  _memoize = <T>(label: string, getter: (...args: any[]) => any, ...args: any[]): T => {
+  _memoize = (label: string, getter: V, ...args): ReturnType<V> => {
     const key = `${args.join(';')}`
     let value = this._cache[label]
 
