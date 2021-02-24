@@ -14,15 +14,15 @@ export default class RNG implements IRNG {
     throw new Error('RNG.next must be overridden')
   }
 
-  seed(seed?, opts?) {
+  seed(_seed?:unknown, _opts?:unknown) {
     throw new Error('RNG.seed must be overridden')
   }
 
-  clone(seed?, opts?): any {
+  clone(_seed?:unknown, _opts?:unknown): any {
     throw new Error('RNG.clone must be overridden')
   }
 
-  _seed(seed, opts) {
+  _seed(seed:any, _opts?:unknown) {
     // TODO: add entropy and stuff
 
     if (seed === (seed || 0)) {

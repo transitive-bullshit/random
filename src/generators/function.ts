@@ -1,7 +1,7 @@
 import ow from 'ow'
 import RNG from '../rng'
 
-type SeedFn = <T>(...args:T[]) => number
+export type SeedFn = <T>(...args:T[]) => number
 
 export default class RNGFunction<T> extends RNG {
 
@@ -21,7 +21,7 @@ export default class RNGFunction<T> extends RNG {
     return this._rng()
   }
 
-  seed(thunk: SeedFn, opts?: T[]) {
+  seed(thunk: SeedFn, _opts?: T[]) {
     ow(thunk, ow.function)
     this._rng = thunk
   }

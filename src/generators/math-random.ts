@@ -9,7 +9,7 @@ export default class RNGMathRandom extends RNG {
     return Math.random()
   }
 
-  seed(seed: unknown, opts: unknown) {
+  seed(_seed: unknown, _opts: unknown) {
     // intentionally empty
   }
 

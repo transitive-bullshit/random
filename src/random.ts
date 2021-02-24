@@ -17,8 +17,33 @@ import irwinHall from './distributions/irwin-hall'
 import bates from './distributions/bates'
 import pareto from './distributions/pareto'
 
-// TODO: Expand
-type V = any
+
+/**
+ * Distribution function
+ */
+interface IDistFn<R> {
+  (random: {
+    next: () => number;
+  }, ...args): () => R
+}
+
+/**
+ * Distribution
+ */
+interface IDist<T extends IDistFn<T>> {
+  (...args): ReturnType<T>
+  (random: {
+    next: () => number;
+  }, ...args): ReturnType<T>
+}
+
+/**
+ * Keyed cache entry
+ */
+interface ICacheEntry<T extends IDist<T>> {
+  key: string,
+  distribution: IDist<T>,
+}
 
 export { RNG, RNGFactory }
 
@@ -34,15 +59,14 @@ export { RNG, RNGFactory }
  */
 class Random<R extends RNG> {
 
-  _cache: Record<
-    string, { key: string, distribution: V }
-  >
   _rng: RNG
   _patch: typeof Math.random
+  protected _cache: {
+    [k: string]: ICacheEntry<(...args) => any>
+  } = {};
 
   constructor(rng?: R) {
     if (rng) ow(rng, ow.object.instanceOf(RNG))
-
     this._cache = {}
     this.use(rng)
   }
@@ -353,12 +377,15 @@ class Random<R extends RNG> {
    * @param {function} getter - Function which generates a new distribution
    * @param {...*} args - Distribution-specific arguments
    */
-  _memoize = (label: string, getter: V, ...args): ReturnType<V> => {
+  _memoize<F extends IDist<F>>(label: string, getter: F, ...args) {
     const key = `${args.join(';')}`
-    let value = this._cache[label]
+    let value = this._cache[label];
 
     if (value === undefined || value.key !== key) {
-      value = { key, distribution: getter(this, ...args) }
+      value = {
+        key,
+        distribution: getter(this, ...args)
+      };
       this._cache[label] = value
     }
 
