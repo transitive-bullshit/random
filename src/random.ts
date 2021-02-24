@@ -57,7 +57,7 @@ export { RNG, RNGFactory }
  *
  * @param {RNG|function} [rng=Math.random] - Underlying pseudorandom number generator.
  */
-class Random {
+export class Random {
 
   _rng: RNG
   _patch: typeof Math.random
@@ -228,7 +228,7 @@ class Random {
    * @param {number} [min=0] - Lower bound (float, inclusive)
    * @param {number} [max=1] - Upper bound (float, exclusive)
    */
-  uniform = (min: number, max: number) => {
+  uniform = (min?: number, max?: number) => {
     return this._memoize('uniform', uniform, min, max)
   }
 
@@ -262,7 +262,7 @@ class Random {
    * @param {number} [mu=0] - Mean
    * @param {number} [sigma=1] - Standard deviation
    */
-  normal = (mu: number, sigma: number) => {
+  normal = (mu?: number, sigma?: number) => {
     return normal(this, mu, sigma)
   }
 
@@ -272,7 +272,7 @@ class Random {
    * @param {number} [mu=0] - Mean of underlying normal distribution
    * @param {number} [sigma=1] - Standard deviation of underlying normal distribution
    */
-  logNormal = (mu: number, sigma: number) => {
+  logNormal = (mu?: number, sigma?: number) => {
     return logNormal(this, mu, sigma)
   }
 
@@ -285,7 +285,7 @@ class Random {
    *
    * @param {number} [p=0.5] - Success probability of each trial.
    */
-  bernoulli = (p: number) => {
+  bernoulli = (p?: number) => {
     return bernoulli(this, p)
   }
 
@@ -295,7 +295,7 @@ class Random {
    * @param {number} [n=1] - Number of trials.
    * @param {number} [p=0.5] - Success probability of each trial.
    */
-  binomial = (n: number, p: number) => {
+  binomial = (n?: number, p?: number) => {
     return binomial(this, n, p)
   }
 
@@ -304,7 +304,7 @@ class Random {
    *
    * @param {number} [p=0.5] - Success probability of each trial.
    */
-  geometric = (p: number) => {
+  geometric = (p?: number) => {
     return geometric(this, p)
   }
 
@@ -317,7 +317,7 @@ class Random {
    *
    * @param {number} [lambda=1] - Mean (lambda > 0)
    */
-  poisson = (lambda: number) => {
+  poisson = (lambda?: number) => {
     return poisson(this, lambda)
   }
 
@@ -339,7 +339,7 @@ class Random {
    *
    * @param {number} [n=1] - Number of uniform samples to sum (n >= 0)
    */
-  irwinHall = (n: number) => {
+  irwinHall = (n?: number) => {
     return irwinHall(this, n)
   }
 
@@ -348,7 +348,7 @@ class Random {
    *
    * @param {number} [n=1] - Number of uniform samples to average (n >= 1)
    */
-  bates = (n: number) => {
+  bates = (n?: number) => {
     return bates(this, n)
   }
 
@@ -357,7 +357,7 @@ class Random {
    *
    * @param {number} [alpha=1] - Alpha
    */
-  pareto = (alpha: number) => {
+  pareto = (alpha?: number) => {
     return pareto(this, alpha)
   }
 

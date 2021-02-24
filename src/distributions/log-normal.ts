@@ -1,6 +1,7 @@
-// TODO: Type
-export default (random: any, ...args: any[]) => {
-  const normal = random.normal(...args)
+import { Random } from '../random';
+
+export default (random: Random, mu = 0, sigma = 1) => {
+  const normal = random.normal(mu,sigma)
   return () => {
     return Math.exp(normal())
   }

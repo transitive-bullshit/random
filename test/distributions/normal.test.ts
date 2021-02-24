@@ -2,7 +2,7 @@ import test from 'ava'
 import seedrandom from 'seedrandom'
 
 import inDelta from '../_in-delta'
-import random from '../..'
+import random from "../../src/random"
 
 test('random.normal() produces numbers', (t) => {
   const r = random.clone(seedrandom('ZDJjM2IyNmFlNmVjNWQwMGZkMmY1Y2Nk'))
