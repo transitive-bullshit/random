@@ -57,7 +57,7 @@ export { RNG, RNGFactory }
  *
  * @param {RNG|function} [rng=Math.random] - Underlying pseudorandom number generator.
  */
-class Random<R extends RNG> {
+class Random {
 
   _rng: RNG
   _patch: typeof Math.random
@@ -65,7 +65,7 @@ class Random<R extends RNG> {
     [k: string]: ICacheEntry<(...args) => any>
   } = {};
 
-  constructor(rng?: R) {
+  constructor(rng?: RNG) {
     if (rng) ow(rng, ow.object.instanceOf(RNG))
     this._cache = {}
     this.use(rng)
@@ -88,7 +88,7 @@ class Random<R extends RNG> {
    * @param {object} [opts] - Optional config for new RNG options.
    * @return {Random}
    */
-  clone<T extends RNG>(...args: [T]): Random<RNG> {
+  clone<T>(...args: [T]): Random {
     if (args.length) {
       return new Random(RNGFactory(...args))
     } else {
