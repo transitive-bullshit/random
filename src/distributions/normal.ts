@@ -1,5 +1,5 @@
 import ow from 'ow'
-import { Random } from '../random';
+import { Random } from '../random'
 
 export default (random: Random, mu = 0, sigma = 1) => {
   ow(mu, ow.number)

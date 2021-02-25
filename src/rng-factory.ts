@@ -24,7 +24,7 @@ export default <T extends any[]>(...args: T) => {
     case 'function':
       return new RNGFunction(arg0)
 
-    case "number":
+    case 'number':
     case 'string':
       return new RNGFunction(seedrandom(...rest))
   }

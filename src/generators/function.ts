@@ -4,29 +4,28 @@ import RNG from '../rng'
 type SeedFn = <T>(...args: T[]) => number
 
 export default class RNGFunction<T> extends RNG {
-
   _rng: SeedFn
 
-  constructor(thunk: SeedFn, opts?: T[]) {
+  constructor (thunk: SeedFn, opts?: T[]) {
     super()
 
     this.seed(thunk, opts)
   }
 
-  get name() {
+  get name () {
     return 'function'
   }
 
-  next() {
+  next () {
     return this._rng()
   }
 
-  seed(thunk: SeedFn, _opts?: T[]) {
+  seed (thunk: SeedFn, _opts?: T[]) {
     ow(thunk, ow.function)
     this._rng = thunk
   }
 
-  clone(opts: T[]) {
+  clone (opts: T[]) {
     return new RNGFunction(this._rng, opts)
   }
 }

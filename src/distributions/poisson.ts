@@ -1,5 +1,5 @@
 import ow from 'ow'
-import { Random } from '../random';
+import { Random } from '../random'
 
 const logFactorialTable = [
   0.0,
@@ -15,11 +15,7 @@ const logFactorialTable = [
 ]
 
 const logFactorial = (k: number) => {
-  const v = logFactorialTable[k]
-  if (v) {
-    return v
-  }
-  throw new Error(`Value ${k} not in factorial table`)
+  return logFactorialTable[k]
 }
 
 const logSqrt2PI = 0.91893853320467267
@@ -85,6 +81,7 @@ export default (random: Random, lambda = 1) => {
             return k
           }
         } else if (k >= 0) {
+          // @ts-ignore
           if (Math.log(v) <= k * Math.log(lambda) - lambda - logFactorial(k)) {
             return k
           }

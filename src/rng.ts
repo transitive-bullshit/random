@@ -6,7 +6,6 @@ interface IRNG {
 }
 
 export default abstract class RNG implements IRNG {
-
   abstract get name(): string
 
   abstract next(): number
@@ -15,7 +14,7 @@ export default abstract class RNG implements IRNG {
 
   abstract clone(_seed?: unknown, _opts?: unknown): RNG
 
-  _seed(seed: number, _opts?: unknown) {
+  _seed (seed: number, _opts?: unknown) {
     // TODO: add entropy and stuff
 
     if (seed === (seed || 0)) {
@@ -32,4 +31,3 @@ export default abstract class RNG implements IRNG {
     }
   }
 }
-

@@ -1,5 +1,3 @@
-import ow from 'ow'
-
 import RNG from './rng'
 import RNGFactory from './rng-factory'
 
@@ -16,7 +14,6 @@ import exponential from './distributions/exponential'
 import irwinHall from './distributions/irwin-hall'
 import bates from './distributions/bates'
 import pareto from './distributions/pareto'
-
 
 /**
  * Distribution function
@@ -53,26 +50,23 @@ export { RNG, RNGFactory }
  * @param {RNG|function} [rng=Math.random] - Underlying pseudorandom number generator.
  */
 export class Random {
-
   _rng: RNG
   _patch: typeof Math.random | undefined
   protected _cache: {
     [k: string]: ICacheEntry<any>
   } = {};
 
-  constructor(rng?: RNG) {
-    if (rng) {
-      ow(rng, ow.object.instanceOf(RNG))
+  constructor (rng?: RNG) {
+    if (rng && rng instanceof RNG) {
       this.use(rng)
     }
     this._cache = {}
-
   }
 
   /**
    * @member {RNG} Underlying pseudo-random number generator
    */
-  get rng() {
+  get rng () {
     return this._rng
   }
 
@@ -86,7 +80,7 @@ export class Random {
    * @param {object} [opts] - Optional config for new RNG options.
    * @return {Random}
    */
-  clone<T>(...args: [T]): Random {
+  clone<T> (...args: [T]): Random {
     if (args.length) {
       return new Random(RNGFactory(...args))
     } else {
@@ -112,14 +106,14 @@ export class Random {
    *
    * @param {...*} args
    */
-  use(...args: [RNG]) {
+  use (...args: [RNG]) {
     this._rng = RNGFactory(...args)
   }
 
   /**
    * Patches `Math.random` with this Random instance's PRNG.
    */
-  patch() {
+  patch () {
     if (this._patch) {
       throw new Error('Math.random already patched')
     }
@@ -131,7 +125,7 @@ export class Random {
   /**
    * Restores a previously patched `Math.random` to its original value.
    */
-  unpatch() {
+  unpatch () {
     if (this._patch) {
       Math.random = this._patch
       delete this._patch
@@ -396,15 +390,15 @@ export class Random {
    *
    * @return {function}
    */
-  _memoize<T>(label: string, getter: IDistFn<any>, ...args: any[]): IDist<T> {
+  _memoize<T> (label: string, getter: IDistFn<any>, ...args: any[]): IDist<T> {
     const key = `${args.join(';')}`
-    let value = this._cache[label];
+    let value = this._cache[label]
 
     if (value === undefined || value.key !== key) {
       value = {
         key,
         distribution: getter(this, ...args)
-      };
+      }
       this._cache[label] = value
     }
 

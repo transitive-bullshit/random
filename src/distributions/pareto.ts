@@ -1,5 +1,5 @@
 import ow from 'ow'
-import { Random } from '../random';
+import { Random } from '../random'
 
 export default (random: Random, alpha = 1) => {
   ow(alpha, ow.number.greaterThanOrEqual(0))
