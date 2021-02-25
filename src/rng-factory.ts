@@ -3,6 +3,14 @@ import seedrandom from 'seedrandom'
 import RNG from './rng'
 import RNGFunction from './generators/function'
 
+/**
+ * Construct an RNG with variable inputs. Used in calls to Random constructor
+ * @param {...*} args - Distribution-specific arguments
+ * @return RNG
+ *
+ * @example
+ * new Random(RNGFactory(...args))
+ */
 export default <T extends any[]>(...args: T) => {
   const [arg0 = 'default', ...rest] = args
 

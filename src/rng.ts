@@ -1,28 +1,21 @@
-export interface IRNG {
+interface IRNG {
   next(): number
-  seed<S,O>(seed?: S, opts?: O): void
-  clone<S,O>(seed?: S, opts?: O): any
-  _seed?<S,O>(seed: S, opts: O): any
+  seed<S, O>(seed?: S, opts?: O): void
+  clone<S, O>(seed?: S, opts?: O): RNG
+  _seed?<O>(seed: number, opts: O): number
 }
 
-export default class RNG implements IRNG {
-  get name(): string {
-    throw new Error('RNG.name must be overridden')
-  }
+export default abstract class RNG implements IRNG {
 
-  next(): number {
-    throw new Error('RNG.next must be overridden')
-  }
+  abstract get name(): string
 
-  seed(_seed?:unknown, _opts?:unknown) {
-    throw new Error('RNG.seed must be overridden')
-  }
+  abstract next(): number
 
-  clone(_seed?:unknown, _opts?:unknown): any {
-    throw new Error('RNG.clone must be overridden')
-  }
+  abstract seed(_seed?: unknown, _opts?: unknown): void
 
-  _seed(seed:any, _opts?:unknown) {
+  abstract clone(_seed?: unknown, _opts?: unknown): RNG
+
+  _seed(seed: number, _opts?: unknown) {
     // TODO: add entropy and stuff
 
     if (seed === (seed || 0)) {

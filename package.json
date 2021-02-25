@@ -2,17 +2,18 @@
   "name": "random",
   "version": "2.2.0",
   "description": "Seedable random number generator supporting many common distributions.",
-  "main": "index.js",
-  "module": "src/random.js",
+  "main": "dist/random.js",
+  "module": "dist/random.js",
+  "types":"dist/random.d.ts",
   "repository": "transitive-bullshit/random",
   "author": "Travis Fischer <travis@automagical.ai>",
   "license": "MIT",
   "reveal": true,
   "scripts": {
     "start": "yarn build:watch",
-    "docs": "update-markdown-jsdoc -f src/random.js --shallow",
+    "docs": "update-markdown-jsdoc -f dist/random.js --shallow",
     "build": "tsc",
-    "build:watch": "babel -w -s -d dist src",
+    "build:watch": "tsc --watch",
     "prebuild": "yarn run clean",
     "clean": "del dist",
     "prepublishOnly": "yarn run build",
@@ -47,11 +48,8 @@
     "@types/node": "^14.14.31",
     "@types/seedrandom": "^2.4.28",
     "ava": "^3.5.0",
-    "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
     "del-cli": "^1.1.0",
     "dev-cli": "^0.0.0",
-    "esm": "^3.2.25",
     "standard": "^14.3.3",
     "ts-node": "^9.1.1",
     "tsc": "^1.20150623.0",
@@ -59,7 +57,6 @@
     "update-markdown-jsdoc": "^1.0.11"
   },
   "dependencies": {
-    "babel-runtime": "^6.26.0",
     "ow": "^0.4.0",
     "ow-lite": "^0.0.2",
     "seedrandom": "^3.0.5"
@@ -74,11 +71,6 @@
 		],
     "require": [
       "ts-node/register"
-    ]
-  },
-  "babel": {
-    "presets": [
-      "env"
     ]
   }
 }

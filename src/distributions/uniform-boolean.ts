@@ -1,4 +1,6 @@
-export default (random: { next: () => number }) => {
+import { Random } from '../random';
+
+export default (random: Random) => {
   return () => {
     return (random.next() >= 0.5)
   }

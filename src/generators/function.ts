@@ -1,7 +1,7 @@
 import ow from 'ow'
 import RNG from '../rng'
 
-export type SeedFn = <T>(...args:T[]) => number
+type SeedFn = <T>(...args: T[]) => number
 
 export default class RNGFunction<T> extends RNG {
 

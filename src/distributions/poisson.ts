@@ -1,4 +1,5 @@
-import ow from 'ow-lite'
+import ow from 'ow'
+import { Random } from '../random';
 
 const logFactorialTable = [
   0.0,
@@ -14,12 +15,16 @@ const logFactorialTable = [
 ]
 
 const logFactorial = (k: number) => {
-  return logFactorialTable[k]
+  const v = logFactorialTable[k]
+  if (v) {
+    return v
+  }
+  throw new Error(`Value ${k} not in factorial table`)
 }
 
 const logSqrt2PI = 0.91893853320467267
 
-export default (random: { next: () => number }, lambda = 1) => {
+export default (random: Random, lambda = 1) => {
   ow(lambda, ow.number.positive)
 
   if (lambda < 10) {

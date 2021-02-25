@@ -1,6 +1,7 @@
 import ow from 'ow'
+import { Random } from '../random';
 
-export default (random: { next: () => number }, n = 1) => {
+export default (random: Random, n = 1) => {
   ow(n, ow.number.integer.greaterThanOrEqual(0))
 
   return () => {

@@ -1,6 +1,7 @@
+import { Random } from '../random';
 import ow from 'ow'
 
-export default (random: { next: () => number }, min?: number, max?: number) => {
+export default (random: Random, min: number = 0, max: number = 1) => {
   if (max === undefined) {
     max = (min === undefined ? 1 : min)
     min = 0

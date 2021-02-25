@@ -7,7 +7,7 @@ export default class RNGXOR128<T> extends RNG {
   z: number;
   w: number;
 
-  constructor(seed: number, opts: T[]) {
+  constructor(seed: number, opts?: T[]) {
     super()
 
     this.x = 0
@@ -31,7 +31,7 @@ export default class RNGXOR128<T> extends RNG {
     return (this.w >>> 0) / 0x100000000
   }
 
-  seed(seed: number, opts: T[]) {
+  seed(seed: number, opts?: T[]) {
 
     this.x = this._seed(seed, opts)
 
