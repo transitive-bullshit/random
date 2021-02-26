@@ -1,6 +1,6 @@
 import RNG from '../rng'
 
-export default class RNGMathRandom extends RNG {
+export default class RNGMathRandom<T> extends RNG {
   get name () {
     return 'default'
   }
@@ -9,7 +9,7 @@ export default class RNGMathRandom extends RNG {
     return Math.random()
   }
 
-  seed (_seed: unknown, _opts: unknown) {
+  seed (_seed: unknown, _opts: T[]) {
     // intentionally empty
   }
 

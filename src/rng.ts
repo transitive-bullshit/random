@@ -1,18 +1,14 @@
-interface IRNG {
-  next(): number
-  seed<S, O>(seed?: S, opts?: O): void
-  clone<S, O>(seed?: S, opts?: O): RNG
-  _seed?<O>(seed: number, opts: O): number
-}
+export type SeedFn = () => number
+export type SeedType = number | string | SeedFn | RNG
 
-export default abstract class RNG implements IRNG {
+export default abstract class RNG {
   abstract get name(): string
 
   abstract next(): number
 
-  abstract seed(_seed?: unknown, _opts?: unknown): void
+  abstract seed(_seed?: SeedType, _opts?: {}): void
 
-  abstract clone(_seed?: unknown, _opts?: unknown): RNG
+  abstract clone(_seed?: SeedType, _opts?: {}): RNG
 
   _seed (seed: number, _opts?: unknown) {
     // TODO: add entropy and stuff
