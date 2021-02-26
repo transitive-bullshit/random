@@ -1,4 +1,5 @@
 import test from 'ava'
+import { ArgumentError } from 'ow'
 import seedrandom from 'seedrandom'
 
 import random from '../../src/random'
@@ -10,4 +11,12 @@ test('random.poisson() produces numbers', (t) => {
     const v = d()
     t.is(typeof v, 'number')
   }
+})
+
+test('random.poisson() invalid negative n input', (t) => {
+  const r = random.clone(seedrandom('ZDJjM2IyNmFlNmVjNWQwMGZkMmY1Y2Nk'))
+  const error = t.throws(() => {
+    r.poisson(-1)
+  }, { instanceOf: ArgumentError })
+  t.is(error.message, 'Expected number to be positive, got -1')
 })

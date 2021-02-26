@@ -237,7 +237,7 @@ export class Random {
    * @param {number} [max=1] - Upper bound (integer, inclusive)
    * @return {function}
    */
-  uniformInt = (min: number, max: number) => {
+  uniformInt = (min?: number, max?: number) => {
     return this._memoize<number>('uniformInt', uniformInt, min, max)
   }
 
@@ -334,7 +334,7 @@ export class Random {
    * @param {number} [lambda=1] - Inverse mean (lambda > 0)
    * @return {function}
    */
-  exponential = (lambda: number) => {
+  exponential = (lambda?: number) => {
     return exponential(this, lambda)
   }
 
