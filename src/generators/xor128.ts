@@ -1,12 +1,12 @@
 import RNG from '../rng'
 
-export default class RNGXOR128<T> extends RNG {
+export default class RNGXOR128 extends RNG {
   x: number
   y: number
   z: number
   w: number
 
-  constructor(seed: number, opts?: T[]) {
+  constructor(seed: number, opts?: Record<string, unknown>) {
     super()
 
     this.x = 0
@@ -30,7 +30,7 @@ export default class RNGXOR128<T> extends RNG {
     return (this.w >>> 0) / 0x100000000
   }
 
-  seed(seed: number, opts?: T[]) {
+  seed(seed: number, opts?: Record<string, unknown>) {
     this.x = this._seed(seed, opts)
 
     // discard an initial batch of 64 values
@@ -39,7 +39,7 @@ export default class RNGXOR128<T> extends RNG {
     }
   }
 
-  clone(seed: number, opts: T[]) {
+  clone(seed: number, opts: Record<string, unknown>) {
     return new RNGXOR128(seed, opts)
   }
 }
