@@ -15,8 +15,14 @@ test('random.irwinHall() produces numbers', (t) => {
 
 test('random.irwinHall() invalid negative n input', (t) => {
   const r = random.clone(seedrandom('ZDJjM2IyNmFlNmVjNWQwMGZkMmY1Y2Nk'))
-  const error = t.throws(() => {
-    r.irwinHall(-1)
-  }, { instanceOf: ArgumentError })
-  t.is(error.message, 'Expected number to be greater than or equal to 0, got -1')
+  const error = t.throws(
+    () => {
+      r.irwinHall(-1)
+    },
+    { instanceOf: ArgumentError }
+  )
+  t.is(
+    error.message,
+    'Expected number to be greater than or equal to 0, got -1'
+  )
 })

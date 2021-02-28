@@ -5,7 +5,7 @@ const logFactorialTable = [
   0.0,
   0.0,
   0.69314718055994529,
-  1.7917594692280550,
+  1.791759469228055,
   3.1780538303479458,
   4.7874917427820458,
   6.5792512120101012,
@@ -34,7 +34,7 @@ export default (random: Random, lambda = 1) => {
 
       while (u > p) {
         u = u - p
-        p = lambda * p / ++x
+        p = (lambda * p) / ++x
       }
 
       return x
@@ -54,14 +54,16 @@ export default (random: Random, lambda = 1) => {
 
         if (v <= 0.86 * vR) {
           u = v / vR - 0.43
-          return Math.floor((2 * a / (0.5 - Math.abs(u)) + b) * u + lambda + 0.445)
+          return Math.floor(
+            ((2 * a) / (0.5 - Math.abs(u)) + b) * u + lambda + 0.445
+          )
         }
 
         if (v >= vR) {
           u = random.next() - 0.5
         } else {
           u = v / vR - 0.93
-          u = ((u < 0) ? -0.5 : 0.5) - u
+          u = (u < 0 ? -0.5 : 0.5) - u
           v = random.next() * vR
         }
 
@@ -70,12 +72,16 @@ export default (random: Random, lambda = 1) => {
           continue
         }
 
-        const k = Math.floor((2 * a / us + b) * u + lambda + 0.445) | 0
-        v = v * invAlpha / (a / (us * us) + b)
+        const k = Math.floor(((2 * a) / us + b) * u + lambda + 0.445) | 0
+        v = (v * invAlpha) / (a / (us * us) + b)
 
         if (k >= 10) {
-          const t = (k + 0.5) * Math.log(lambda / k) - lambda - logSqrt2PI +
-            k - (1 / 12.0 - (1 / 360.0 - 1 / (1260.0 * k * k)) / (k * k)) / k
+          const t =
+            (k + 0.5) * Math.log(lambda / k) -
+            lambda -
+            logSqrt2PI +
+            k -
+            (1 / 12.0 - (1 / 360.0 - 1 / (1260.0 * k * k)) / (k * k)) / k
 
           if (Math.log(v * smu) <= t) {
             return k

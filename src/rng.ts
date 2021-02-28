@@ -10,7 +10,7 @@ export default abstract class RNG {
 
   abstract clone(_seed?: SeedType, _opts?: {}): RNG
 
-  _seed (seed: number, _opts?: unknown) {
+  _seed(seed: number, _opts?: unknown) {
     // TODO: add entropy and stuff
 
     if (seed === (seed || 0)) {

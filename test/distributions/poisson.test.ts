@@ -15,8 +15,11 @@ test('random.poisson() produces numbers', (t) => {
 
 test('random.poisson() invalid negative n input', (t) => {
   const r = random.clone(seedrandom('ZDJjM2IyNmFlNmVjNWQwMGZkMmY1Y2Nk'))
-  const error = t.throws(() => {
-    r.poisson(-1)
-  }, { instanceOf: ArgumentError })
+  const error = t.throws(
+    () => {
+      r.poisson(-1)
+    },
+    { instanceOf: ArgumentError }
+  )
   t.is(error.message, 'Expected number to be positive, got -1')
 })

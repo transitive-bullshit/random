@@ -10,6 +10,6 @@ export default (random: Random, mu = 0, sigma = 1) => {
       r = x * x + y * y
     } while (!r || r > 1)
 
-    return mu + sigma * y * Math.sqrt(-2 * Math.log(r) / r)
+    return mu + sigma * y * Math.sqrt((-2 * Math.log(r)) / r)
   }
 }

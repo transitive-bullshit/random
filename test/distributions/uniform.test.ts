@@ -26,7 +26,7 @@ export const calcMean = (d: Function) => {
  * @param max
  * @param t
  */
-export const zeroMax = (d: Function, max:number, t: ExecutionContext) => {
+export const zeroMax = (d: Function, max: number, t: ExecutionContext) => {
   for (let i = 0; i < 10000; ++i) {
     const v = d()
     if (v < 0 || v > max) {
@@ -41,7 +41,12 @@ export const zeroMax = (d: Function, max:number, t: ExecutionContext) => {
  * Assert random.uniform(min, max) returns numbers in [min, max)
  * @param d Distribution function
  */
-export const inMinMax = (d:Function, min:number, max:number, t: ExecutionContext) => {
+export const inMinMax = (
+  d: Function,
+  min: number,
+  max: number,
+  t: ExecutionContext
+) => {
   for (let i = 0; i < 10000; ++i) {
     const v = d()
     t.true(v >= min)

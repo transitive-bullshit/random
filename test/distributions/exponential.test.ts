@@ -15,8 +15,11 @@ test('random.exponential() produces numbers', (t) => {
 
 test('random.exponential() invalid negative n input', (t) => {
   const r = random.clone(seedrandom('ZDJjM2IyNmFlNmVjNWQwMGZkMmY1Y2Nk'))
-  const error = t.throws(() => {
-    r.exponential(-1)
-  }, { instanceOf: ArgumentError })
+  const error = t.throws(
+    () => {
+      r.exponential(-1)
+    },
+    { instanceOf: ArgumentError }
+  )
   t.is(error.message, 'Expected number to be positive, got -1')
 })

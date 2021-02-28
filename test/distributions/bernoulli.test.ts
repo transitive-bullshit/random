@@ -15,16 +15,25 @@ test('random.bernoulli() produces numbers', (t) => {
 
 test('random.bernoulli() p number input', (t) => {
   const r = random.clone(seedrandom('ZDJjM2IyNmFlNmVjNWQwMGZkMmY1Y2Nk'))
-  const error = t.throws(() => {
-    r.bernoulli(3)
-  }, { instanceOf: ArgumentError })
+  const error = t.throws(
+    () => {
+      r.bernoulli(3)
+    },
+    { instanceOf: ArgumentError }
+  )
   t.is(error.message, 'Expected number to be less than 1, got 3')
 })
 
 test('random.bernoulli() invalid p negative input', (t) => {
   const r = random.clone(seedrandom('ZDJjM2IyNmFlNmVjNWQwMGZkMmY1Y2Nk'))
-  const error = t.throws(() => {
-    r.bernoulli(-1)
-  }, { instanceOf: ArgumentError })
-  t.is(error.message, 'Expected number to be greater than or equal to 0, got -1')
+  const error = t.throws(
+    () => {
+      r.bernoulli(-1)
+    },
+    { instanceOf: ArgumentError }
+  )
+  t.is(
+    error.message,
+    'Expected number to be greater than or equal to 0, got -1'
+  )
 })

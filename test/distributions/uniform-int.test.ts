@@ -41,8 +41,11 @@ test('random.uniformInt(min, max) has mean (min + max) / 2', (t) => {
 
 test('random.uniformInt(min, max) with non valid input', (t) => {
   const r = random.clone(seedrandom('ZDJjM2IyNmFlNmVjNWQwMGZkMmY1Y2Nk'))
-  const error = t.throws(() => {
-    r.uniformInt(10.1, 42.1)
-  }, { instanceOf: ArgumentError })
+  const error = t.throws(
+    () => {
+      r.uniformInt(10.1, 42.1)
+    },
+    { instanceOf: ArgumentError }
+  )
   t.is(error.message, 'Expected number to be an integer, got 10.1')
 })
