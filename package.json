@@ -14,7 +14,7 @@
   "scripts": {
     "start": "run-s build:watch",
     "build": "tsc -p tsconfig.json && tsc -p tsconfig.cjs.json",
-    "build:watch": "tsc --watch",
+    "build:watch": "tsc -p tsconfig.json && tsc -p tsconfig.cjs.json --watch",
     "prebuild": "run-s clean",
     "clean": "del dist",
     "prepublishOnly": "run-s build",
