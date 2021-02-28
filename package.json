@@ -6,22 +6,24 @@
   "module": "dist/random.js",
   "types": "dist/random.d.ts",
   "repository": "transitive-bullshit/random",
-  "author": "Travis Fischer <travis@automagical.ai>",
+  "author": "Travis Fischer <travis@transitivebullsh.it>",
   "license": "MIT",
-  "reveal": true,
-  "scripts": {
-    "start": "yarn build:watch",
-    "docs": "update-markdown-jsdoc -f dist/random.js --shallow",
-    "build": "tsc",
-    "build:watch": "tsc --watch",
-    "prebuild": "yarn run clean",
-    "clean": "del dist",
-    "prepublishOnly": "yarn run build",
-    "test": "ava -v",
-    "lint": "eslint '{src,test}/**/*.ts' --fix"
-  },
   "engines": {
     "node": ">=10"
+  },
+  "scripts": {
+    "start": "run-s build:watch",
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "prebuild": "run-s clean",
+    "clean": "del dist",
+    "prepublishOnly": "run-s build",
+    "docs": "update-markdown-jsdoc -f dist/random.js --shallow",
+    "pretest": "run-s build",
+    "test": "run-s test:*",
+    "test:unit": "ava -v",
+    "test:prettier": "prettier '**/*.{js,jsx,ts,tsx}' --check",
+    "test:lint": "eslint '{src,test}/**/*.ts'"
   },
   "keywords": [
     "random",
@@ -43,6 +45,10 @@
     "irwinhall",
     "bates"
   ],
+  "dependencies": {
+    "ow": "^0.23.0",
+    "seedrandom": "^3.0.5"
+  },
   "devDependencies": {
     "@ava/typescript": "^1.1.1",
     "@types/node": "^14.14.31",
@@ -57,13 +63,10 @@
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.3.1",
+    "npm-run-all": "^4.1.5",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.2",
     "update-markdown-jsdoc": "^1.0.11"
-  },
-  "dependencies": {
-    "ow": "^0.23.0",
-    "seedrandom": "^3.0.5"
   },
   "files": [
     "dist"
