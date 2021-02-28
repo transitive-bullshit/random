@@ -1,10 +1,10 @@
 import ow from 'ow'
 import RNG, { SeedFn } from '../rng'
 
-export default class RNGFunction<T> extends RNG {
+export default class RNGFunction extends RNG {
   _rng: SeedFn
 
-  constructor(thunk: SeedFn, opts?: T[]) {
+  constructor(thunk: SeedFn, opts?: Record<string, unknown>) {
     super()
 
     this.seed(thunk, opts)
@@ -18,12 +18,13 @@ export default class RNGFunction<T> extends RNG {
     return this._rng()
   }
 
-  seed(thunk: SeedFn, _opts?: T[]) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  seed(thunk: SeedFn, _opts?: Record<string, unknown>) {
     ow(thunk, ow.function)
     this._rng = thunk
   }
 
-  clone(_: undefined, opts: T[]) {
+  clone(_: undefined, opts: Record<string, unknown>) {
     return new RNGFunction(this._rng, opts)
   }
 }

@@ -1,18 +1,20 @@
 {
-  "env": {
-    "browser": true,
-    "es2021": true,
-    "node": true
-  },
-  "extends": ["standard"],
-  "parser": "@typescript-eslint/parser",
+  "root": true,
   "parserOptions": {
-    "ecmaVersion": 12,
-    "sourceType": "module"
+    "ecmaVersion": 2020
   },
+  "parser": "@typescript-eslint/parser",
   "plugins": ["@typescript-eslint"],
+  "extends": [
+    "plugin:@typescript-eslint/recommended",
+    "standard",
+    "plugin:prettier/recommended"
+  ],
+  "env": { "browser": true, "node": true },
   "rules": {
-    "no-use-before-define": "off"
-  },
-  "ignorePatterns": ["src/types/*"]
+    "@typescript-eslint/explicit-module-boundary-types": 0,
+    "@typescript-eslint/no-explicit-any": 0,
+    "no-use-before-define": 0,
+    "space-before-function-paren": 0
+  }
 }

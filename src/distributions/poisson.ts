@@ -87,8 +87,9 @@ export default (random: Random, lambda = 1) => {
             return k
           }
         } else if (k >= 0) {
-          // @ts-ignore
-          if (Math.log(v) <= k * Math.log(lambda) - lambda - logFactorial(k)) {
+          const f = logFactorial(k) ?? 0
+
+          if (Math.log(v) <= k * Math.log(lambda) - lambda - f) {
             return k
           }
         }

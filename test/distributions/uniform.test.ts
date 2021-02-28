@@ -7,17 +7,22 @@ import RNGXOR128 from '../../src/generators/xor128'
 import RNGFunction from '../../src/generators/function'
 import RNGMathRandom from '../../src/generators/math-random'
 
+type distFn = () => number
+
 /**
  * @param d Distribution function
  * @returns Mean of d
  */
-export const calcMean = (d: Function) => {
+export const calcMean = (d: distFn) => {
+  const n = 10000
   let sum = 0
-  for (let i = 0; i < 10000; ++i) {
+
+  for (let i = 0; i < n; ++i) {
     const v = d()
     sum += v
   }
-  return sum / 10000
+
+  return sum / n
 }
 
 /**
@@ -26,12 +31,16 @@ export const calcMean = (d: Function) => {
  * @param max
  * @param t
  */
-export const zeroMax = (d: Function, max: number, t: ExecutionContext) => {
-  for (let i = 0; i < 10000; ++i) {
+export const zeroMax = (d: distFn, max: number, t: ExecutionContext) => {
+  const n = 10000
+
+  for (let i = 0; i < n; ++i) {
     const v = d()
+
     if (v < 0 || v > max) {
       console.log(v)
     }
+
     t.true(v >= 0)
     t.true(v < max)
   }
@@ -42,7 +51,7 @@ export const zeroMax = (d: Function, max: number, t: ExecutionContext) => {
  * @param d Distribution function
  */
 export const inMinMax = (
-  d: Function,
+  d: distFn,
   min: number,
   max: number,
   t: ExecutionContext

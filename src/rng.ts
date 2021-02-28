@@ -6,11 +6,12 @@ export default abstract class RNG {
 
   abstract next(): number
 
-  abstract seed(_seed?: SeedType, _opts?: {}): void
+  abstract seed(_seed?: SeedType, _opts?: Record<string, unknown>): void
 
-  abstract clone(_seed?: SeedType, _opts?: {}): RNG
+  abstract clone(_seed?: SeedType, _opts?: Record<string, unknown>): RNG
 
-  _seed(seed: number, _opts?: unknown) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _seed(seed: number, _opts?: Record<string, unknown>) {
     // TODO: add entropy and stuff
 
     if (seed === (seed || 0)) {

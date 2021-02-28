@@ -5,17 +5,22 @@ import inDelta from '../_in-delta'
 import random from '../../src/random'
 import { ArgumentError } from 'ow'
 
+type distFn = () => number
+
 /**
  * @param d Distribution function
  * @returns Mean of d
  */
-export const calcMean = (d: Function) => {
+export const calcMean = (d: distFn) => {
+  const n = 10000
   let sum = 0
-  for (let i = 0; i < 10000; ++i) {
+
+  for (let i = 0; i < n; ++i) {
     const v = d()
     sum += v
   }
-  return sum / 10000
+
+  return sum / n
 }
 
 test('random.uniformInt() with seedrandom has mean 0.5', (t) => {

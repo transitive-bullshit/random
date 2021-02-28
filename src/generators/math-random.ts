@@ -1,6 +1,6 @@
 import RNG from '../rng'
 
-export default class RNGMathRandom<T> extends RNG {
+export default class RNGMathRandom extends RNG {
   get name() {
     return 'default'
   }
@@ -9,7 +9,8 @@ export default class RNGMathRandom<T> extends RNG {
     return Math.random()
   }
 
-  seed(_seed: unknown, _opts: T[]) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  seed(_seed: unknown, _opts: Record<string, unknown>) {
     // intentionally empty
   }
 
