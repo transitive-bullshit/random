@@ -9,6 +9,7 @@ Welcome to the most **random** module on npm! 😜
 ## Highlights
 
 - Simple API (_make easy things easy and hard things possible_)
+- TypeScript supported!
 - Seedable based on entropy or user input
 - Plugin support for different pseudo random number generators (PRNGs)
 - Sample from many common distributions
@@ -21,37 +22,41 @@ Welcome to the most **random** module on npm! 😜
 
 ```bash
 npm install --save random
+# or
+yarn add random
 ```
 
 ## Usage
 
 ```js
 const random = require('random')
+// or
+import random from 'random'
 
 // quick uniform shortcuts
 random.float((min = 0), (max = 1)) // uniform float in [ min, max )
 random.int((min = 0), (max = 1)) // uniform integer in [ min, max ]
 random.boolean() // true or false
 
-// uniform
+// uniform distribution
 random.uniform((min = 0), (max = 1)) // () => [ min, max )
 random.uniformInt((min = 0), (max = 1)) // () => [ min, max ]
 random.uniformBoolean() // () => [ false, true ]
 
-// normal
+// normal distribution
 random.normal((mu = 0), (sigma = 1))
 random.logNormal((mu = 0), (sigma = 1))
 
-// bernoulli
+// bernoulli distribution
 random.bernoulli((p = 0.5))
 random.binomial((n = 1), (p = 0.5))
 random.geometric((p = 0.5))
 
-// poisson
+// poisson distribution
 random.poisson((lambda = 1))
 random.exponential((lambda = 1))
 
-// misc
+// misc distribution
 random.irwinHall(n)
 random.bates(n)
 random.pareto(alpha)
@@ -65,8 +70,7 @@ random.int(0, 100) // 72
 random.boolean() // true
 ```
 
-**All distribution methods return a thunk** (function with no params), which will return
-a series of independent, identically distributed random variables from the specified distribution.
+**All distribution methods return a thunk** (function with no params), which will return a series of independent, identically distributed random variables from the specified distribution.
 
 ```js
 // create a normal distribution with default params (mu=1 and sigma=0)
@@ -462,6 +466,7 @@ Type: `function (alpha): function`
   - [x] basic tests
   - [x] test suite
   - [x] initial release!
+  - [x] typescript support
 
 ## Related
 
@@ -473,6 +478,8 @@ Type: `function (alpha): function`
 
 ## Credit
 
+Thanks go to [Andrew Moss](https://github.com/agmoss) for the TypeScript port!
+
 Huge shoutout to [Roger Combs](https://github.com/rcombs) for donating the `random` npm package for this project!
 
 Lots of inspiration from [d3-random](https://github.com/d3/d3-random) ([@mbostock](https://github.com/mbostock) and [@svanschooten](https://github.com/svanschooten)).
@@ -481,6 +488,6 @@ Some distributions and PRNGs are ported from C++ [boost::random](https://www.boo
 
 ## License
 
-MIT © [Travis Fischer](https://github.com/transitive-bullshit)
+MIT © [Travis Fischer](https://transitivebullsh.it)
 
 Support my OSS work by <a href="https://twitter.com/transitive_bs">following me on twitter <img src="https://storage.googleapis.com/saasify-assets/twitter-logo.svg" alt="twitter" height="24px" align="center"></a>
