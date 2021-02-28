@@ -1,5 +1,4 @@
 import test from 'ava'
-import { ArgumentError } from 'ow'
 import seedrandom from 'seedrandom'
 import random from '../../src/random'
 
@@ -19,10 +18,13 @@ test('random.bates() invalid n float input', (t) => {
     () => {
       r.bates(1.3)
     },
-    { instanceOf: ArgumentError }
+    { instanceOf: Error }
   )
 
-  t.is(error.message, 'Expected number to be an integer, got 1.3')
+  t.is(
+    error.message,
+    'Expected number `argument` `1.3` failed predicate `integer`'
+  )
 })
 
 test('random.bates() invalid negative n input', (t) => {
@@ -32,8 +34,11 @@ test('random.bates() invalid negative n input', (t) => {
     () => {
       r.bates(-1)
     },
-    { instanceOf: ArgumentError }
+    { instanceOf: Error }
   )
 
-  t.is(error.message, 'Expected number to be positive, got -1')
+  t.is(
+    error.message,
+    'Expected number `argument` `-1` failed predicate `positive`'
+  )
 })

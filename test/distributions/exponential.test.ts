@@ -1,5 +1,4 @@
 import test from 'ava'
-import { ArgumentError } from 'ow'
 import seedrandom from 'seedrandom'
 
 import random from '../../src/random'
@@ -19,7 +18,10 @@ test('random.exponential() invalid negative n input', (t) => {
     () => {
       r.exponential(-1)
     },
-    { instanceOf: ArgumentError }
+    { instanceOf: Error }
   )
-  t.is(error.message, 'Expected number to be positive, got -1')
+  t.is(
+    error.message,
+    'Expected number `argument` `-1` failed predicate `positive`'
+  )
 })

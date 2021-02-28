@@ -1,5 +1,5 @@
 import { Random } from '../random'
-import ow from 'ow'
+import ow from 'ow-lite'
 
 export default (random: Random, min = 0, max = 1) => {
   if (max === undefined) {

@@ -1,5 +1,4 @@
 import test from 'ava'
-import { ArgumentError } from 'ow'
 import seedrandom from 'seedrandom'
 
 import random from '../../src/random'
@@ -19,9 +18,9 @@ test('random.geometric() invalid positive n input', (t) => {
     () => {
       r.geometric(2)
     },
-    { instanceOf: ArgumentError }
+    { instanceOf: Error }
   )
-  t.is(error.message, 'Expected number to be less than 1, got 2')
+  t.is(error.message, 'Expected number `argument` `2` failed predicate `lte`')
 })
 
 test('random.geometric() invalid negative n input', (t) => {
@@ -30,7 +29,7 @@ test('random.geometric() invalid negative n input', (t) => {
     () => {
       r.geometric(-1)
     },
-    { instanceOf: ArgumentError }
+    { instanceOf: Error }
   )
-  t.is(error.message, 'Expected number to be greater than 0, got -1')
+  t.is(error.message, 'Expected number `argument` `-1` failed predicate `gt`')
 })

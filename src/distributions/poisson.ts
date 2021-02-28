@@ -1,4 +1,4 @@
-import ow from 'ow'
+import ow from 'ow-lite'
 import { Random } from '../random'
 
 const logFactorialTable = [

@@ -1,5 +1,4 @@
 import test from 'ava'
-import { ArgumentError } from 'ow'
 import seedrandom from 'seedrandom'
 
 import random from '../../src/random'
@@ -19,9 +18,12 @@ test('random.binomial() invalid negative n input', (t) => {
     () => {
       r.binomial(-1)
     },
-    { instanceOf: ArgumentError }
+    { instanceOf: Error }
   )
-  t.is(error.message, 'Expected number to be positive, got -1')
+  t.is(
+    error.message,
+    'Expected number `argument` `-1` failed predicate `positive`'
+  )
 })
 
 test('random.binomial() invalid positive p input', (t) => {
@@ -30,7 +32,7 @@ test('random.binomial() invalid positive p input', (t) => {
     () => {
       r.binomial(1, 3)
     },
-    { instanceOf: ArgumentError }
+    { instanceOf: Error }
   )
-  t.is(error.message, 'Expected number to be less than 1, got 3')
+  t.is(error.message, 'Expected number `argument` `3` failed predicate `lte`')
 })

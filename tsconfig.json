@@ -8,6 +8,7 @@
     "sourceMap": true,
     "outDir": "dist",
     "rootDir": "src",
+    "baseUrl": "src",
     "strict": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
@@ -22,7 +23,8 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedIndexedAccess": true,
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "typeRoots": ["src/ow-lite.d.ts"]
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "test"]
