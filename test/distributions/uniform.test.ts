@@ -27,6 +27,7 @@ export const calcMean = (d: distFn) => {
 
 /**
  * Assert numbers in [0, max)
+ *
  * @param d Distribution function
  * @param max
  * @param t

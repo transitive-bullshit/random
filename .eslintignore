@@ -1,0 +1,6 @@
+.snapshots/
+.next/
+.vercel/
+build/
+dist/
+docs/
