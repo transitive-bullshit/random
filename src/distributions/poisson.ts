@@ -1,5 +1,5 @@
-import ow from 'ow'
 import { Random } from '../random'
+import NumberValidator from '../NumberValidator'
 
 const logFactorialTable = [
   0.0,
@@ -21,7 +21,7 @@ const logFactorial = (k: number) => {
 const logSqrt2PI = 0.91893853320467267
 
 export default (random: Random, lambda = 1) => {
-  ow(lambda, ow.number.positive)
+  new NumberValidator(lambda).isPositive()
 
   if (lambda < 10) {
     // inversion method

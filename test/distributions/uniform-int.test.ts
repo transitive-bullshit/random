@@ -3,7 +3,6 @@ import seedrandom from 'seedrandom'
 
 import inDelta from '../_in-delta'
 import random from '../../src/random'
-import { ArgumentError } from 'ow'
 
 type distFn = () => number
 
@@ -50,7 +49,7 @@ test('random.uniformInt(min, max) with non valid input', (t) => {
     () => {
       r.uniformInt(10.1, 42.1)
     },
-    { instanceOf: ArgumentError }
+    { instanceOf: Error }
   )
   t.is(error.message, 'Expected number to be an integer, got 10.1')
 })

@@ -1,4 +1,3 @@
-import ow from 'ow'
 import RNG, { SeedFn } from '../rng'
 
 export default class RNGFunction extends RNG {
@@ -20,7 +19,6 @@ export default class RNGFunction extends RNG {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   seed(thunk: SeedFn, _opts?: Record<string, unknown>) {
-    ow(thunk, ow.function)
     this._rng = thunk
   }
 
