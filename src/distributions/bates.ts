@@ -1,8 +1,8 @@
 import { Random } from '../random'
-import NumberValidator from '../NumberValidator'
+import { numberValidator } from '../validation'
 
 export default (random: Random, n = 1) => {
-  new NumberValidator(n).isInt().isPositive()
+  numberValidator(n).isInt().isPositive()
   const irwinHall = random.irwinHall(n)
 
   return () => {

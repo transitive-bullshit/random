@@ -1,8 +1,9 @@
 import { Random } from '../random'
-import NumberValidator from '../NumberValidator'
+import { numberValidator } from '../validation'
 
 export default (random: Random, lambda = 1) => {
-  new NumberValidator(lambda).isPositive()
+  numberValidator(lambda).isPositive()
+
   return () => {
     return -Math.log(1 - random.next()) / lambda
   }

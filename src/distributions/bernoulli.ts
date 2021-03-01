@@ -1,8 +1,8 @@
 import { Random } from '../random'
-import NumberValidator from '../NumberValidator'
+import { numberValidator } from '../validation'
 
 export default (random: Random, p = 0.5) => {
-  new NumberValidator(p).greaterThanOrEqual(0).lessThan(1)
+  numberValidator(p).greaterThanOrEqual(0).lessThan(1)
 
   return () => {
     return (random.next() + p) | 0

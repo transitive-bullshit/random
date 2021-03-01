@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
     "composite": true,
-    "target": "es5",
-    "module": "ES2020",
+    "target": "es6",
+    "module": "commonjs",
+    "moduleResolution": "node",
     "allowJs": true,
     "declaration": true,
     "declarationMap": true,
@@ -23,8 +24,7 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedIndexedAccess": true,
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "node"
+    "forceConsistentCasingInFileNames": true
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "test"],

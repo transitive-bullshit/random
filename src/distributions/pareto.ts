@@ -1,8 +1,8 @@
 import { Random } from '../random'
-import NumberValidator from '../NumberValidator'
+import { numberValidator } from '../validation'
 
 export default (random: Random, alpha = 1) => {
-  new NumberValidator(alpha).greaterThanOrEqual(0)
+  numberValidator(alpha).greaterThanOrEqual(0)
   const invAlpha = 1.0 / alpha
 
   return () => {

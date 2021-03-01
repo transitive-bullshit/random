@@ -1,3 +1,7 @@
+export function numberValidator(num: number) {
+  return new NumberValidator(num)
+}
+
 export class NumberValidator {
   private n: number
   constructor(num: number) {
@@ -41,5 +45,3 @@ export class NumberValidator {
     throw new Error(`Expected number to be greater than ${v}, got ${this.n}`)
   }
 }
-
-export default NumberValidator
