@@ -1,5 +1,4 @@
 import test from 'ava'
-import { ArgumentError } from 'ow'
 import seedrandom from 'seedrandom'
 
 import random from '../../src/random'
@@ -19,7 +18,7 @@ test('random.bernoulli() p number input', (t) => {
     () => {
       r.bernoulli(3)
     },
-    { instanceOf: ArgumentError }
+    { instanceOf: Error }
   )
   t.is(error.message, 'Expected number to be less than 1, got 3')
 })
@@ -30,7 +29,7 @@ test('random.bernoulli() invalid p negative input', (t) => {
     () => {
       r.bernoulli(-1)
     },
-    { instanceOf: ArgumentError }
+    { instanceOf: Error }
   )
   t.is(
     error.message,

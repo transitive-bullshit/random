@@ -46,7 +46,6 @@
     "bates"
   ],
   "dependencies": {
-    "ow": "^0.23.0",
     "seedrandom": "^3.0.5"
   },
   "devDependencies": {

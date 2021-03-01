@@ -1,8 +1,8 @@
-import ow from 'ow'
 import { Random } from '../random'
+import NumberValidator from '../NumberValidator'
 
 export default (random: Random, n = 1) => {
-  ow(n, ow.number.integer.greaterThanOrEqual(0))
+  new NumberValidator(n).isInt().greaterThanOrEqual(0)
 
   return () => {
     let sum = 0

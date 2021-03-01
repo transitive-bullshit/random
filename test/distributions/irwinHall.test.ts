@@ -1,5 +1,4 @@
 import test from 'ava'
-import { ArgumentError } from 'ow'
 import seedrandom from 'seedrandom'
 
 import random from '../../src/random'
@@ -19,7 +18,7 @@ test('random.irwinHall() invalid negative n input', (t) => {
     () => {
       r.irwinHall(-1)
     },
-    { instanceOf: ArgumentError }
+    { instanceOf: Error }
   )
   t.is(
     error.message,

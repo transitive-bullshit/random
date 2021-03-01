@@ -1,5 +1,5 @@
 import { Random } from '../random'
-import ow from 'ow'
+import NumberValidator from '../NumberValidator'
 
 export default (random: Random, min = 0, max = 1) => {
   if (max === undefined) {
@@ -7,8 +7,8 @@ export default (random: Random, min = 0, max = 1) => {
     min = 0
   }
 
-  ow(min, ow.number.integer)
-  ow(max, ow.number.integer)
+  new NumberValidator(min).isInt()
+  new NumberValidator(max).isInt()
 
   return () => {
     return (random.next() * (max - min + 1) + min) | 0
