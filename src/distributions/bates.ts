@@ -1,6 +1,5 @@
-// import ow from 'ow'
 import { Random } from '../random'
-import { NumberValidator } from '../NumberValidator'
+import NumberValidator from '../NumberValidator'
 
 export default (random: Random, n = 1) => {
   new NumberValidator(n).isInt().isPositive()
