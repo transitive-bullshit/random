@@ -14,6 +14,7 @@ import exponential from './distributions/exponential'
 import irwinHall from './distributions/irwin-hall'
 import bates from './distributions/bates'
 import pareto from './distributions/pareto'
+import RNGMathRandom from './generators/math-random'
 
 /**
  * Distribution function
@@ -59,6 +60,8 @@ export class Random {
   constructor(rng?: RNG) {
     if (rng && rng instanceof RNG) {
       this.use(rng)
+    } else {
+      this.use(new RNGMathRandom())
     }
     this._cache = {}
   }
