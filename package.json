@@ -13,8 +13,8 @@
   },
   "scripts": {
     "start": "run-s build:watch",
-    "build": "tsc -p tsconfig.json && tsc -p tsconfig.cjs.json",
-    "build:watch": "tsc -p tsconfig.json && tsc -p tsconfig.cjs.json --watch",
+    "build": "tsc -b",
+    "build:watch": "tsc -b --watch",
     "prebuild": "run-s clean",
     "clean": "del dist",
     "prepublishOnly": "run-s build",
