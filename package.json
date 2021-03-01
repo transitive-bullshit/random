@@ -1,6 +1,6 @@
 {
   "name": "random",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "Seedable random number generator supporting many common distributions.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
