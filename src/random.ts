@@ -160,7 +160,7 @@ export class Random {
    * @param {number} [max=1] - Upper bound (float, exclusive)
    * @return {number}
    */
-  float = (min: number, max: number): number => {
+  float = (min?: number, max?: number): number => {
     return this.uniform(min, max)()
   }
 
@@ -174,7 +174,7 @@ export class Random {
    * @param {number} [max=1] - Upper bound (integer, inclusive)
    * @return {number}
    */
-  int = (min: number, max: number) => {
+  int = (min?: number, max?: number) => {
     return this.uniformInt(min, max)()
   }
 
@@ -190,7 +190,7 @@ export class Random {
    * @param {number} [max=1] - Upper bound (integer, inclusive)
    * @return {number}
    */
-  integer = (min: number, max: number) => {
+  integer = (min?: number, max?: number) => {
     return this.uniformInt(min, max)()
   }
 
