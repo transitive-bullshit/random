@@ -3,27 +3,30 @@ import seedrandom from 'seedrandom'
 import random from '../../src/random'
 import inDelta from '../_in-delta'
 
-test('random.float() produces numbers', (t) => {
+test('random.float() produces numbers [0,1)', (t) => {
   const r = random.clone(seedrandom('ZDJjM2IyNmFlNmVjNWQwMGZkMmY1Y2Nk'))
   for (let i = 0; i < 10000; ++i) {
     const v = r.float()
-    t.is(typeof v, 'number')
+    t.true(v >= 0)
+    t.true(v < 1)
   }
 })
 
-test('random.float() with max produces numbers', (t) => {
+test('random.float() with max produces numbers in [0, max)', (t) => {
   const r = random.clone(seedrandom('ZDJjM2IyNmFlNmVjNWQwMGZkMmY1Y2Nk'))
   for (let i = 0; i < 10000; ++i) {
     const v = r.float(100)
-    t.is(typeof v, 'number')
+    t.true(v >= 0)
+    t.true(v < 100)
   }
 })
 
-test('random.float() with min max produces numbers', (t) => {
+test('random.float() with min max produces numbers in [min, max)', (t) => {
   const r = random.clone(seedrandom('ZDJjM2IyNmFlNmVjNWQwMGZkMmY1Y2Nk'))
   for (let i = 0; i < 10000; ++i) {
     const v = r.float(10, 100)
-    t.is(typeof v, 'number')
+    t.true(v >= 10)
+    t.true(v < 100)
   }
 })
 
