@@ -3,7 +3,7 @@
   "version": "3.0.3",
   "description": "Seedable random number generator supporting many common distributions.",
   "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
+  "module": "dist/esm/index.esm.js",
   "types": "dist/cjs/index.d.ts",
   "repository": "transitive-bullshit/random",
   "author": "Travis Fischer <travis@transitivebullsh.it>",

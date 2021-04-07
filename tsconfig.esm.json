@@ -2,7 +2,7 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "noEmit": false,
-    "module": "commonjs",
-    "outDir": "dist/cjs"
-  }
+    "module": "es6",
+    "outDir": "dist/esm"
+  },
 }
