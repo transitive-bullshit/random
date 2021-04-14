@@ -2,15 +2,14 @@
   "compilerOptions": {
     "composite": true,
     "target": "es6",
-    "module": "commonjs",
     "moduleResolution": "node",
     "allowJs": true,
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
-    "outDir": "dist/esm",
     "rootDir": "src",
     "strict": true,
+    "noEmit": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
     "strictFunctionTypes": true,
@@ -31,6 +30,9 @@
   "references": [
     {
       "path": "./tsconfig.cjs.json"
+    },
+    {
+      "path": "./tsconfig.esm.json"
     }
   ]
 }
