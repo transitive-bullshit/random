@@ -478,9 +478,9 @@ Type: `function (alpha): function`
 
 ## Credit
 
-Thanks go to [Andrew Moss](https://github.com/agmoss) for the TypeScript port!
+Thanks go to [Andrew Moss](https://github.com/agmoss) for the TypeScript port and for helping to maintain this package!
 
-Huge shoutout to [Roger Combs](https://github.com/rcombs) for donating the `random` npm package for this project!
+Shoutout to [Roger Combs](https://github.com/rcombs) for donating the `random` npm package for this project!
 
 Lots of inspiration from [d3-random](https://github.com/d3/d3-random) ([@mbostock](https://github.com/mbostock) and [@svanschooten](https://github.com/svanschooten)).
 
