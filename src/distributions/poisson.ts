@@ -72,7 +72,7 @@ export default (random: Random, lambda = 1) => {
           continue
         }
 
-        const k = Math.floor(((2 * a) / us + b) * u + lambda + 0.445) | 0
+        const k = Math.floor(((2 * a) / us + b) * u + lambda + 0.445)
         v = (v * invAlpha) / (a / (us * us) + b)
 
         if (k >= 10) {

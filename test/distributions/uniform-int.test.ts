@@ -43,6 +43,18 @@ test('random.uniformInt(min, max) has mean (min + max) / 2', (t) => {
   t.true(inDelta(mean, 26, 0.5))
 })
 
+test('random.uniformInt(min, max) with large max', (t) => {
+  const r = random.clone(seedrandom('YjQ2MGJiNDM3OWQ2YzUzNzA1MDdmMmQ0'))
+  const min = 0
+  const max = 14206147658
+  for (let i = 0; i < 100000; ++i) {
+    const d = r.int(min, max)
+    t.true(d >= min)
+    t.true(d <= max)
+    t.true(Math.floor(d) === d)
+  }
+})
+
 test('random.uniformInt(min, max) with non valid input', (t) => {
   const r = random.clone(seedrandom('ZDJjM2IyNmFlNmVjNWQwMGZkMmY1Y2Nk'))
   const error = t.throws(

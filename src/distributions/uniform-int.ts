@@ -11,6 +11,6 @@ export default (random: Random, min = 0, max = 1) => {
   numberValidator(max).isInt()
 
   return () => {
-    return (random.next() * (max - min + 1) + min) | 0
+    return Math.floor(random.next() * (max - min + 1) + min)
   }
 }
