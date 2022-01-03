@@ -12,7 +12,7 @@ import RNGFunction from './generators/function'
  * new Random(RNGFactory(...args))
  */
 export default <T extends any[]>(...args: T) => {
-  const [arg0 = 'default', ...rest] = args
+  const [arg0 = 'default'] = args
 
   switch (typeof arg0) {
     case 'object':
@@ -26,7 +26,7 @@ export default <T extends any[]>(...args: T) => {
 
     case 'number':
     case 'string':
-      return new RNGFunction(seedrandom(...rest))
+      return new RNGFunction(seedrandom(...args))
   }
 
   throw new Error(`invalid RNG "${arg0}"`)
