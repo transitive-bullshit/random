@@ -109,7 +109,7 @@ export class Random {
    *
    * @param {...*} args
    */
-  use(...args: [RNG]) {
+  use<T>(...args: [T]) {
     this._rng = RNGFactory(...args)
   }
 
