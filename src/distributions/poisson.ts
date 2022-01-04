@@ -1,6 +1,7 @@
 import { Random } from '../random'
 import { numberValidator } from '../validation'
 
+// prettier-ignore
 const logFactorialTable = [
   0.0,
   0.0,
