@@ -1,5 +1,5 @@
-import { Random } from '../random'
-import { numberValidator } from '../validation'
+import { Random } from '../random.js'
+import { numberValidator } from '../validation.js'
 
 // prettier-ignore
 const logFactorialTable = [

@@ -4,7 +4,7 @@
   "description": "Seedable random number generator supporting many common distributions.",
   "main": "dist/cjs/index.cjs.js",
   "module": "dist/esm/index.js",
-  "types": "dist/esm/index.d.ts",
+  "types": "dist/types/index.d.ts",
   "repository": "transitive-bullshit/random",
   "author": "Travis Fischer <travis@transitivebullsh.it>",
   "type": "module",
@@ -52,13 +52,13 @@
     "seedrandom": "^3.0.5"
   },
   "devDependencies": {
-    "@ava/typescript": "^1.1.1",
     "@types/node": "^14.14.31",
     "@types/seedrandom": "^2.4.28",
     "@typescript-eslint/eslint-plugin": "^4.2.0",
     "@typescript-eslint/parser": "^4.2.0",
-    "ava": "^3.15.0",
+    "ava": "^4.0.1",
     "del-cli": "^3.0.1",
+    "esbuild-node-loader": "^0.6.5",
     "eslint": "^7.21.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-config-standard": "^16.0.2",
@@ -68,7 +68,6 @@
     "eslint-plugin-promise": "^4.3.1",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.2.1",
-    "ts-node": "^9.1.1",
     "typescript": "^4.1.5",
     "update-markdown-jsdoc": "^1.0.11"
   },
@@ -76,11 +75,13 @@
     "dist"
   ],
   "ava": {
-    "extensions": [
-      "ts"
-    ],
-    "require": [
-      "ts-node/register"
+    "extensions": {
+      "js": true,
+      "ts": "module"
+    },
+    "nodeArguments": [
+      "--loader=esbuild-node-loader",
+      "--experimental-specifier-resolution=node"
     ]
   }
 }

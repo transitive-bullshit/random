@@ -6,6 +6,7 @@
     "allowJs": true,
     "declaration": true,
     "declarationMap": true,
+    "declarationDir": "dist/types",
     "sourceMap": true,
     "rootDir": "src",
     "strict": true,
