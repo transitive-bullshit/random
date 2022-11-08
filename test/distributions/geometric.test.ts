@@ -1,7 +1,7 @@
 import test from 'ava'
 import seedrandom from 'seedrandom'
 
-import random from '../../src/random'
+import random from '../../src/index'
 
 test('random.geometric() produces numbers', (t) => {
   const r = random.clone(seedrandom('ZDJjM2IyNmFlNmVjNWQwMGZkMmY1Y2Nk'))
@@ -20,7 +20,7 @@ test('random.geometric() invalid positive n input', (t) => {
     },
     { instanceOf: Error }
   )
-  t.is(error.message, 'Expected number to be less than 1, got 2')
+  t.is(error?.message, 'Expected number to be less than 1, got 2')
 })
 
 test('random.geometric() invalid negative n input', (t) => {
@@ -31,5 +31,5 @@ test('random.geometric() invalid negative n input', (t) => {
     },
     { instanceOf: Error }
   )
-  t.is(error.message, 'Expected number to be greater than 0, got -1')
+  t.is(error?.message, 'Expected number to be greater than 0, got -1')
 })

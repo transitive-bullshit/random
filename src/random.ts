@@ -99,7 +99,7 @@ export class Random {
    * RNG.
    *
    * @example
-   * const random = require('random')
+   * import random from 'random'
    *
    * random.use('example_seedrandom_string')
    * // or

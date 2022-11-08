@@ -1,7 +1,7 @@
 import test from 'ava'
 import seedrandom from 'seedrandom'
 
-import random from '../../src/random'
+import random from '../../src/index'
 
 test('random.poisson() produces numbers', (t) => {
   const r = random.clone(seedrandom('ZDJjM2IyNmFlNmVjNWQwMGZkMmY1Y2Nk'))
@@ -20,5 +20,5 @@ test('random.poisson() invalid negative n input', (t) => {
     },
     { instanceOf: Error }
   )
-  t.is(error.message, 'Expected number to be positive, got -1')
+  t.is(error?.message, 'Expected number to be positive, got -1')
 })

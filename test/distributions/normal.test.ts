@@ -2,7 +2,7 @@ import test from 'ava'
 import seedrandom from 'seedrandom'
 
 import inDelta from '../_in-delta'
-import random from '../../src/random'
+import random from '../../src/index'
 import RNGXOR128 from '../../src/generators/xor128'
 import RNGFunction from '../../src/generators/function'
 import RNGMathRandom from '../../src/generators/math-random'

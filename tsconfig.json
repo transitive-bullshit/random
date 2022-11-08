@@ -1,38 +1,15 @@
 {
   "compilerOptions": {
-    "composite": true,
-    "target": "es6",
+    "target": "es2016",
+    "lib": ["esnext"],
+    "module": "ES2020",
     "moduleResolution": "node",
     "allowJs": true,
     "declaration": true,
-    "declarationMap": true,
-    "sourceMap": true,
-    "rootDir": "src",
-    "strict": true,
-    "noEmit": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "strictFunctionTypes": true,
-    "strictBindCallApply": true,
-    "strictPropertyInitialization": false,
-    "noImplicitThis": true,
-    "alwaysStrict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": false,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "noUncheckedIndexedAccess": true,
+    "strict": false,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "test"],
-  "references": [
-    {
-      "path": "./tsconfig.cjs.json"
-    },
-    {
-      "path": "./tsconfig.esm.json"
-    }
-  ]
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules", "test"]
 }

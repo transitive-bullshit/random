@@ -1,7 +1,7 @@
 import test from 'ava'
 import seedrandom from 'seedrandom'
 
-import random from '../../src/random'
+import random from '../../src/index'
 
 test('random.bernoulli() produces numbers', (t) => {
   const r = random.clone(seedrandom('ZDJjM2IyNmFlNmVjNWQwMGZkMmY1Y2Nk'))
@@ -20,7 +20,7 @@ test('random.bernoulli() p number input', (t) => {
     },
     { instanceOf: Error }
   )
-  t.is(error.message, 'Expected number to be less than 1, got 3')
+  t.is(error?.message, 'Expected number to be less than 1, got 3')
 })
 
 test('random.bernoulli() invalid p negative input', (t) => {
@@ -32,7 +32,7 @@ test('random.bernoulli() invalid p negative input', (t) => {
     { instanceOf: Error }
   )
   t.is(
-    error.message,
+    error?.message,
     'Expected number to be greater than or equal to 0, got -1'
   )
 })

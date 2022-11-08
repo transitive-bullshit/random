@@ -1,7 +1,7 @@
 import test from 'ava'
 import seedrandom from 'seedrandom'
 
-import random from '../../src/random'
+import random from '../../src/index'
 
 test('random.pareto() produces numbers', (t) => {
   const r = random.clone(seedrandom('ZDJjM2IyNmFlNmVjNWQwMGZkMmY1Y2Nk'))
@@ -21,7 +21,7 @@ test('random.pareto() invalid negative n input', (t) => {
     { instanceOf: Error }
   )
   t.is(
-    error.message,
+    error?.message,
     'Expected number to be greater than or equal to 0, got -1'
   )
 })

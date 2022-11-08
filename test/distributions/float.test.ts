@@ -1,6 +1,6 @@
 import test from 'ava'
 import seedrandom from 'seedrandom'
-import random from '../../src/random'
+import random from '../../src/index'
 import inDelta from '../_in-delta'
 
 test('random.float() produces numbers [0,1)', (t) => {

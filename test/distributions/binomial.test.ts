@@ -1,7 +1,7 @@
 import test from 'ava'
 import seedrandom from 'seedrandom'
 
-import random from '../../src/random'
+import random from '../../src/index'
 
 test('random.binomial() produces numbers', (t) => {
   const r = random.clone(seedrandom('ZDJjM2IyNmFlNmVjNWQwMGZkMmY1Y2Nk'))
@@ -20,7 +20,7 @@ test('random.binomial() invalid negative n input', (t) => {
     },
     { instanceOf: Error }
   )
-  t.is(error.message, 'Expected number to be positive, got -1')
+  t.is(error?.message, 'Expected number to be positive, got -1')
 })
 
 test('random.binomial() invalid positive p input', (t) => {
@@ -31,5 +31,5 @@ test('random.binomial() invalid positive p input', (t) => {
     },
     { instanceOf: Error }
   )
-  t.is(error.message, 'Expected number to be less than 1, got 3')
+  t.is(error?.message, 'Expected number to be less than 1, got 3')
 })

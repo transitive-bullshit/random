@@ -1,15 +1,12 @@
 {
-  "root": true,
-  "parserOptions": {
-    "ecmaVersion": 2020
-  },
-  "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint"],
   "extends": [
+    "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
-    "standard",
     "plugin:prettier/recommended"
   ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "root": true,
   "env": { "browser": true, "node": true },
   "rules": {
     "@typescript-eslint/explicit-module-boundary-types": 0,

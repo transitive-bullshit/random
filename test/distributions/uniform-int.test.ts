@@ -2,7 +2,7 @@ import test from 'ava'
 import seedrandom from 'seedrandom'
 
 import inDelta from '../_in-delta'
-import random from '../../src/random'
+import random from '../../src/index'
 
 type distFn = () => number
 
@@ -63,5 +63,5 @@ test('random.uniformInt(min, max) with non valid input', (t) => {
     },
     { instanceOf: Error }
   )
-  t.is(error.message, 'Expected number to be an integer, got 10.1')
+  t.is(error?.message, 'Expected number to be an integer, got 10.1')
 })

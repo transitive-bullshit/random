@@ -1,6 +1,6 @@
 import test from 'ava'
 import seedrandom from 'seedrandom'
-import random from '../../src/random'
+import random from '../../src/index'
 
 test('random.bates() produces numbers', (t) => {
   const r = random.clone(seedrandom('ZDJjM2IyNmFlNmVjNWQwMGZkMmY1Y2Nk'))
@@ -21,7 +21,7 @@ test('random.bates() invalid n float input', (t) => {
     { instanceOf: Error }
   )
 
-  t.is(error.message, 'Expected number to be an integer, got 1.3')
+  t.is(error?.message, 'Expected number to be an integer, got 1.3')
 })
 
 test('random.bates() invalid negative n input', (t) => {
@@ -34,5 +34,5 @@ test('random.bates() invalid negative n input', (t) => {
     { instanceOf: Error }
   )
 
-  t.is(error.message, 'Expected number to be positive, got -1')
+  t.is(error?.message, 'Expected number to be positive, got -1')
 })

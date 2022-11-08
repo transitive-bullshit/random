@@ -29,8 +29,6 @@ yarn add random
 ## Usage
 
 ```js
-const random = require('random')
-// or
 import random from 'random'
 
 // quick uniform shortcuts
@@ -92,7 +90,7 @@ samples from the same distribution.
 You can change the underlying PRNG or its seed as follows:
 
 ```js
-const seedrandom = require('seedrandom')
+import seedrandom from 'seedrandom'
 
 // change the underlying pseudo random number generator
 // by default, Math.random is used as the underlying PRNG
@@ -117,31 +115,41 @@ rng.unpatch()
 
 #### Table of Contents
 
-- [Random](#random)
-  - [rng](#rng)
-  - [clone](#clone)
-  - [use](#use)
-  - [patch](#patch)
-  - [unpatch](#unpatch)
-  - [next](#next)
-  - [float](#float)
-  - [int](#int)
-  - [integer](#integer)
-  - [bool](#bool)
-  - [boolean](#boolean)
-  - [uniform](#uniform)
-  - [uniformInt](#uniformint)
-  - [uniformBoolean](#uniformboolean)
-  - [normal](#normal)
-  - [logNormal](#lognormal)
-  - [bernoulli](#bernoulli)
-  - [binomial](#binomial)
-  - [geometric](#geometric)
-  - [poisson](#poisson)
-  - [exponential](#exponential)
-  - [irwinHall](#irwinhall)
-  - [bates](#bates)
-  - [pareto](#pareto)
+- [random](#random)
+  - [Highlights](#highlights)
+  - [Install](#install)
+  - [Usage](#usage)
+  - [API](#api)
+      - [Table of Contents](#table-of-contents)
+    - [Random](#random-1)
+      - [rng](#rng)
+      - [clone](#clone)
+      - [use](#use)
+      - [patch](#patch)
+      - [unpatch](#unpatch)
+      - [next](#next)
+      - [float](#float)
+      - [int](#int)
+      - [integer](#integer)
+      - [bool](#bool)
+      - [boolean](#boolean)
+      - [uniform](#uniform)
+      - [uniformInt](#uniformint)
+      - [uniformBoolean](#uniformboolean)
+      - [normal](#normal)
+      - [logNormal](#lognormal)
+      - [bernoulli](#bernoulli)
+      - [binomial](#binomial)
+      - [geometric](#geometric)
+      - [poisson](#poisson)
+      - [exponential](#exponential)
+      - [irwinHall](#irwinhall)
+      - [bates](#bates)
+      - [pareto](#pareto)
+  - [Todo](#todo)
+  - [Related](#related)
+  - [Credit](#credit)
+  - [License](#license)
 
 ### [Random](https://github.com/transitive-bullshit/random/blob/e11a840a1cfe0f5bd9c43640f9645a0b28f61406/src/random.js#L36-L382)
 
@@ -191,7 +199,7 @@ Type: `function (args)`
 Example:
 
 ```javascript
-const random = require('random')
+import random from 'random'
 
 random.use('example_seedrandom_string')
 // or

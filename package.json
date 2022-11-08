@@ -2,23 +2,29 @@
   "name": "random",
   "version": "3.0.6",
   "description": "Seedable random number generator supporting many common distributions.",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.esm.js",
-  "types": "dist/cjs/index.d.ts",
   "repository": "transitive-bullshit/random",
   "author": "Travis Fischer <travis@transitivebullsh.it>",
   "type": "module",
+  "exports": {
+    "default": "./dist/random.module.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "source": "./src/index.ts",
+  "module": "./dist/random.module.js",
+  "types": "./dist/index.d.ts",
   "sideEffects": false,
   "license": "MIT",
   "engines": {
-    "node": ">=10"
+    "node": ">=14"
   },
   "scripts": {
     "start": "run-s build:watch",
-    "build": "tsc -b",
-    "build:watch": "tsc -b --watch",
-    "postbuild": "echo '{ \"type\": \"commonjs\" }' > dist/cjs/package.json",
+    "build": "microbundle -f esm --no-compress",
+    "build:watch": "microbundle -f esm --no-compress --watch",
     "prebuild": "run-s clean",
+    "prebuild:watch": "run-s clean",
     "clean": "del dist",
     "prepublishOnly": "run-s build",
     "docs": "update-markdown-jsdoc -f dist/random.js --shallow",
@@ -26,7 +32,7 @@
     "test": "run-s test:*",
     "test:unit": "ava -v",
     "test:prettier": "prettier '**/*.{js,jsx,ts,tsx}' --check",
-    "test:lint": "eslint '{src,test}/**/*.ts'"
+    "test:lint": "eslint '**/*.{js,jsx,ts,tsx}'"
   },
   "keywords": [
     "random",
@@ -52,35 +58,30 @@
     "seedrandom": "^3.0.5"
   },
   "devDependencies": {
-    "@ava/typescript": "^1.1.1",
-    "@types/node": "^14.14.31",
-    "@types/seedrandom": "^2.4.28",
-    "@typescript-eslint/eslint-plugin": "^4.2.0",
-    "@typescript-eslint/parser": "^4.2.0",
-    "ava": "^3.15.0",
-    "del-cli": "^3.0.1",
-    "eslint": "^7.21.0",
-    "eslint-config-prettier": "^8.1.0",
-    "eslint-config-standard": "^16.0.2",
-    "eslint-plugin-import": "^2.22.1",
+    "@ava/typescript": "^3.0.1",
+    "@esbuild-kit/esm-loader": "^2.5.0",
+    "@types/node": "^18.11.9",
+    "@types/seedrandom": "^3.0.2",
+    "@typescript-eslint/eslint-plugin": "^5.42.1",
+    "@typescript-eslint/parser": "^5.42.1",
+    "ava": "^5.0.1",
+    "del-cli": "^5.0.0",
+    "eslint": "^8.27.0",
+    "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prettier": "^3.1.1",
-    "eslint-plugin-promise": "^4.3.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "microbundle": "^0.15.1",
     "npm-run-all": "^4.1.5",
-    "prettier": "^2.2.1",
-    "ts-node": "^9.1.1",
-    "typescript": "^4.1.5",
+    "prettier": "^2.7.1",
+    "typescript": "^4.8.4",
     "update-markdown-jsdoc": "^1.0.11"
   },
-  "files": [
-    "dist"
-  ],
   "ava": {
-    "extensions": [
-      "ts"
-    ],
-    "require": [
-      "ts-node/register"
+    "extensions": {
+      "ts": "module"
+    },
+    "nodeArguments": [
+      "--loader=@esbuild-kit/esm-loader"
     ]
   }
 }
