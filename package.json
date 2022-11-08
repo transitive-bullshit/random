@@ -32,7 +32,7 @@
     "test": "run-s test:*",
     "test:unit": "ava -v",
     "test:prettier": "prettier '**/*.{js,jsx,ts,tsx}' --check",
-    "test:lint": "eslint '**/*.{js,jsx,ts,tsx}'"
+    "test:lint": "eslint ."
   },
   "keywords": [
     "random",

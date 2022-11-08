@@ -9,6 +9,7 @@
   "root": true,
   "env": { "browser": true, "node": true },
   "rules": {
+    "no-constant-condition": 0,
     "@typescript-eslint/explicit-module-boundary-types": 0,
     "@typescript-eslint/no-explicit-any": 0,
     "no-use-before-define": 0,
