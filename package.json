@@ -27,7 +27,7 @@
     "prebuild:watch": "run-s clean",
     "clean": "del dist",
     "prepublishOnly": "run-s build",
-    "docs": "update-markdown-jsdoc -f dist/random.js --shallow",
+    "docs": "update-markdown-jsdoc -f dist/random.module.js --shallow",
     "pretest": "run-s build",
     "test": "run-s test:*",
     "test:unit": "ava -v",

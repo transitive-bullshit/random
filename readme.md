@@ -1,4 +1,4 @@
-# random
+# random <!-- omit in toc -->
 
 > Seedable random number generator supporting many common distributions.
 
@@ -6,7 +6,7 @@
 
 Welcome to the most **random** module on npm! 😜
 
-## Highlights
+## Highlights <!-- omit in toc -->
 
 - Simple API (_make easy things easy and hard things possible_)
 - TypeScript supported!
@@ -16,17 +16,19 @@ Welcome to the most **random** module on npm! 😜
   - uniform, normal, poisson, bernoulli, etc
 - Validates all user input via [ow](https://github.com/sindresorhus/ow)
 - Integrates with [seedrandom](https://github.com/davidbau/seedrandom)
-- Supports node >= 6 and browser
+- Supports node >= 14 and browser
 
-## Install
+## Install <!-- omit in toc -->
 
 ```bash
 npm install --save random
 # or
 yarn add random
+# or
+pnpm add random
 ```
 
-## Usage
+## Usage <!-- omit in toc -->
 
 ```js
 import random from 'random'
@@ -115,41 +117,35 @@ rng.unpatch()
 
 #### Table of Contents
 
-- [random](#random)
-  - [Highlights](#highlights)
-  - [Install](#install)
-  - [Usage](#usage)
-  - [API](#api)
-      - [Table of Contents](#table-of-contents)
-    - [Random](#random-1)
-      - [rng](#rng)
-      - [clone](#clone)
-      - [use](#use)
-      - [patch](#patch)
-      - [unpatch](#unpatch)
-      - [next](#next)
-      - [float](#float)
-      - [int](#int)
-      - [integer](#integer)
-      - [bool](#bool)
-      - [boolean](#boolean)
-      - [uniform](#uniform)
-      - [uniformInt](#uniformint)
-      - [uniformBoolean](#uniformboolean)
-      - [normal](#normal)
-      - [logNormal](#lognormal)
-      - [bernoulli](#bernoulli)
-      - [binomial](#binomial)
-      - [geometric](#geometric)
-      - [poisson](#poisson)
-      - [exponential](#exponential)
-      - [irwinHall](#irwinhall)
-      - [bates](#bates)
-      - [pareto](#pareto)
-  - [Todo](#todo)
-  - [Related](#related)
-  - [Credit](#credit)
-  - [License](#license)
+<!-- no toc -->
+
+- [API](#api)
+    - [Table of Contents](#table-of-contents)
+  - [Random](#random)
+    - [rng](#rng)
+    - [clone](#clone)
+    - [use](#use)
+    - [patch](#patch)
+    - [unpatch](#unpatch)
+    - [next](#next)
+    - [float](#float)
+    - [int](#int)
+    - [integer](#integer)
+    - [bool](#bool)
+    - [boolean](#boolean)
+    - [uniform](#uniform)
+    - [uniformInt](#uniformint)
+    - [uniformBoolean](#uniformboolean)
+    - [normal](#normal)
+    - [logNormal](#lognormal)
+    - [bernoulli](#bernoulli)
+    - [binomial](#binomial)
+    - [geometric](#geometric)
+    - [poisson](#poisson)
+    - [exponential](#exponential)
+    - [irwinHall](#irwinhall)
+    - [bates](#bates)
+    - [pareto](#pareto)
 
 ### [Random](https://github.com/transitive-bullshit/random/blob/e11a840a1cfe0f5bd9c43640f9645a0b28f61406/src/random.js#L36-L382)
 
@@ -434,7 +430,7 @@ Type: `function (alpha): function`
 
 ---
 
-## Todo
+## Todo <!-- omit in toc -->
 
 - Distributions
 
@@ -476,7 +472,7 @@ Type: `function (alpha): function`
   - [x] initial release!
   - [x] typescript support
 
-## Related
+## Related <!-- omit in toc -->
 
 - [d3-random](https://github.com/d3/d3-random) - D3's excellent random number generation library.
 - [seedrandom](https://github.com/davidbau/seedrandom) - Seedable pseudo random number generator.
@@ -484,7 +480,7 @@ Type: `function (alpha): function`
 - [random-float](https://github.com/sindresorhus/random-float) - For the common use case of generating uniform random floats.
 - [randombytes](https://github.com/crypto-browserify/randombytes) - Random crypto bytes for Node.js and the browser.
 
-## Credit
+## Credit <!-- omit in toc -->
 
 Thanks go to [Andrew Moss](https://github.com/agmoss) for the TypeScript port and for helping to maintain this package!
 
@@ -494,7 +490,7 @@ Lots of inspiration from [d3-random](https://github.com/d3/d3-random) ([@mbostoc
 
 Some distributions and PRNGs are ported from C++ [boost::random](https://www.boost.org/doc/libs/1_66_0/doc/html/boost_random/reference.html#boost_random.reference.distributions).
 
-## License
+## License <!-- omit in toc -->
 
 MIT © [Travis Fischer](https://transitivebullsh.it)
 
