@@ -51,8 +51,8 @@ export { RNG, RNGFactory }
  * @param {RNG|function} [rng=Math.random] - Underlying pseudorandom number generator.
  */
 export class Random {
-  _rng: RNG
-  _patch: typeof Math.random | undefined
+  private _rng: RNG
+  private _patch: typeof Math.random | undefined
   protected _cache: {
     [k: string]: ICacheEntry<any>
   } = {}
