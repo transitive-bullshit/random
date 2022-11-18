@@ -6,7 +6,9 @@
   "author": "Travis Fischer <travis@transitivebullsh.it>",
   "type": "module",
   "exports": {
-    "default": "./dist/random.module.js"
+		"import": "./dist/random.module.js",
+		"types": "./dist/index.d.ts",
+		"default": "./dist/random.module.js"
   },
   "files": [
     "dist"
