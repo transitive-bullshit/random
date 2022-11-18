@@ -1,14 +1,14 @@
 {
   "name": "random",
-  "version": "4.0.2",
+  "version": "4.0.3",
   "description": "Seedable random number generator supporting many common distributions.",
   "repository": "transitive-bullshit/random",
   "author": "Travis Fischer <travis@transitivebullsh.it>",
   "type": "module",
   "exports": {
-		"import": "./dist/random.module.js",
-		"types": "./dist/index.d.ts",
-		"default": "./dist/random.module.js"
+    "import": "./dist/random.module.js",
+    "types": "./dist/index.d.ts",
+    "default": "./dist/random.module.js"
   },
   "files": [
     "dist"
