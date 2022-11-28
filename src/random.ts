@@ -218,6 +218,31 @@ export class Random {
     return this.uniformBoolean()()
   }
 
+  /**
+   * Returns an item chosen uniformly at trandom from the given array.
+   *
+   * Convence wrapper around `random.uniformInt()`
+   *
+   * @param {Array<T>} [array] - Lower bound (integer, inclusive)
+   * @return {T | undefined}
+   */
+  choice<T>(array: Array<T>): T | undefined {
+    if (!Array.isArray(array)) {
+      throw new Error(
+        `Random.choice expected input to be an array, got ${typeof array}`
+      )
+    }
+
+    const length = array?.length
+
+    if (length > 0) {
+      const index = this.uniformInt(0, length - 1)()
+      return array[index]
+    } else {
+      return undefined
+    }
+  }
+
   // --------------------------------------------------------------------------
   // Uniform distributions
   // --------------------------------------------------------------------------
