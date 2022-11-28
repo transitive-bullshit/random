@@ -70,6 +70,9 @@ For convenience, several common uniform samplers are exposed directly:
 random.float() // 0.2149383367670885
 random.int(0, 100) // 72
 random.boolean() // true
+
+// random array item
+random.choice([1, true, 'foo']) // 'foo'
 ```
 
 **All distribution methods return a thunk** (function with no params), which will return a series of independent, identically distributed random variables from the specified distribution.
@@ -143,6 +146,7 @@ const rng2 = new Random(seedrandom('tinykittens'))
   - [integer](#integer)
   - [bool](#bool)
   - [boolean](#boolean)
+  - [choice](#choice)
   - [uniform](#uniform)
   - [uniformInt](#uniformint)
   - [uniformBoolean](#uniformboolean)
@@ -301,6 +305,18 @@ Samples a uniform random boolean value.
 Convence wrapper around `random.uniformBoolean()`
 
 Type: `function (): boolean`
+
+---
+
+#### [choice]()
+
+Returns an item chosen uniformly at trandom from the given array.
+
+Convence wrapper around `random.uniformInt()`
+
+Type: `function choice <T> (array: Array<T>): T | undefined`
+
+- `array` **[Array<T>](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)** Array of items to sample from
 
 ---
 
