@@ -9,12 +9,12 @@ Welcome to the most **random** module on npm! 😜
 ## Highlights <!-- omit in toc -->
 
 - Simple API (_make easy things easy and hard things possible_)
-- TypeScript supported!
+- TypeScript support
 - Seedable based on entropy or user input
 - Plugin support for different pseudo random number generators (PRNGs)
 - Sample from many common distributions
   - uniform, normal, poisson, bernoulli, etc
-- Validates all user input via [ow](https://github.com/sindresorhus/ow)
+- Validates all user input
 - Integrates with [seedrandom](https://github.com/davidbau/seedrandom)
 - Supports node >= 14 and browser
 
