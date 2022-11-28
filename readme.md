@@ -316,7 +316,7 @@ Convence wrapper around `random.uniformInt()`
 
 Type: `function choice <T> (array: Array<T>): T | undefined`
 
-- `array` **[Array<T>](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)** Array to sample from
+- `array` **[Array<T>](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)** Array of items to sample from
 
 ---
 
