@@ -6,13 +6,11 @@
   "author": "Travis Fischer <travis@transitivebullsh.it>",
   "type": "module",
   "exports": {
-    "import": "./dist/random.module.js",
     "types": "./dist/index.d.ts",
+    "import": "./dist/random.module.js",
     "default": "./dist/random.module.js"
   },
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "source": "./src/index.ts",
   "module": "./dist/random.module.js",
   "types": "./dist/index.d.ts",
@@ -82,8 +80,6 @@
     "extensions": {
       "ts": "module"
     },
-    "nodeArguments": [
-      "--loader=@esbuild-kit/esm-loader"
-    ]
+    "nodeArguments": ["--loader=@esbuild-kit/esm-loader"]
   }
 }
