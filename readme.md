@@ -310,7 +310,7 @@ Type: `function (): boolean`
 
 #### [choice](https://github.com/transitive-bullshit/random/blob/fcead1d157da7b3551e25b1ba8d4b0787d608f07/src/random.ts#L229)
 
-Returns an item chosen uniformly at trandom from the given array.
+Returns an item chosen uniformly at random from the given array.
 
 Convence wrapper around `random.uniformInt()`
 

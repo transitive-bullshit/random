@@ -219,7 +219,7 @@ export class Random {
   }
 
   /**
-   * Returns an item chosen uniformly at trandom from the given array.
+   * Returns an item chosen uniformly at random from the given array.
    *
    * Convence wrapper around `random.uniformInt()`
    *
