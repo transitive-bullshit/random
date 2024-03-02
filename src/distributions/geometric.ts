@@ -1,5 +1,5 @@
-import { Random } from '../random'
-import { numberValidator } from '../validation'
+import { Random } from '../random.js'
+import { numberValidator } from '../validation.js'
 
 export default (random: Random, p = 0.5) => {
   numberValidator(p).greaterThan(0).lessThan(1)

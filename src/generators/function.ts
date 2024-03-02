@@ -1,4 +1,4 @@
-import RNG, { SeedFn } from '../rng'
+import RNG, { SeedFn } from '../rng.js'
 
 export default class RNGFunction extends RNG {
   _rng: SeedFn

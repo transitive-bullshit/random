@@ -1,7 +1,7 @@
 import seedrandom from 'seedrandom'
 
-import RNG from './rng'
-import RNGFunction from './generators/function'
+import RNG from './rng.js'
+import RNGFunction from './generators/function.js'
 
 /**
  * Construct an RNG with variable inputs. Used in calls to Random constructor

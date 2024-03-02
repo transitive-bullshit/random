@@ -1,4 +1,4 @@
-import { Random } from '../random'
+import { Random } from '../random.js'
 
 export default (random: Random, mu = 0, sigma = 1) => {
   return () => {
