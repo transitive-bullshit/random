@@ -1,5 +1,5 @@
-import { Random } from '../random'
-import { numberValidator } from '../validation'
+import { Random } from '../random.js'
+import { numberValidator } from '../validation.js'
 
 const logFactorialTable = [
   0.0, 0.0, 0.69314718055994529, 1.791759469228055, 3.1780538303479458,

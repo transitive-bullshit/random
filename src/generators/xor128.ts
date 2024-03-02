@@ -1,4 +1,4 @@
-import RNG from '../rng'
+import RNG from '../rng.js'
 
 export default class RNGXOR128 extends RNG {
   x: number
