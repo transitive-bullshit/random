@@ -8,12 +8,11 @@ Welcome to the most **random** module on npm! 😜
 
 ## Highlights <!-- omit in toc -->
 
-- Simple API (_make easy things easy and hard things possible_)
-- TypeScript support
-- Supports node >= 14 and browser
+- Simple TS API
+- Supports all modern JS/TS runtimes
 - Seedable based on entropy or user input
 - Plugin support for different pseudo random number generators (PRNGs)
-- Sample from many common distributions
+- Includes many common distributions
   - uniform, normal, poisson, bernoulli, etc
 - Validates all user input
 - Integrates with [seedrandom](https://github.com/davidbau/seedrandom)
@@ -508,7 +507,7 @@ Type: `function (alpha): function`
 
 ## Credit <!-- omit in toc -->
 
-Thanks go to [Andrew Moss](https://github.com/agmoss) for the TypeScript port and for helping to maintain this package!
+Thanks go to [Andrew Moss](https://github.com/agmoss) for the TypeScript port and for helping to maintain this package.
 
 Shoutout to [Roger Combs](https://github.com/rcombs) for donating the `random` npm package for this project!
 

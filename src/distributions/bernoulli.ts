@@ -1,7 +1,7 @@
-import { Random } from '../random'
+import { type Random } from '../random'
 import { numberValidator } from '../validation'
 
-export default (random: Random, p = 0.5) => {
+export function bernoulli(random: Random, p = 0.5) {
   numberValidator(p).greaterThanOrEqual(0).lessThan(1)
 
   return () => {

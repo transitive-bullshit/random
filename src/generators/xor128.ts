@@ -1,6 +1,6 @@
-import RNG from '../rng'
+import { RNG } from '../rng'
 
-export default class RNGXOR128 extends RNG {
+export class RNGXOR128 extends RNG {
   x: number
   y: number
   z: number
@@ -27,7 +27,7 @@ export default class RNGXOR128 extends RNG {
     this.y = this.z
     this.z = this.w
     this.w = this.w ^ ((this.w >>> 19) ^ t ^ (t >>> 8))
-    return (this.w >>> 0) / 0x100000000
+    return (this.w >>> 0) / 0x1_00_00_00_00
   }
 
   seed(seed: number, opts?: Record<string, unknown>) {

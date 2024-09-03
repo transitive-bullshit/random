@@ -1,7 +1,7 @@
-import { Random } from '../random'
+import { type Random } from '../random'
 import { numberValidator } from '../validation'
 
-export default (random: Random, n = 1, p = 0.5) => {
+export function binomial(random: Random, n = 1, p = 0.5) {
   numberValidator(n).isInt().isPositive()
   numberValidator(p).greaterThanOrEqual(0).lessThan(1)
 

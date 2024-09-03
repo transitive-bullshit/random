@@ -1,6 +1,6 @@
-import { Random } from '../random'
+import { type Random } from '../random'
 
-export default (random: Random, mu = 0, sigma = 1) => {
+export function normal(random: Random, mu = 0, sigma = 1) {
   return () => {
     let x: number, y: number, r: number
 

@@ -1,7 +1,6 @@
-export type SeedFn = () => number
-export type SeedType = number | string | SeedFn | RNG
+import type { SeedType } from './types'
 
-export default abstract class RNG {
+export abstract class RNG {
   abstract get name(): string
 
   abstract next(): number
@@ -21,6 +20,7 @@ export default abstract class RNG {
       let s = 0
 
       for (let k = 0; k < strSeed.length; ++k) {
+        // eslint-disable-next-line unicorn/prefer-code-point, unicorn/prefer-math-trunc
         s ^= strSeed.charCodeAt(k) | 0
       }
 

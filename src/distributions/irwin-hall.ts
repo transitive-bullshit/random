@@ -1,7 +1,7 @@
-import { Random } from '../random'
+import { type Random } from '../random'
 import { numberValidator } from '../validation'
 
-export default (random: Random, n = 1) => {
+export function irwinHall(random: Random, n = 1) {
   numberValidator(n).isInt().greaterThanOrEqual(0)
 
   return () => {
