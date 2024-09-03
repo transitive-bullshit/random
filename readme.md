@@ -119,8 +119,9 @@ You can also instantiate a fresh instance of `Random`:
 import { Random } from 'random'
 import seedrandom from 'seedrandom'
 
-const rng = new Random()
-const rng2 = new Random(seedrandom('tinykittens'))
+const rng = new Random() // (uses Math.random)
+const rng2 = new Random('my-seed-string')
+const rng3 = new Random(seedrandom('my-seed-string'))
 ```
 
 ## API <!-- omit in toc -->
