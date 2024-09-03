@@ -27,8 +27,6 @@ yarn add random
 pnpm add random
 ```
 
-Note: this package uses ESM and no longer provides a CommonJS export. See [here](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c) for more info on how to use ESM modules.
-
 ## Usage <!-- omit in toc -->
 
 ```ts
