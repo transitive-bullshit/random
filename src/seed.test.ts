@@ -1,5 +1,5 @@
 import seedrandom from 'seedrandom'
-import { expect, test } from 'vitest'
+import { assert, expect, test } from 'vitest'
 
 import random, { Random } from '../src/random'
 
@@ -37,6 +37,36 @@ test('Random constructor', () => {
   const rng3 = new Random(Math.random)
   expect(rng3).toBeDefined()
 
-  const rng4 = new Random('example--seed-string')
+  const rng4 = new Random('example-seed-string')
   expect(rng4).toBeDefined()
+})
+
+test('random seed consistency', () => {
+  let value = 0
+  for (let i = 0; i < 10; ++i) {
+    const rng = new Random(seedrandom('my-seed'))
+    if (i <= 0) {
+      value = rng.float()
+    } else {
+      assert.equal(value, rng.float())
+    }
+  }
+
+  for (let i = 0; i < 10; ++i) {
+    const rng = new Random('my-seed')
+    if (i <= 0) {
+      value = rng.float()
+    } else {
+      assert.equal(value, rng.float())
+    }
+  }
+
+  for (let i = 0; i < 10; ++i) {
+    const rng = new Random(42)
+    if (i <= 0) {
+      value = rng.float()
+    } else {
+      assert.equal(value, rng.float())
+    }
+  }
 })

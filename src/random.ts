@@ -42,7 +42,7 @@ interface ICacheEntry<T> {
  * @name Random
  * @class
  *
- * @param {RNG|function} [rng=Math.random] - Underlying the default, built-in `Math.random` pseudorandom number generator.
+ * @param {RNG|function|string|number} [rng=Math.random] - Underlying the default, built-in `Math.random` pseudorandom number generator.
  */
 export class Random {
   protected _rng!: RNG
@@ -69,7 +69,6 @@ export class Random {
    * @see RNG.clone
    *
    * @param {string} [seed] - Optional seed for new RNG.
-   * @param {object} [opts] - Optional config for new RNG options.
    * @return {Random}
    */
   clone(rng: SeedType = this.rng.clone()): Random {
@@ -91,8 +90,6 @@ export class Random {
    * random.use(seedrandom('kittens'))
    * // or
    * random.use(Math.random)
-   *
-   * @param {...*} args
    */
   use(rng?: SeedType) {
     this._rng = RNGFactory(rng)
@@ -204,7 +201,7 @@ export class Random {
   }
 
   /**
-   * Returns an item chosen uniformly at trandom from the given array.
+   * Returns an item chosen uniformly at random from the given array.
    *
    * Convence wrapper around `random.uniformInt()`
    *
