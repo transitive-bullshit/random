@@ -1,6 +1,7 @@
 import seedrandom from 'seedrandom'
 import { assert, test } from 'vitest'
 
+import type { SeedType } from '../types'
 import { RNGFunction } from '../../src/generators/function'
 import { RNGMathRandom } from '../../src/generators/math-random'
 import { RNGXOR128 } from '../../src/generators/xor128'
@@ -15,7 +16,7 @@ test('random.normal() produces numbers', () => {
   }
 })
 
-const meanN = <T>(t: T) => {
+const meanN = <T extends SeedType>(t: T) => {
   const r = random.clone(t)
   const d = r.normal(120)
   let sum = 0

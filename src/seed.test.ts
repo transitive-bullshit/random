@@ -1,7 +1,7 @@
 import seedrandom from 'seedrandom'
 import { expect, test } from 'vitest'
 
-import random from '../src/random'
+import random, { Random } from '../src/random'
 
 test('random.clone with seedrandom rng is consistent', () => {
   const r = random.clone(seedrandom('ZjExZDczNWQxY2NlZjUzYmRiZWU0ZGIz'))
@@ -25,4 +25,18 @@ test('random.clone with string seed is consistent', () => {
   }
 
   expect(o).toMatchSnapshot()
+})
+
+test('Random constructor', () => {
+  const rng = new Random()
+  expect(rng).toBeDefined()
+
+  const rng2 = new Random(seedrandom('my-seed-string'))
+  expect(rng2).toBeDefined()
+
+  const rng3 = new Random(Math.random)
+  expect(rng3).toBeDefined()
+
+  const rng4 = new Random('example--seed-string')
+  expect(rng4).toBeDefined()
 })

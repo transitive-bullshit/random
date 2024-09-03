@@ -1,4 +1,5 @@
 import type { RNG } from './rng'
+import type { SeedType } from './types'
 import { bates } from './distributions/bates'
 import { bernoulli } from './distributions/bernoulli'
 import { binomial } from './distributions/binomial'
@@ -50,7 +51,7 @@ export class Random {
   } = {}
   protected _patch?: typeof Math.random
 
-  constructor(rng: RNG = new RNGMathRandom()) {
+  constructor(rng: SeedType = new RNGMathRandom()) {
     this.use(rng)
   }
 
@@ -71,12 +72,8 @@ export class Random {
    * @param {object} [opts] - Optional config for new RNG options.
    * @return {Random}
    */
-  clone<T>(...args: [T]): Random {
-    if (args.length) {
-      return new Random(RNGFactory(...args))
-    } else {
-      return new Random(this.rng.clone())
-    }
+  clone(rng: SeedType = this.rng.clone()): Random {
+    return new Random(rng)
   }
 
   /**
@@ -97,8 +94,8 @@ export class Random {
    *
    * @param {...*} args
    */
-  use(...args: [RNG]) {
-    this._rng = RNGFactory(...args)
+  use(rng?: SeedType) {
+    this._rng = RNGFactory(rng)
   }
 
   /**
