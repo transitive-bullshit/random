@@ -1,6 +1,6 @@
-import { Random } from '../random'
+import { type Random } from '../random'
 
-export default (random: Random) => {
+export function uniformBoolean(random: Random) {
   return () => {
     return random.next() >= 0.5
   }

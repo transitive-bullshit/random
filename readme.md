@@ -2,18 +2,17 @@
 
 > Seedable random number generator supporting many common distributions.
 
-[![NPM](https://img.shields.io/npm/v/random.svg)](https://www.npmjs.com/package/random) [![Build Status](https://github.com/transitive-bullshit/random/actions/workflows/test.yml/badge.svg)](https://github.com/transitive-bullshit/random/actions/workflows/test.yml) [![Prettier Code Formatting](https://img.shields.io/badge/code_style-prettier-brightgreen.svg)](https://prettier.io)
+[![NPM](https://img.shields.io/npm/v/random.svg)](https://www.npmjs.com/package/random) [![Build Status](https://github.com/transitive-bullshit/random/actions/workflows/main.yml/badge.svg)](https://github.com/transitive-bullshit/random/actions/workflows/main.yml) [![Prettier Code Formatting](https://img.shields.io/badge/code_style-prettier-brightgreen.svg)](https://prettier.io)
 
 Welcome to the most **random** module on npm! 😜
 
 ## Highlights <!-- omit in toc -->
 
-- Simple API (_make easy things easy and hard things possible_)
-- TypeScript support
-- Supports node >= 14 and browser
+- Simple TS API
+- Supports all modern JS/TS runtimes
 - Seedable based on entropy or user input
 - Plugin support for different pseudo random number generators (PRNGs)
-- Sample from many common distributions
+- Includes many common distributions
   - uniform, normal, poisson, bernoulli, etc
 - Validates all user input
 - Integrates with [seedrandom](https://github.com/davidbau/seedrandom)
@@ -27,8 +26,6 @@ yarn add random
 # or
 pnpm add random
 ```
-
-Note: this package uses ESM and no longer provides a CommonJS export. See [here](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c) for more info on how to use ESM modules.
 
 ## Usage <!-- omit in toc -->
 
@@ -508,7 +505,7 @@ Type: `function (alpha): function`
 
 ## Credit <!-- omit in toc -->
 
-Thanks go to [Andrew Moss](https://github.com/agmoss) for the TypeScript port and for helping to maintain this package!
+Thanks go to [Andrew Moss](https://github.com/agmoss) for the TypeScript port and for helping to maintain this package.
 
 Shoutout to [Roger Combs](https://github.com/rcombs) for donating the `random` npm package for this project!
 

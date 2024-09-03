@@ -1,11 +1,10 @@
-import test, { ExecutionContext } from 'ava'
 import seedrandom from 'seedrandom'
+import { assert, test } from 'vitest'
 
-import inDelta from '../_in-delta'
-import random from '../../src/index'
-import RNGXOR128 from '../../src/generators/xor128'
-import RNGFunction from '../../src/generators/function'
-import RNGMathRandom from '../../src/generators/math-random'
+import { RNGFunction } from '../../src/generators/function'
+import { RNGMathRandom } from '../../src/generators/math-random'
+import { RNGXOR128 } from '../../src/generators/xor128'
+import random from '../random'
 
 type distFn = () => number
 
@@ -14,7 +13,7 @@ type distFn = () => number
  * @returns Mean of d
  */
 export const calcMean = (d: distFn) => {
-  const n = 10000
+  const n = 10_000
   let sum = 0
 
   for (let i = 0; i < n; ++i) {
@@ -32,8 +31,8 @@ export const calcMean = (d: distFn) => {
  * @param max
  * @param t
  */
-export const zeroMax = (d: distFn, max: number, t: ExecutionContext) => {
-  const n = 10000
+export const assertZeroMax = (d: distFn, max: number) => {
+  const n = 10_000
 
   for (let i = 0; i < n; ++i) {
     const v = d()
@@ -42,8 +41,8 @@ export const zeroMax = (d: distFn, max: number, t: ExecutionContext) => {
       console.log(v)
     }
 
-    t.true(v >= 0)
-    t.true(v < max)
+    assert.isTrue(v >= 0)
+    assert.isTrue(v < max)
   }
 }
 
@@ -51,131 +50,126 @@ export const zeroMax = (d: distFn, max: number, t: ExecutionContext) => {
  * Assert random.uniform(min, max) returns numbers in [min, max)
  * @param d Distribution function
  */
-export const inMinMax = (
-  d: distFn,
-  min: number,
-  max: number,
-  t: ExecutionContext
-) => {
-  for (let i = 0; i < 10000; ++i) {
+export const inMinMax = (d: distFn, min: number, max: number) => {
+  for (let i = 0; i < 10_000; ++i) {
     const v = d()
-    t.true(v >= min)
-    t.true(v < max)
+    assert.isTrue(v >= min)
+    assert.isTrue(v < max)
   }
 }
 
-test('random.uniform() is in [0, 1)', (t) => {
+test('random.uniform() is in [0, 1)', () => {
   const r = random.clone(seedrandom('ZDJjM2IyNmFlNmVjNWQwMGZkMmY1Y2Nk'))
   const d = r.uniform()
-  for (let i = 0; i < 10000; ++i) {
+  for (let i = 0; i < 10_000; ++i) {
     const v = d()
-    t.true(v >= 0)
-    t.true(v < 1)
+    assert.isTrue(v >= 0)
+    assert.isTrue(v < 1)
   }
 })
 
-test('random.uniform() with seedrandom has mean 0.5', (t) => {
+test('random.uniform() with seedrandom has mean 0.5', () => {
   const r = random.clone(seedrandom('MzUyYjZjZmM4YWI5NzEwNDliZGRmOTE3'))
   const d = r.uniform()
   const mean = calcMean(d)
-  t.true(inDelta(mean, 0.5, 0.05))
+  assert.closeTo(mean, 0.5, 0.05)
 })
 
-test('random.uniform() with RNGXOR128 has mean 0.5', (t) => {
+test('random.uniform() with RNGXOR128 has mean 0.5', () => {
   const r = random.clone(new RNGXOR128(3))
   const d = r.uniform()
   const mean = calcMean(d)
-  t.true(inDelta(mean, 0.5, 0.05))
+  assert.closeTo(mean, 0.5, 0.05)
 })
 
-test('random.uniform() with RNGFunction has mean 0.5', (t) => {
+test('random.uniform() with RNGFunction has mean 0.5', () => {
   const r = random.clone(new RNGFunction(Math.random))
   const d = r.uniform()
   const mean = calcMean(d)
-  t.true(inDelta(mean, 0.5, 0.05))
+  assert.closeTo(mean, 0.5, 0.05)
 })
 
-test('random.uniform() with RNGMathRandom has mean 0.5', (t) => {
+test('random.uniform() with RNGMathRandom has mean 0.5', () => {
   const r = random.clone(new RNGMathRandom())
   const d = r.uniform()
   const mean = calcMean(d)
-  t.true(inDelta(mean, 0.5, 0.05))
+  assert.closeTo(mean, 0.5, 0.05)
 })
 
-test('random.uniform(max) returns numbers in [0, max)', (t) => {
+test('random.uniform(max) returns numbers in [0, max)', () => {
   const r = random.clone(seedrandom('ODEzYWI1MjQ2NGEwYWExOTRlZTJjYmI4'))
   const d = r.uniform(undefined, 42)
-  zeroMax(d, 42, t)
+  assertZeroMax(d, 42)
 })
 
-test('random.uniform(max) with RNGXOR128 returns numbers in [0, max)', (t) => {
+test('random.uniform(max) with RNGXOR128 returns numbers in [0, max)', () => {
   const r = random.clone(new RNGXOR128(3))
   const d = r.uniform(undefined, 42)
-  zeroMax(d, 42, t)
+  assertZeroMax(d, 42)
 })
 
-test('random.uniform(max) with RNGFunction returns numbers in [0, max)', (t) => {
+test('random.uniform(max) with RNGFunction returns numbers in [0, max)', () => {
   const r = random.clone(new RNGFunction(Math.random))
   const d = r.uniform(undefined, 42)
-  zeroMax(d, 42, t)
+  assertZeroMax(d, 42)
 })
 
-test('random.uniform(max) with RNGMathRandom returns numbers in [0, max)', (t) => {
+test('random.uniform(max) with RNGMathRandom returns numbers in [0, max)', () => {
   const r = random.clone(new RNGMathRandom())
   const d = r.uniform(undefined, 42)
-  zeroMax(d, 42, t)
+  assertZeroMax(d, 42)
 })
 
-test('random.uniform(max) has mean max / 2', (t) => {
+test('random.uniform(max) has mean max / 2', () => {
   const r = random.clone(seedrandom('NjcwNjY0MDdiNTEzMmE4Y2I0ZWYxYzNl'))
   const d = r.uniform(undefined, 42)
   const mean = calcMean(d)
-  t.true(inDelta(mean, 21, 0.5))
+  assert.closeTo(mean, 21, 0.5)
 })
 
-test('random.uniform(max) RNGXOR128 has mean max / 2', (t) => {
+test('random.uniform(max) RNGXOR128 has mean max / 2', () => {
   const r = random.clone(new RNGXOR128(3))
   const d = r.uniform(undefined, 42)
   const mean = calcMean(d)
-  t.true(inDelta(mean, 21, 0.5))
+  assert.closeTo(mean, 21, 0.5)
 })
 
-test('random.uniform(max) RNGFunction  has mean max / 2', (t) => {
+test('random.uniform(max) RNGFunction  has mean max / 2', () => {
   const r = random.clone(new RNGFunction(Math.random))
   const d = r.uniform(undefined, 42)
   const mean = calcMean(d)
-  t.true(inDelta(mean, 21, 0.5))
+  assert.closeTo(mean, 21, 0.5)
 })
 
-test('random.uniform(max) RNGMathRandom  has mean max / 2', (t) => {
+test('random.uniform(max) RNGMathRandom  has mean max / 2', () => {
   const r = random.clone(new RNGMathRandom())
   const d = r.uniform(undefined, 42)
   const mean = calcMean(d)
-  t.true(inDelta(mean, 21, 0.5))
+  assert.closeTo(mean, 21, 0.5)
 })
 
-test('random.uniform(min, max) returns numbers in [min, max)', (t) => {
+test('random.uniform(min, max) returns numbers in [min, max)', () => {
   const r = random.clone(seedrandom('NWI0ZWQ0MDBkMGFmZGZkZGU1YjEwMThk'))
   const d = r.uniform(10, 42)
-  inMinMax(d, 10, 42, t)
+  inMinMax(d, 10, 42)
 })
 
-test('random.uniform(min, max) with RNGXOR128 returns numbers in [min, max)', (t) => {
+test('random.uniform(min, max) with RNGXOR128 returns numbers in [min, max)', () => {
   const r = random.clone(new RNGXOR128(2))
   const d = r.uniform(10, 42)
-  inMinMax(d, 10, 42, t)
+  inMinMax(d, 10, 42)
 })
 
-test('random.uniform(min, max) has mean (min + max) / 2', (t) => {
+test('random.uniform(min, max) has mean (min + max) / 2', () => {
   const r = random.clone(seedrandom('M2M2ZGFiZDdkOGUzMjkwOTM1MzQwMWRm'))
   const d = r.uniform(10, 42)
   const mean = calcMean(d)
-  t.true(inDelta(mean, 26, 0.5))
+  assert.closeTo(mean, 26, 0.5)
 })
 
-test('random.uniform(min, max) with RNGXOR128 has mean (min + max) / 2', (t) => {
+test('random.uniform(min, max) with RNGXOR128 has mean (min + max) / 2', () => {
   const r = random.clone(new RNGXOR128(2))
   const d = r.uniform(10, 42)
   const mean = calcMean(d)
-  t.true(inDelta(mean, 26, 0.5))
+  assert.closeTo(mean, 26, 0.5)
 })

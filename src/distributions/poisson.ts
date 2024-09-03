@@ -1,19 +1,19 @@
-import { Random } from '../random'
+import { type Random } from '../random'
 import { numberValidator } from '../validation'
 
 const logFactorialTable = [
-  0.0, 0.0, 0.69314718055994529, 1.791759469228055, 3.1780538303479458,
-  4.7874917427820458, 6.5792512120101012, 8.5251613610654147,
-  10.604602902745251, 12.801827480081469
+  0.0, 0.0, 0.693_147_180_559_945_29, 1.791_759_469_228_055,
+  3.178_053_830_347_945_8, 4.787_491_742_782_045_8, 6.579_251_212_010_101_2,
+  8.525_161_361_065_414_7, 10.604_602_902_745_251, 12.801_827_480_081_469
 ]
 
 const logFactorial = (k: number) => {
   return logFactorialTable[k]
 }
 
-const logSqrt2PI = 0.91893853320467267
+const logSqrt2PI = 0.918_938_533_204_672_67
 
-export default (random: Random, lambda = 1) => {
+export function poisson(random: Random, lambda = 1) {
   numberValidator(lambda).isPositive()
 
   if (lambda < 10) {
@@ -36,7 +36,7 @@ export default (random: Random, lambda = 1) => {
     // generative method
     const smu = Math.sqrt(lambda)
     const b = 0.931 + 2.53 * smu
-    const a = -0.059 + 0.02483 * b
+    const a = -0.059 + 0.024_83 * b
     const invAlpha = 1.1239 + 1.1328 / (b - 3.4)
     const vR = 0.9277 - 3.6224 / (b - 2)
 

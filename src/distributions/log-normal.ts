@@ -1,6 +1,6 @@
-import { Random } from '../random'
+import { type Random } from '../random'
 
-export default (random: Random, mu = 0, sigma = 1) => {
+export function logNormal(random: Random, mu = 0, sigma = 1) {
   const normal = random.normal(mu, sigma)
   return () => {
     return Math.exp(normal())

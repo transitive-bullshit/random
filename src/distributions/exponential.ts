@@ -1,7 +1,7 @@
-import { Random } from '../random'
+import { type Random } from '../random'
 import { numberValidator } from '../validation'
 
-export default (random: Random, lambda = 1) => {
+export function exponential(random: Random, lambda = 1) {
   numberValidator(lambda).isPositive()
 
   return () => {

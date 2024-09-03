@@ -1,0 +1,11 @@
+{
+  "root": true,
+  "extends": ["@fisch0920/eslint-config/node"],
+  "rules": {
+    "no-console": "off",
+    "@typescript-eslint/naming-convention": "off",
+    "import/consistent-type-specifier-style": "off",
+    "@typescript-eslint/array-type": "off",
+    "@typescript-eslint/no-inferrable-types": "off"
+  }
+}

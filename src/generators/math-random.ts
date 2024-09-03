@@ -1,6 +1,6 @@
-import RNG from '../rng'
+import { RNG } from '../rng'
 
-export default class RNGMathRandom extends RNG {
+export class RNGMathRandom extends RNG {
   get name() {
     return 'default'
   }

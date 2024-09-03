@@ -1,34 +1,29 @@
-import RNG from './rng'
-import RNGFactory from './rng-factory'
-
-import uniform from './distributions/uniform'
-import uniformInt from './distributions/uniform-int'
-import uniformBoolean from './distributions/uniform-boolean'
-import normal from './distributions/normal'
-import logNormal from './distributions/log-normal'
-import bernoulli from './distributions/bernoulli'
-import binomial from './distributions/binomial'
-import geometric from './distributions/geometric'
-import poisson from './distributions/poisson'
-import exponential from './distributions/exponential'
-import irwinHall from './distributions/irwin-hall'
-import bates from './distributions/bates'
-import pareto from './distributions/pareto'
-import RNGMathRandom from './generators/math-random'
+import type { RNG } from './rng'
+import { bates } from './distributions/bates'
+import { bernoulli } from './distributions/bernoulli'
+import { binomial } from './distributions/binomial'
+import { exponential } from './distributions/exponential'
+import { geometric } from './distributions/geometric'
+import { irwinHall } from './distributions/irwin-hall'
+import { logNormal } from './distributions/log-normal'
+import { normal } from './distributions/normal'
+import { pareto } from './distributions/pareto'
+import { poisson } from './distributions/poisson'
+import { uniform } from './distributions/uniform'
+import { uniformBoolean } from './distributions/uniform-boolean'
+import { uniformInt } from './distributions/uniform-int'
+import { RNGMathRandom } from './generators/math-random'
+import { RNGFactory } from './rng-factory'
 
 /**
  * Distribution function
  */
-interface IDistFn<R> {
-  (random: Random, ...argv: any): R
-}
+type IDistFn<R> = (random: Random, ...argv: any) => R
 
 /**
  * Distribution
  */
-interface IDist<R> {
-  (): R
-}
+type IDist<R> = () => R
 
 /**
  * Keyed cache entry
@@ -38,8 +33,6 @@ interface ICacheEntry<T> {
   distribution: () => T
 }
 
-export { RNG, RNGFactory }
-
 /**
  * Seedable random number generator supporting many common distributions.
  *
@@ -48,22 +41,17 @@ export { RNG, RNGFactory }
  * @name Random
  * @class
  *
- * @param {RNG|function} [rng=Math.random] - Underlying pseudorandom number generator.
+ * @param {RNG|function} [rng=Math.random] - Underlying the default, built-in `Math.random` pseudorandom number generator.
  */
 export class Random {
-  protected _rng: RNG
-  protected _patch: typeof Math.random | undefined
-  protected _cache: {
+  protected _rng!: RNG
+  protected readonly _cache: {
     [k: string]: ICacheEntry<any>
   } = {}
+  protected _patch?: typeof Math.random
 
-  constructor(rng?: RNG) {
-    if (rng && rng instanceof RNG) {
-      this.use(rng)
-    } else {
-      this.use(new RNGMathRandom())
-    }
-    this._cache = {}
+  constructor(rng: RNG = new RNGMathRandom()) {
+    this.use(rng)
   }
 
   /**
@@ -228,7 +216,7 @@ export class Random {
    */
   choice<T>(array: Array<T>): T | undefined {
     if (!Array.isArray(array)) {
-      throw new Error(
+      throw new TypeError(
         `Random.choice expected input to be an array, got ${typeof array}`
       )
     }

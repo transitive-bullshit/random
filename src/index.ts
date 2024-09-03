@@ -1,3 +1,6 @@
-import random from './random'
 export * from './random'
-export default random
+export { default } from './random'
+export * from './rng'
+export * from './rng-factory'
+export * from './rng-factory'
+export type * from './types'

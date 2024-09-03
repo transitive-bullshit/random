@@ -1,28 +1,31 @@
-import RNG, { SeedFn } from '../rng'
+import type { SeedFn } from '../types'
+import { RNG } from '../rng'
 
-export default class RNGFunction extends RNG {
-  _rng: SeedFn
+export class RNGFunction extends RNG {
+  _name!: string
+  _seedFn!: SeedFn
 
-  constructor(thunk: SeedFn, opts?: Record<string, unknown>) {
+  constructor(seedFn: SeedFn, opts?: Record<string, unknown>) {
     super()
 
-    this.seed(thunk, opts)
+    this.seed(seedFn, opts)
   }
 
   get name() {
-    return 'function'
+    return this._name
   }
 
   next() {
-    return this._rng()
+    return this._seedFn()
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  seed(thunk: SeedFn, _opts?: Record<string, unknown>) {
-    this._rng = thunk
+  seed(seedFn: SeedFn, _opts?: Record<string, unknown>) {
+    this._name = seedFn.name ?? 'function'
+    this._seedFn = seedFn
   }
 
   clone(_: undefined, opts: Record<string, unknown>) {
-    return new RNGFunction(this._rng, opts)
+    return new RNGFunction(this._seedFn, opts)
   }
 }
