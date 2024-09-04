@@ -71,6 +71,13 @@ test('random.uniform() with seedrandom has mean 0.5', () => {
   assert.closeTo(mean, 0.5, 0.05)
 })
 
+test('random.uniform() with seed has mean 0.5', () => {
+  const r = random.clone('OTU2YTM0NjQ5MjM1ZTA3MTg4YjQyYjUw')
+  const d = r.uniform()
+  const mean = calcMean(d)
+  assert.closeTo(mean, 0.5, 0.05)
+})
+
 test('random.uniform() with XOR128RNG has mean 0.5', () => {
   const r = random.clone(new XOR128RNG(3))
   const d = r.uniform()
