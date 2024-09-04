@@ -14,7 +14,7 @@ import { uniform } from './distributions/uniform'
 import { uniformBoolean } from './distributions/uniform-boolean'
 import { uniformInt } from './distributions/uniform-int'
 import { MathRandomRNG } from './generators/math-random'
-import { RNGFactory } from './rng-factory'
+import { createRNG } from './utils'
 
 /**
  * Distribution function
@@ -47,8 +47,9 @@ export class Random {
   protected readonly _cache: {
     [k: string]: ICacheEntry<any>
   } = {}
+
   constructor(seedOrRNG: SeedOrRNG = new MathRandomRNG()) {
-    this._rng = RNGFactory(seedOrRNG)
+    this._rng = createRNG(seedOrRNG)
   }
 
   /**
@@ -81,7 +82,7 @@ export class Random {
    * ```
    */
   use(seedOrRNG: SeedOrRNG) {
-    this._rng = RNGFactory(seedOrRNG)
+    this._rng = createRNG(seedOrRNG)
   }
 
   // --------------------------------------------------------------------------

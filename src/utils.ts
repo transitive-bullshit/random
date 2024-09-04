@@ -1,4 +1,25 @@
-import type { Seed } from './types'
+import type { Seed, SeedOrRNG } from './types'
+import { ARC4RNG } from './generators/arc4'
+import { FunctionRNG } from './generators/function'
+import { RNG } from './rng'
+
+export function createRNG(seedOrRNG?: SeedOrRNG) {
+  switch (typeof seedOrRNG) {
+    case 'object':
+      if (seedOrRNG instanceof RNG) {
+        return seedOrRNG
+      }
+      break
+
+    case 'function':
+      return new FunctionRNG(seedOrRNG)
+
+    default:
+      return new ARC4RNG(seedOrRNG)
+  }
+
+  throw new Error(`invalid RNG seed or instance "${seedOrRNG}"`)
+}
 
 export function processSeed(seed?: Seed): number {
   if (seed === undefined) {
