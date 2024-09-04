@@ -29,7 +29,17 @@ const meanN = <T extends SeedOrRNG>(t: T) => {
 }
 
 test('random.normal(120) has mean 120', () => {
+  const mean = meanN(0)
+  assert.closeTo(mean, 120, 0.5)
+})
+
+test('random.normal(120) with seedrandom has mean 120', () => {
   const mean = meanN(seedrandom('MzUyYjZjZmM4YWI5NzEwNDliZGRmOTE3'))
+  assert.closeTo(mean, 120, 0.5)
+})
+
+test('random.normal(120) with seed has mean 120', () => {
+  const mean = meanN('YzNlNmVhOTg0MjZkMTNhNzE2NDc3Mjkw')
   assert.closeTo(mean, 120, 0.5)
 })
 
