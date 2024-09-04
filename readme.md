@@ -13,7 +13,7 @@ Welcome to the most **random** module on npm! 😜
 - Plugin support for different pseudo random number generators
 - Includes many common distributions
   - uniform, normal, poisson, bernoulli, etc
-- Replacement for `seedrandom` which hasn't been updated in over 9 years
+- Replacement for `seedrandom` which hasn't been updated in over 5 years
 - Supports all modern JS/TS runtimes
 
 ## Install <!-- omit in toc -->
