@@ -29,16 +29,16 @@ test('random.clone with string seed is consistent', () => {
 
 test('Random constructor', () => {
   const rng = new Random()
-  expect(rng).toBeDefined()
+  expect(rng.rng.name).toEqual('Math.random')
 
   const rng2 = new Random(seedrandom('my-seed-string'))
-  expect(rng2).toBeDefined()
+  expect(rng2.rng.name).toEqual('prng')
 
   const rng3 = new Random(Math.random)
-  expect(rng3).toBeDefined()
+  expect(rng3.rng.name).toEqual('random')
 
   const rng4 = new Random('example-seed-string')
-  expect(rng4).toBeDefined()
+  expect(rng4.rng.name).toEqual('arc4')
 })
 
 test('random seed consistency', () => {

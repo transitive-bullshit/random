@@ -54,7 +54,7 @@ export class ARC4RNG extends RNG {
 
     // For more robust unpredictability, the function call below discards an
     // initial batch of values. This is called RC4-drop.
-    this.g(768)
+    this.g(256)
   }
 
   override get name() {
