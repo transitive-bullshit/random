@@ -9,22 +9,17 @@ Welcome to the most **random** module on npm! 😜
 ## Highlights <!-- omit in toc -->
 
 - Simple TS API
-- Supports all modern JS/TS runtimes
-- Seedable based on entropy or user input
-- Plugin support for different pseudo random number generators (PRNGs)
+- **Seedable**
+- Plugin support for different pseudo random number generators
 - Includes many common distributions
   - uniform, normal, poisson, bernoulli, etc
-- Validates all user input
-- Integrates with [seedrandom](https://github.com/davidbau/seedrandom)
+- Replacement for `seedrandom` which hasn't been updated in over 9 years
+- Supports all modern JS/TS runtimes
 
 ## Install <!-- omit in toc -->
 
 ```bash
-npm install --save random
-# or
-yarn add random
-# or
-pnpm add random
+npm install random
 ```
 
 ## Usage <!-- omit in toc -->
@@ -88,29 +83,22 @@ poisson() // 4
 poisson() // 1
 ```
 
-Note that returning a thunk here is more efficient when generating multiple
-samples from the same distribution.
+Note that returning a thunk here is more efficient when generating multiple samples from the same distribution.
 
 You can change the underlying PRNG or its seed as follows:
 
 ```ts
-import seedrandom from 'seedrandom'
+// change the underlying pseudo random number generator seed.
+// by default, Math.random is used as the underlying PRNG, but it is not seedable,
+// so if a seed is given, we use an ARC4 PRNG.
+random.use('my-seed')
 
-// change the underlying pseudo random number generator
-// by default, Math.random is used as the underlying PRNG
-random.use(seedrandom('foobar'))
-
-// create a new independent random number generator (uses seedrandom under the hood)
+// create a new independent random number generator (uses ARC4 under the hood)
 const rng = random.clone('my-new-seed')
 
-// create a second independent random number generator and use a seeded PRNG
+// create a second independent random number generator using a custom PRNG
+import seedrandom from 'seedrandom'
 const rng2 = random.clone(seedrandom('kittyfoo'))
-
-// replace Math.random with rng.uniform
-rng.patch()
-
-// restore original Math.random
-rng.unpatch()
 ```
 
 You can also instantiate a fresh instance of `Random`:
@@ -136,8 +124,6 @@ const rng3 = new Random(seedrandom('my-seed-string'))
   - [rng](#rng)
   - [clone](#clone)
   - [use](#use)
-  - [patch](#patch)
-  - [unpatch](#unpatch)
   - [next](#next)
   - [float](#float)
   - [int](#int)
@@ -215,22 +201,6 @@ random.use(seedrandom('kittens'))
 // or
 random.use(Math.random)
 ```
-
----
-
-#### [patch](https://github.com/transitive-bullshit/random/blob/e11a840a1cfe0f5bd9c43640f9645a0b28f61406/src/random.js#L94-L101)
-
-Patches `Math.random` with this Random instance's PRNG.
-
-Type: `function ()`
-
----
-
-#### [unpatch](https://github.com/transitive-bullshit/random/blob/e11a840a1cfe0f5bd9c43640f9645a0b28f61406/src/random.js#L106-L111)
-
-Restores a previously patched `Math.random` to its original value.
-
-Type: `function ()`
 
 ---
 
@@ -485,16 +455,7 @@ Type: `function (alpha): function`
 - Generators
 
   - [x] pluggable prng
-  - [ ] port more prng from boost
-  - [ ] custom entropy
-
-- Misc
-  - [x] browser support via rollup
-  - [x] basic docs
-  - [x] basic tests
-  - [x] test suite
-  - [x] initial release!
-  - [x] typescript support
+  - [ ] port more prng from boost / seedrandom
 
 ## Related <!-- omit in toc -->
 

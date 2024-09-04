@@ -1,4 +1,4 @@
-import { type Random } from '../random'
+import type { Random } from '../random'
 import { numberValidator } from '../validation'
 
 export function binomial(random: Random, n = 1, p = 0.5) {

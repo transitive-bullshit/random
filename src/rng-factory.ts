@@ -1,35 +1,22 @@
-import seedrandom from 'seedrandom'
-
-import { RNGFunction } from './generators/function'
+import type { SeedOrRNG } from './types'
+import { ARC4RNG } from './generators/arc4'
+import { FunctionRNG } from './generators/function'
 import { RNG } from './rng'
 
-/**
- * Construct an RNG with variable inputs. Used in calls to Random constructor.
- *
- * @param {...*} args - Distribution-specific arguments
- * @return RNG
- *
- * @example
- * ```ts
- * new Random(RNGFactory(...args))
- * ```
- */
-export const RNGFactory = <T extends any[]>(...args: T) => {
-  const [arg0 = 'default'] = args
-
-  switch (typeof arg0) {
+export const RNGFactory = (seedOrRNG?: SeedOrRNG) => {
+  switch (typeof seedOrRNG) {
     case 'object':
-      if (arg0 instanceof RNG) {
-        return arg0
+      if (seedOrRNG instanceof RNG) {
+        return seedOrRNG
       }
       break
 
     case 'function':
-      return new RNGFunction(arg0)
+      return new FunctionRNG(seedOrRNG)
 
     default:
-      return new RNGFunction(seedrandom(...args))
+      return new ARC4RNG(seedOrRNG)
   }
 
-  throw new Error(`invalid RNG "${arg0}"`)
+  throw new Error(`invalid RNG seed or instance "${seedOrRNG}"`)
 }
