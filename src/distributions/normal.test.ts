@@ -12,7 +12,7 @@ test('random.normal() produces numbers', () => {
   const d = r.normal()
   for (let i = 0; i < 10_000; ++i) {
     const v = d()
-    assert.equal(typeof v, 'number')
+    assert.isNumber(v)
   }
 })
 
