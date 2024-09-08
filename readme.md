@@ -8,7 +8,7 @@ Welcome to the most **random** module on npm! 😜
 
 ## Highlights <!-- omit in toc -->
 
-- Simple TS API
+- Simple TS API with zero dependencies
 - **Seedable**
 - Plugin support for different pseudo random number generators
 - Includes many common distributions

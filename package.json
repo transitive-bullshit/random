@@ -63,6 +63,7 @@
     "prng",
     "stats",
     "d3-random",
+    "probability",
     "seedrandom",
     "distribution",
     "pseudorandom",
