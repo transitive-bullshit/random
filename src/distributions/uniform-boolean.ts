@@ -1,4 +1,4 @@
-import { type Random } from '../random'
+import type { Random } from '../random'
 
 export function uniformBoolean(random: Random) {
   return () => {

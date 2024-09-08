@@ -1,4 +1,4 @@
-import { type Random } from '../random'
+import type { Random } from '../random'
 import { numberValidator } from '../validation'
 
 export function exponential(random: Random, lambda = 1) {

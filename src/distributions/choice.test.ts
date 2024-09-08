@@ -10,7 +10,7 @@ type TestFn = (sample: number) => void
  * @param d Distribution function
  * @returns Mean of d
  */
-export const calcMean = (d: DistFn, testFn: TestFn) => {
+const calcMean = (d: DistFn, testFn: TestFn) => {
   const n = 10_000
   let sum = 0
 
@@ -34,7 +34,7 @@ test('random.choice() with seedrandom has correct uniform mean selection', () =>
 })
 
 test('random.choice() produces valid output for mixed arrays', () => {
-  const r = random.clone(seedrandom('NWNmMmU2MzVmNWY5MzQ1MzdhZjc0M2Zm'))
+  const r = random.clone('NWNmMmU2MzVmNWY5MzQ1MzdhZjc0M2Zm')
   const a = [13, 'foo', { example: true }, false, null, 14.152]
   for (let i = 0; i < 1_000_000; ++i) {
     const s = r.choice(a)!
@@ -43,7 +43,7 @@ test('random.choice() produces valid output for mixed arrays', () => {
 })
 
 test('random.choice() produces undefined for empty arrays', () => {
-  const r = random.clone(seedrandom('MzdkYTRkNTE4YWVjYThiNzkwMGI5YzA4'))
+  const r = random.clone('MzdkYTRkNTE4YWVjYThiNzkwMGI5YzA4')
   const a: any[] = []
   for (let i = 0; i < 1000; ++i) {
     const s = r.choice(a)
@@ -52,7 +52,7 @@ test('random.choice() produces undefined for empty arrays', () => {
 })
 
 test('random.choice() with invalid input', () => {
-  const r = random.clone(seedrandom('ZDJjM2IyNmFlNmVjNWQwMGZkMmY1Y2Nk'))
+  const r = random.clone('ZDJjM2IyNmFlNmVjNWQwMGZkMmY1Y2Nk')
   assert.throws(
     () => r.choice(5 as any),
     'Random.choice expected input to be an array, got number'

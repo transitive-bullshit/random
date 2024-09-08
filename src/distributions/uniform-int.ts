@@ -1,4 +1,4 @@
-import { type Random } from '../random'
+import type { Random } from '../random'
 import { numberValidator } from '../validation'
 
 export function uniformInt(random: Random, min = 0, max = 1) {

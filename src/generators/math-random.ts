@@ -1,20 +1,15 @@
 import { RNG } from '../rng'
 
-export class RNGMathRandom extends RNG {
-  get name() {
-    return 'default'
+export class MathRandomRNG extends RNG {
+  override get name() {
+    return 'Math.random'
   }
 
-  next() {
+  override next() {
     return Math.random()
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  seed(_seed: unknown, _opts: Record<string, unknown>) {
-    // intentionally empty
-  }
-
-  clone() {
-    return new RNGMathRandom()
+  override clone() {
+    return new MathRandomRNG()
   }
 }

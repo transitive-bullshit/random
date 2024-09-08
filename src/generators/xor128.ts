@@ -1,27 +1,35 @@
+import type { Seed } from '../types'
 import { RNG } from '../rng'
+import { processSeed } from '../utils'
 
-export class RNGXOR128 extends RNG {
+export class XOR128RNG extends RNG {
+  protected _seed: number
+
   x: number
   y: number
   z: number
   w: number
 
-  constructor(seed: number, opts?: Record<string, unknown>) {
+  constructor(seed?: Seed) {
     super()
 
-    this.x = 0
+    this._seed = processSeed(seed)
+    this.x = this._seed
     this.y = 0
     this.z = 0
     this.w = 0
 
-    this.seed(seed, opts)
+    // discard an initial batch of 64 values
+    for (let i = 0; i < 64; ++i) {
+      this.next()
+    }
   }
 
-  get name() {
+  override get name() {
     return 'xor128'
   }
 
-  next() {
+  override next() {
     const t = this.x ^ (this.x << 1)
     this.x = this.y
     this.y = this.z
@@ -30,16 +38,7 @@ export class RNGXOR128 extends RNG {
     return (this.w >>> 0) / 0x1_00_00_00_00
   }
 
-  seed(seed: number, opts?: Record<string, unknown>) {
-    this.x = this._seed(seed, opts)
-
-    // discard an initial batch of 64 values
-    for (let i = 0; i < 64; ++i) {
-      this.next()
-    }
-  }
-
-  clone(seed: number, opts: Record<string, unknown>) {
-    return new RNGXOR128(seed, opts)
+  override clone() {
+    return new XOR128RNG(this._seed)
   }
 }

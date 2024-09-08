@@ -1,5 +1,5 @@
 import type { RNG } from './rng'
-import type { SeedType } from './types'
+import type { SeedOrRNG } from './types'
 import { bates } from './distributions/bates'
 import { bernoulli } from './distributions/bernoulli'
 import { binomial } from './distributions/binomial'
@@ -13,8 +13,8 @@ import { poisson } from './distributions/poisson'
 import { uniform } from './distributions/uniform'
 import { uniformBoolean } from './distributions/uniform-boolean'
 import { uniformInt } from './distributions/uniform-int'
-import { RNGMathRandom } from './generators/math-random'
-import { RNGFactory } from './rng-factory'
+import { MathRandomRNG } from './generators/math-random'
+import { createRNG } from './utils'
 
 /**
  * Distribution function
@@ -37,26 +37,23 @@ interface ICacheEntry<T> {
 /**
  * Seedable random number generator supporting many common distributions.
  *
- * Defaults to Math.random as its underlying pseudorandom number generator.
- *
  * @name Random
  * @class
  *
- * @param {RNG|function|string|number} [rng=Math.random] - Underlying the default, built-in `Math.random` pseudorandom number generator.
+ * @param {RNG|function|string|number} [rng=Math.random] - Underlying random number generator or a seed for the default PRNG. Defaults to `Math.random`.
  */
 export class Random {
   protected _rng!: RNG
   protected readonly _cache: {
     [k: string]: ICacheEntry<any>
   } = {}
-  protected _patch?: typeof Math.random
 
-  constructor(rng: SeedType = new RNGMathRandom()) {
-    this.use(rng)
+  constructor(seedOrRNG: SeedOrRNG = new MathRandomRNG()) {
+    this._rng = createRNG(seedOrRNG)
   }
 
   /**
-   * @member {RNG} Underlying pseudo-random number generator
+   * @member {RNG} rng - Underlying pseudo-random number generator.
    */
   get rng() {
     return this._rng
@@ -66,55 +63,26 @@ export class Random {
    * Creates a new `Random` instance, optionally specifying parameters to
    * set a new seed.
    *
-   * @see RNG.clone
-   *
-   * @param {string} [seed] - Optional seed for new RNG.
    * @return {Random}
    */
-  clone(rng: SeedType = this.rng.clone()): Random {
-    return new Random(rng)
+  clone(seedOrRNG: SeedOrRNG = this.rng.clone()): Random {
+    return new Random(seedOrRNG)
   }
 
   /**
-   * Sets the underlying pseudorandom number generator used via
-   * either an instance of `seedrandom`, a custom instance of RNG
-   * (for PRNG plugins), or a string specifying the PRNG to use
-   * along with an optional `seed` and `opts` to initialize the
-   * RNG.
+   * Sets the underlying pseudorandom number generator.
    *
    * @example
+   * ```ts
    * import random from 'random'
    *
-   * random.use('example_seedrandom_string')
-   * // or
-   * random.use(seedrandom('kittens'))
+   * random.use('example-seed')
    * // or
    * random.use(Math.random)
+   * ```
    */
-  use(rng?: SeedType) {
-    this._rng = RNGFactory(rng)
-  }
-
-  /**
-   * Patches `Math.random` with this Random instance's PRNG.
-   */
-  patch() {
-    if (this._patch) {
-      throw new Error('Math.random already patched')
-    }
-
-    this._patch = Math.random
-    Math.random = this.uniform()
-  }
-
-  /**
-   * Restores a previously patched `Math.random` to its original value.
-   */
-  unpatch() {
-    if (this._patch) {
-      Math.random = this._patch
-      delete this._patch
-    }
+  use(seedOrRNG: SeedOrRNG) {
+    this._rng = createRNG(seedOrRNG)
   }
 
   // --------------------------------------------------------------------------
@@ -205,7 +173,7 @@ export class Random {
    *
    * Convence wrapper around `random.uniformInt()`
    *
-   * @param {Array<T>} [array] - Lower bound (integer, inclusive)
+   * @param {Array<T>} [array] - Input array
    * @return {T | undefined}
    */
   choice<T>(array: Array<T>): T | undefined {
@@ -215,7 +183,7 @@ export class Random {
       )
     }
 
-    const length = array?.length
+    const length = array.length
 
     if (length > 0) {
       const index = this.uniformInt(0, length - 1)()
@@ -234,7 +202,6 @@ export class Random {
    *
    * @param {number} [min=0] - Lower bound (float, inclusive)
    * @param {number} [max=1] - Upper bound (float, exclusive)
-   * @return {function}
    */
   uniform = (min?: number, max?: number) => {
     return this._memoize<number>('uniform', uniform, min, max)
@@ -392,7 +359,7 @@ export class Random {
    * Returns a thunk which that returns independent, identically distributed
    * samples from the specified distribution.
    *
-   * @private
+   * @internal
    *
    * @param {string} label - Name of distribution
    * @param {function} getter - Function which generates a new distribution
@@ -400,7 +367,11 @@ export class Random {
    *
    * @return {function}
    */
-  _memoize<T>(label: string, getter: IDistFn<any>, ...args: any[]): IDist<T> {
+  protected _memoize<T>(
+    label: string,
+    getter: IDistFn<any>,
+    ...args: any[]
+  ): IDist<T> {
     const key = `${args.join(';')}`
     let value = this._cache[label]
 
@@ -416,5 +387,4 @@ export class Random {
   }
 }
 
-// defaults to Math.random as its RNG
 export default new Random()

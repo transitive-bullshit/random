@@ -1,4 +1,4 @@
-import { type Random } from '../random'
+import type { Random } from '../random'
 import { numberValidator } from '../validation'
 
 export function pareto(random: Random, alpha = 1) {

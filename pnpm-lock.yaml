@@ -7,10 +7,6 @@ settings:
 importers:
 
   .:
-    dependencies:
-      seedrandom:
-        specifier: ^3.0.5
-        version: 3.0.5
     devDependencies:
       '@fisch0920/eslint-config':
         specifier: ^1.4.0
@@ -45,6 +41,9 @@ importers:
       prettier:
         specifier: ^3.3.3
         version: 3.3.3
+      seedrandom:
+        specifier: ^3.0.5
+        version: 3.0.5
       tsup:
         specifier: ^8.2.4
         version: 8.2.4(postcss@8.4.44)(tsx@4.19.0)(typescript@5.5.4)(yaml@2.5.0)
