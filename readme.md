@@ -90,26 +90,27 @@ You can change the underlying PRNG or its seed as follows:
 ```ts
 // change the underlying pseudo random number generator seed.
 // by default, Math.random is used as the underlying PRNG, but it is not seedable,
-// so if a seed is given, we use an ARC4 PRNG.
+// so if a seed is given, we use an ARC4 PRNG (the same one used by `seedrandom`).
 random.use('my-seed')
 
-// create a new independent random number generator (uses ARC4 under the hood)
+// create a new independent random number generator with a different seed
 const rng = random.clone('my-new-seed')
 
-// create a second independent random number generator using a custom PRNG
+// create a third independent random number generator using a custom PRNG
 import seedrandom from 'seedrandom'
-const rng2 = random.clone(seedrandom('kittyfoo'))
+const rng2 = random.clone(seedrandom('kitty-seed'))
 ```
 
 You can also instantiate a fresh instance of `Random`:
 
 ```ts
 import { Random } from 'random'
-import seedrandom from 'seedrandom'
 
 const rng = new Random() // (uses Math.random)
 const rng2 = new Random('my-seed-string')
-const rng3 = new Random(seedrandom('my-seed-string'))
+const rng3 = new Random(() => {
+  /* custom PRNG */ return Math.random()
+})
 ```
 
 ## API <!-- omit in toc -->
