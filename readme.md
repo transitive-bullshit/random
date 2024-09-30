@@ -465,6 +465,7 @@ Type: `function (alpha): function`
 - [random-int](https://github.com/sindresorhus/random-int) - For the common use case of generating uniform random ints.
 - [random-float](https://github.com/sindresorhus/random-float) - For the common use case of generating uniform random floats.
 - [randombytes](https://github.com/crypto-browserify/randombytes) - Random crypto bytes for Node.js and the browser.
+- [jshash prngs](https://github.com/bryc/code/blob/master/jshash/PRNGs.md)
 
 ## Credit <!-- omit in toc -->
 
