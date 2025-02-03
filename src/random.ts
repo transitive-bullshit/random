@@ -104,7 +104,7 @@ export class Random {
    * Samples a uniform random floating point number, optionally specifying
    * lower and upper bounds.
    *
-   * Convence wrapper around `random.uniform()`
+   * Convenience wrapper around `random.uniform()`
    *
    * @param {number} [min=0] - Lower bound (float, inclusive)
    * @param {number} [max=1] - Upper bound (float, exclusive)
@@ -118,7 +118,7 @@ export class Random {
    * Samples a uniform random integer, optionally specifying lower and upper
    * bounds.
    *
-   * Convence wrapper around `random.uniformInt()`
+   * Convenience wrapper around `random.uniformInt()`
    *
    * @param {number} [min=0] - Lower bound (integer, inclusive)
    * @param {number} [max=1] - Upper bound (integer, inclusive)
@@ -132,7 +132,7 @@ export class Random {
    * Samples a uniform random integer, optionally specifying lower and upper
    * bounds.
    *
-   * Convence wrapper around `random.uniformInt()`
+   * Convenience wrapper around `random.uniformInt()`
    *
    * @alias `random.int`
    *
@@ -147,7 +147,7 @@ export class Random {
   /**
    * Samples a uniform random boolean value.
    *
-   * Convence wrapper around `random.uniformBoolean()`
+   * Convenience wrapper around `random.uniformBoolean()`
    *
    * @alias `random.boolean`
    *
@@ -160,7 +160,7 @@ export class Random {
   /**
    * Samples a uniform random boolean value.
    *
-   * Convence wrapper around `random.uniformBoolean()`
+   * Convenience wrapper around `random.uniformBoolean()`
    *
    * @return {boolean}
    */
@@ -171,7 +171,7 @@ export class Random {
   /**
    * Returns an item chosen uniformly at random from the given array.
    *
-   * Convence wrapper around `random.uniformInt()`
+   * Convenience wrapper around `random.uniformInt()`
    *
    * @param {Array<T>} [array] - Input array
    * @return {T | undefined}
