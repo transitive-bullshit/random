@@ -192,7 +192,41 @@ export class Random {
       return undefined
     }
   }
-
+  /**
+   * Returns a shuffled copy of the given array.
+   *
+   * @param {Array<T>} [array] - Input array
+   * @return {Array<T>}
+   */
+  shuffle<T>(array: Array<T>): Array<T> {
+    if (!Array.isArray(array)) {
+      throw new TypeError(
+        `Random.shuffle expected input to be an array, got ${typeof array}`
+      )
+    }
+    const copy = [...array]
+    ShuffleInPlace(this.rng, copy)
+    return copy
+  }
+  /**
+   * Generates a thunk which returns shuffled copies of the given array.
+   *
+   * @param {Array<T>} [array] - Input array
+   * @return {function}
+   */
+  shuffler<T>(array: Array<T>): () => Array<T> {
+    if (!Array.isArray(array)) {
+      throw new TypeError(
+        `Random.shuffler expected input to be an array, got ${typeof array}`
+      )
+    }
+    const gen = this.rng
+    const copy = [...array]
+    return () => {
+      ShuffleInPlace(gen, copy)
+      return [...copy]
+    }
+  }
   // --------------------------------------------------------------------------
   // Uniform distributions
   // --------------------------------------------------------------------------
@@ -384,6 +418,16 @@ export class Random {
     }
 
     return value.distribution
+  }
+}
+
+// Helper function
+function ShuffleInPlace<T>(gen: RNG, array: Array<T>) {
+  for (let i = array.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(gen.next() * (i + 1))
+    const tmp = array[i]
+    array[i] = array[j] as T
+    array[j] = tmp as T
   }
 }
 

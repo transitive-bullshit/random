@@ -65,6 +65,14 @@ random.boolean() // true
 
 // random array item
 random.choice([1, true, 'foo']) // 'foo'
+
+// shuffle arrays
+random.shuffle([1, true, 'foo']) // ['foo', 1, true]
+
+const dist = random.shuffler([1, true, 'foo'])
+dist() // [true, 'foo', 1]
+dist() // ['foo', true, 1]
+dist() // [1, 'foo', true]
 ```
 
 **All distribution methods return a thunk** (function with no params), which will return a series of independent, identically distributed random variables from the specified distribution.
