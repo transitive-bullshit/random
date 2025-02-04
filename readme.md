@@ -315,7 +315,7 @@ Type: `function (min, max): function`
 #### [uniformBoolean](https://github.com/transitive-bullshit/random/blob/e11a840a1cfe0f5bd9c43640f9645a0b28f61406/src/random.js#L230-L232)
 
 Generates a [Discrete uniform distribution](https://en.wikipedia.org/wiki/Discrete_uniform_distribution),
-with two possible outcomes, `true` or \`false.
+with two possible outcomes, `true` or `false`.
 
 This method is analogous to flipping a coin.
 
