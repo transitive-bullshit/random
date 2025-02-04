@@ -13,6 +13,7 @@ import { poisson } from './distributions/poisson'
 import { uniform } from './distributions/uniform'
 import { uniformBoolean } from './distributions/uniform-boolean'
 import { uniformInt } from './distributions/uniform-int'
+import { weibull } from './distributions/weibull'
 import { MathRandomRNG } from './generators/math-random'
 import { createRNG } from './utils'
 
@@ -347,6 +348,17 @@ export class Random {
    */
   pareto = (alpha?: number) => {
     return pareto(this, alpha)
+  }
+
+  /**
+   * Generates a [Weibull distribution](https://en.wikipedia.org/wiki/Weibull_distribution).
+   *
+   * @param {number} [lambda] - Lambda, the scale parameter
+   * @param {number} [k] - k, the shape parameter
+   * @return {function}
+   */
+  weibull = (lambda: number, k: number) => {
+    return weibull(this, lambda, k)
   }
 
   // --------------------------------------------------------------------------
