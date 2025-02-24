@@ -21,26 +21,11 @@ export function createRNG(seedOrRNG?: SeedOrRNG) {
   throw new Error(`invalid RNG seed or instance "${seedOrRNG}"`)
 }
 
-export function processSeed(seed?: Seed): number {
-  if (seed === undefined) {
-    seed = crypto.randomUUID()
-  }
-
-  if (typeof seed === 'number') {
-    return seed
-  }
-
-  const strSeed = `${seed}`
-  let s = 0
-
-  for (let k = 0; k < strSeed.length; ++k) {
-    s ^= strSeed.charCodeAt(k) | 0
-  }
-
-  return s
-}
-
-export function mixKey(seed: number, key: number[]): number[] {
+/**
+ * Mixes a string seed into a key that is an array of integers, and returns a
+ * shortened string seed that is equivalent to the result key.
+ */
+export function mixKey(seed: Seed, key: number[]): number[] {
   const seedStr = `${seed}`
   let smear = 0
   let j = 0

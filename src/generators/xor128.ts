@@ -1,26 +1,34 @@
 import type { Seed } from '../types'
 import { RNG } from '../rng'
-import { processSeed } from '../utils'
 
 export class XOR128RNG extends RNG {
-  protected _seed: number
+  protected readonly _seed: Seed
 
   x: number
   y: number
   z: number
   w: number
 
-  constructor(seed?: Seed) {
+  constructor(seed: Seed = crypto.randomUUID()) {
     super()
 
-    this._seed = processSeed(seed)
-    this.x = this._seed
+    this._seed = seed
+    this.x = 0
     this.y = 0
     this.z = 0
     this.w = 0
 
-    // discard an initial batch of 64 values
-    for (let i = 0; i < 64; ++i) {
+    let strSeed: string = ''
+
+    if (typeof seed === 'number') {
+      this.x = seed
+    } else {
+      strSeed += `${seed}`
+    }
+
+    // Mix in string seed, then discard an initial batch of 64 values.
+    for (let i = 0; i < strSeed.length + 64; ++i) {
+      this.x ^= strSeed.charCodeAt(i) | 0
       this.next()
     }
   }
@@ -30,7 +38,7 @@ export class XOR128RNG extends RNG {
   }
 
   override next() {
-    const t = this.x ^ (this.x << 1)
+    const t = this.x ^ (this.x << 11)
     this.x = this.y
     this.y = this.z
     this.z = this.w
