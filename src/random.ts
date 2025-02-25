@@ -103,7 +103,7 @@ export class Random {
    * Samples a uniform random floating point number, optionally specifying
    * lower and upper bounds.
    *
-   * Convence wrapper around `random.uniform()`
+   * Convenience wrapper around `random.uniform()`
    *
    * @param {number} [min=0] - Lower bound (float, inclusive)
    * @param {number} [max=1] - Upper bound (float, exclusive)
@@ -116,7 +116,7 @@ export class Random {
    * Samples a uniform random integer, optionally specifying lower and upper
    * bounds.
    *
-   * Convence wrapper around `random.uniformInt()`
+   * Convenience wrapper around `random.uniformInt()`
    *
    * @param {number} [min=0] - Lower bound (integer, inclusive)
    * @param {number} [max=1] - Upper bound (integer, inclusive)
@@ -129,7 +129,7 @@ export class Random {
    * Samples a uniform random integer, optionally specifying lower and upper
    * bounds.
    *
-   * Convence wrapper around `random.uniformInt()`
+   * Convenience wrapper around `random.uniformInt()`
    *
    * @alias `random.int`
    *
@@ -143,7 +143,7 @@ export class Random {
   /**
    * Samples a uniform random boolean value.
    *
-   * Convence wrapper around `random.uniformBoolean()`
+   * Convenience wrapper around `random.uniformBoolean()`
    *
    * @alias `random.boolean`
    */
@@ -154,7 +154,7 @@ export class Random {
   /**
    * Samples a uniform random boolean value.
    *
-   * Convence wrapper around `random.uniformBoolean()`
+   * Convenience wrapper around `random.uniformBoolean()`
    */
   boolean(): boolean {
     return this.uniformBoolean()()
@@ -163,7 +163,7 @@ export class Random {
   /**
    * Returns an item chosen uniformly at random from the given array.
    *
-   * Convence wrapper around `random.uniformInt()`
+   * Convenience wrapper around `random.uniformInt()`
    *
    * @param {Array<T>} [array] - Input array
    */
@@ -183,7 +183,41 @@ export class Random {
       return undefined
     }
   }
-
+  /**
+   * Returns a shuffled copy of the given array.
+   *
+   * @param {Array<T>} [array] - Input array
+   * @return {Array<T>}
+   */
+  shuffle<T>(array: Array<T>): Array<T> {
+    if (!Array.isArray(array)) {
+      throw new TypeError(
+        `Random.shuffle expected input to be an array, got ${typeof array}`
+      )
+    }
+    const copy = [...array]
+    ShuffleInPlace(this.rng, copy)
+    return copy
+  }
+  /**
+   * Generates a thunk which returns shuffled copies of the given array.
+   *
+   * @param {Array<T>} [array] - Input array
+   * @return {function}
+   */
+  shuffler<T>(array: Array<T>): () => Array<T> {
+    if (!Array.isArray(array)) {
+      throw new TypeError(
+        `Random.shuffler expected input to be an array, got ${typeof array}`
+      )
+    }
+    const gen = this.rng
+    const copy = [...array]
+    return () => {
+      ShuffleInPlace(gen, copy)
+      return [...copy]
+    }
+  }
   // --------------------------------------------------------------------------
   // Uniform distributions
   // --------------------------------------------------------------------------
@@ -361,6 +395,16 @@ export class Random {
     }
 
     return value.distribution
+  }
+}
+
+// Helper function
+function ShuffleInPlace<T>(gen: RNG, array: Array<T>) {
+  for (let i = array.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(gen.next() * (i + 1))
+    const tmp = array[i]
+    array[i] = array[j] as T
+    array[j] = tmp as T
   }
 }
 
