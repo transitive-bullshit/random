@@ -41,3 +41,12 @@ export function mixKey(seed: Seed, key: number[]): number[] {
 
   return key
 }
+
+export function shuffleInPlace<T>(gen: RNG, array: Array<T>) {
+  for (let i = array.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(gen.next() * (i + 1))
+    const tmp = array[i]
+    array[i] = array[j] as T
+    array[j] = tmp as T
+  }
+}

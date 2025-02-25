@@ -1,6 +1,6 @@
 import { assert, expect, test } from 'vitest'
 
-import random, { Random } from '../src/random'
+import random, { Random } from './random'
 
 function range(count: number): number[] {
   return Array.from({ length: count }, (_, i) => i)

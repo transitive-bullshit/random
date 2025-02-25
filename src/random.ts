@@ -15,7 +15,7 @@ import { uniformBoolean } from './distributions/uniform-boolean'
 import { uniformInt } from './distributions/uniform-int'
 import { weibull } from './distributions/weibull'
 import { MathRandomRNG } from './generators/math-random'
-import { createRNG } from './utils'
+import { createRNG, shuffleInPlace } from './utils'
 
 /**
  * Distribution function
@@ -188,7 +188,6 @@ export class Random {
    * Returns a shuffled copy of the given array.
    *
    * @param {Array<T>} [array] - Input array
-   * @return {Array<T>}
    */
   shuffle<T>(array: Array<T>): Array<T> {
     if (!Array.isArray(array)) {
@@ -196,15 +195,17 @@ export class Random {
         `Random.shuffle expected input to be an array, got ${typeof array}`
       )
     }
+
     const copy = [...array]
-    ShuffleInPlace(this.rng, copy)
+    shuffleInPlace(this.rng, copy)
+
     return copy
   }
+
   /**
    * Generates a thunk which returns shuffled copies of the given array.
    *
    * @param {Array<T>} [array] - Input array
-   * @return {function}
    */
   shuffler<T>(array: Array<T>): () => Array<T> {
     if (!Array.isArray(array)) {
@@ -212,13 +213,16 @@ export class Random {
         `Random.shuffler expected input to be an array, got ${typeof array}`
       )
     }
+
     const gen = this.rng
     const copy = [...array]
+
     return () => {
-      ShuffleInPlace(gen, copy)
+      shuffleInPlace(gen, copy)
       return [...copy]
     }
   }
+
   // --------------------------------------------------------------------------
   // Uniform distributions
   // --------------------------------------------------------------------------
@@ -367,9 +371,8 @@ export class Random {
    *
    * @param {number} [lambda] - Lambda, the scale parameter
    * @param {number} [k] - k, the shape parameter
-   * @return {function}
    */
-  weibull = (lambda: number, k: number) => {
+  weibull(lambda: number, k: number) {
     return weibull(this, lambda, k)
   }
 
@@ -407,16 +410,6 @@ export class Random {
     }
 
     return value.distribution
-  }
-}
-
-// Helper function
-function ShuffleInPlace<T>(gen: RNG, array: Array<T>) {
-  for (let i = array.length - 1; i > 0; i -= 1) {
-    const j = Math.floor(gen.next() * (i + 1))
-    const tmp = array[i]
-    array[i] = array[j] as T
-    array[j] = tmp as T
   }
 }
 
