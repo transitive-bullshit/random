@@ -1,6 +1,6 @@
 {
   "name": "random",
-  "version": "5.1.1",
+  "version": "5.2.0",
   "description": "Seedable random number generator supporting many common distributions.",
   "repository": "transitive-bullshit/random",
   "author": "Travis Fischer <travis@transitivebullsh.it>",
@@ -20,6 +20,7 @@
   "files": [
     "dist"
   ],
+  "packageManager": "pnpm@10.4.1",
   "engines": {
     "node": ">=18"
   },
@@ -39,17 +40,17 @@
   "devDependencies": {
     "@fisch0920/eslint-config": "^1.4.0",
     "@total-typescript/ts-reset": "^0.6.1",
-    "@types/node": "^22.8.7",
+    "@types/node": "^22.13.5",
     "@types/seedrandom": "^3.0.8",
     "del-cli": "^6.0.0",
     "eslint": "^8.57.1",
-    "npm-run-all2": "^7.0.1",
-    "prettier": "^3.3.3",
+    "npm-run-all2": "^7.0.2",
+    "prettier": "^3.5.2",
     "seedrandom": "^3.0.5",
-    "tsup": "^8.3.5",
-    "tsx": "^4.19.2",
-    "typescript": "^5.6.3",
-    "vitest": "^2.1.4"
+    "tsup": "^8.3.6",
+    "tsx": "^4.19.3",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.6"
   },
   "keywords": [
     "random",

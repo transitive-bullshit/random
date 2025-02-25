@@ -1,6 +1,6 @@
 import type { Seed } from '../types'
 import { RNG } from '../rng'
-import { mixKey, processSeed } from '../utils'
+import { mixKey } from '../utils'
 
 //
 // ARC4
@@ -20,18 +20,17 @@ const _arc4_significance = 4_503_599_627_370_496 // 2 ** 52 significant digits i
 const _arc4_overflow = 9_007_199_254_740_992 // 2 ** 53 == significance * 2
 
 export class ARC4RNG extends RNG {
-  protected _seed: number
+  protected readonly _seed: Seed
 
   i: number
   j: number
   S: number[]
 
-  constructor(seed?: Seed) {
+  constructor(seed: Seed = crypto.randomUUID()) {
     super()
 
-    const s = processSeed(seed)
-    this._seed = s
-    const key = mixKey(s, [])
+    this._seed = seed
+    const key = mixKey(seed, [])
 
     const S: number[] = []
     const keylen = key.length

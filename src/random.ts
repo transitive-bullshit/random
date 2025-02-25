@@ -44,7 +44,7 @@ interface ICacheEntry<T> {
  */
 export class Random {
   protected _rng!: RNG
-  protected readonly _cache: {
+  protected _cache: {
     [k: string]: ICacheEntry<any>
   } = {}
 
@@ -62,8 +62,6 @@ export class Random {
   /**
    * Creates a new `Random` instance, optionally specifying parameters to
    * set a new seed.
-   *
-   * @return {Random}
    */
   clone(seedOrRNG: SeedOrRNG = this.rng.clone()): Random {
     return new Random(seedOrRNG)
@@ -83,6 +81,7 @@ export class Random {
    */
   use(seedOrRNG: SeedOrRNG) {
     this._rng = createRNG(seedOrRNG)
+    this._cache = {}
   }
 
   // --------------------------------------------------------------------------
@@ -96,7 +95,7 @@ export class Random {
    *
    * @return {number}
    */
-  next = (): number => {
+  next(): number {
     return this._rng.next()
   }
 
@@ -108,9 +107,8 @@ export class Random {
    *
    * @param {number} [min=0] - Lower bound (float, inclusive)
    * @param {number} [max=1] - Upper bound (float, exclusive)
-   * @return {number}
    */
-  float = (min?: number, max?: number): number => {
+  float(min?: number, max?: number): number {
     return this.uniform(min, max)()
   }
 
@@ -122,9 +120,8 @@ export class Random {
    *
    * @param {number} [min=0] - Lower bound (integer, inclusive)
    * @param {number} [max=1] - Upper bound (integer, inclusive)
-   * @return {number}
    */
-  int = (min?: number, max?: number) => {
+  int(min?: number, max?: number): number {
     return this.uniformInt(min, max)()
   }
 
@@ -138,9 +135,8 @@ export class Random {
    *
    * @param {number} [min=0] - Lower bound (integer, inclusive)
    * @param {number} [max=1] - Upper bound (integer, inclusive)
-   * @return {number}
    */
-  integer = (min?: number, max?: number) => {
+  integer(min?: number, max?: number): number {
     return this.uniformInt(min, max)()
   }
 
@@ -150,10 +146,8 @@ export class Random {
    * Convenience wrapper around `random.uniformBoolean()`
    *
    * @alias `random.boolean`
-   *
-   * @return {boolean}
    */
-  bool = () => {
+  bool(): boolean {
     return this.uniformBoolean()()
   }
 
@@ -161,10 +155,8 @@ export class Random {
    * Samples a uniform random boolean value.
    *
    * Convenience wrapper around `random.uniformBoolean()`
-   *
-   * @return {boolean}
    */
-  boolean = () => {
+  boolean(): boolean {
     return this.uniformBoolean()()
   }
 
@@ -174,7 +166,6 @@ export class Random {
    * Convenience wrapper around `random.uniformInt()`
    *
    * @param {Array<T>} [array] - Input array
-   * @return {T | undefined}
    */
   choice<T>(array: Array<T>): T | undefined {
     if (!Array.isArray(array)) {
@@ -237,7 +228,7 @@ export class Random {
    * @param {number} [min=0] - Lower bound (float, inclusive)
    * @param {number} [max=1] - Upper bound (float, exclusive)
    */
-  uniform = (min?: number, max?: number) => {
+  uniform(min?: number, max?: number): IDist<number> {
     return this._memoize<number>('uniform', uniform, min, max)
   }
 
@@ -246,9 +237,8 @@ export class Random {
    *
    * @param {number} [min=0] - Lower bound (integer, inclusive)
    * @param {number} [max=1] - Upper bound (integer, inclusive)
-   * @return {function}
    */
-  uniformInt = (min?: number, max?: number) => {
+  uniformInt(min?: number, max?: number): IDist<number> {
     return this._memoize<number>('uniformInt', uniformInt, min, max)
   }
 
@@ -257,10 +247,8 @@ export class Random {
    * with two possible outcomes, `true` or `false.
    *
    * This method is analogous to flipping a coin.
-   *
-   * @return {function}
    */
-  uniformBoolean = () => {
+  uniformBoolean(): IDist<boolean> {
     return this._memoize<boolean>('uniformBoolean', uniformBoolean)
   }
 
@@ -273,9 +261,8 @@ export class Random {
    *
    * @param {number} [mu=0] - Mean
    * @param {number} [sigma=1] - Standard deviation
-   * @return {function}
    */
-  normal = (mu?: number, sigma?: number) => {
+  normal(mu?: number, sigma?: number): IDist<number> {
     return normal(this, mu, sigma)
   }
 
@@ -284,9 +271,8 @@ export class Random {
    *
    * @param {number} [mu=0] - Mean of underlying normal distribution
    * @param {number} [sigma=1] - Standard deviation of underlying normal distribution
-   * @return {function}
    */
-  logNormal = (mu?: number, sigma?: number) => {
+  logNormal(mu?: number, sigma?: number): IDist<number> {
     return logNormal(this, mu, sigma)
   }
 
@@ -298,9 +284,8 @@ export class Random {
    * Generates a [Bernoulli distribution](https://en.wikipedia.org/wiki/Bernoulli_distribution).
    *
    * @param {number} [p=0.5] - Success probability of each trial.
-   * @return {function}
    */
-  bernoulli = (p?: number) => {
+  bernoulli(p?: number): IDist<number> {
     return bernoulli(this, p)
   }
 
@@ -309,9 +294,8 @@ export class Random {
    *
    * @param {number} [n=1] - Number of trials.
    * @param {number} [p=0.5] - Success probability of each trial.
-   * @return {function}
    */
-  binomial = (n?: number, p?: number) => {
+  binomial(n?: number, p?: number): IDist<number> {
     return binomial(this, n, p)
   }
 
@@ -319,9 +303,8 @@ export class Random {
    * Generates a [Geometric distribution](https://en.wikipedia.org/wiki/Geometric_distribution).
    *
    * @param {number} [p=0.5] - Success probability of each trial.
-   * @return {function}
    */
-  geometric = (p?: number) => {
+  geometric(p?: number): IDist<number> {
     return geometric(this, p)
   }
 
@@ -333,9 +316,8 @@ export class Random {
    * Generates a [Poisson distribution](https://en.wikipedia.org/wiki/Poisson_distribution).
    *
    * @param {number} [lambda=1] - Mean (lambda > 0)
-   * @return {function}
    */
-  poisson = (lambda?: number) => {
+  poisson(lambda?: number): IDist<number> {
     return poisson(this, lambda)
   }
 
@@ -343,9 +325,8 @@ export class Random {
    * Generates an [Exponential distribution](https://en.wikipedia.org/wiki/Exponential_distribution).
    *
    * @param {number} [lambda=1] - Inverse mean (lambda > 0)
-   * @return {function}
    */
-  exponential = (lambda?: number) => {
+  exponential(lambda?: number): IDist<number> {
     return exponential(this, lambda)
   }
 
@@ -357,9 +338,8 @@ export class Random {
    * Generates an [Irwin Hall distribution](https://en.wikipedia.org/wiki/Irwin%E2%80%93Hall_distribution).
    *
    * @param {number} [n=1] - Number of uniform samples to sum (n >= 0)
-   * @return {function}
    */
-  irwinHall = (n?: number) => {
+  irwinHall(n?: number): IDist<number> {
     return irwinHall(this, n)
   }
 
@@ -367,9 +347,8 @@ export class Random {
    * Generates a [Bates distribution](https://en.wikipedia.org/wiki/Bates_distribution).
    *
    * @param {number} [n=1] - Number of uniform samples to average (n >= 1)
-   * @return {function}
    */
-  bates = (n?: number) => {
+  bates(n?: number): IDist<number> {
     return bates(this, n)
   }
 
@@ -377,9 +356,8 @@ export class Random {
    * Generates a [Pareto distribution](https://en.wikipedia.org/wiki/Pareto_distribution).
    *
    * @param {number} [alpha=1] - Alpha
-   * @return {function}
    */
-  pareto = (alpha?: number) => {
+  pareto(alpha?: number): IDist<number> {
     return pareto(this, alpha)
   }
 
@@ -398,14 +376,13 @@ export class Random {
    * @param {string} label - Name of distribution
    * @param {function} getter - Function which generates a new distribution
    * @param {...*} args - Distribution-specific arguments
-   *
-   * @return {function}
    */
   protected _memoize<T>(
     label: string,
     getter: IDistFn<any>,
     ...args: any[]
   ): IDist<T> {
+    // return getter(this, ...args)
     const key = `${args.join(';')}`
     let value = this._cache[label]
 
