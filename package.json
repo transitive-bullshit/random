@@ -1,6 +1,6 @@
 {
   "name": "random",
-  "version": "5.2.0",
+  "version": "5.3.0",
   "description": "Seedable random number generator supporting many common distributions.",
   "repository": "transitive-bullshit/random",
   "author": "Travis Fischer <travis@transitivebullsh.it>",
