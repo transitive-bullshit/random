@@ -153,6 +153,7 @@ const rng3 = new Random(() => {
   - [irwinHall](#irwinhall)
   - [bates](#bates)
   - [pareto](#pareto)
+  - [weibull](#weibull)
 
 ### [Random](https://github.com/transitive-bullshit/random/blob/e11a840a1cfe0f5bd9c43640f9645a0b28f61406/src/random.js#L36-L382)
 
@@ -322,7 +323,7 @@ Type: `function (min, max): function`
 #### [uniformBoolean](https://github.com/transitive-bullshit/random/blob/e11a840a1cfe0f5bd9c43640f9645a0b28f61406/src/random.js#L230-L232)
 
 Generates a [Discrete uniform distribution](https://en.wikipedia.org/wiki/Discrete_uniform_distribution),
-with two possible outcomes, `true` or \`false.
+with two possible outcomes, `true` or `false`.
 
 This method is analogous to flipping a coin.
 
@@ -433,6 +434,16 @@ Type: `function (alpha): function`
 
 ---
 
+#### [weibull](https://)
+
+Generates a [Weibull distribution](https://en.wikipedia.org/wiki/Weibull_distribution).
+
+Type: `function (lambda, k): function`
+
+- `lambda` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** lambda, the scale parameter (lambda > 0)
+- `k` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** k, the shape parameter (k > 0)
+
+---
 ## Todo <!-- omit in toc -->
 
 - Distributions
@@ -454,7 +465,7 @@ Type: `function (alpha): function`
   - [x] exponential
   - [ ] gamma
   - [ ] hyperExponential
-  - [ ] weibull
+  - [x] weibull
   - [ ] beta
   - [ ] laplace
   - [x] irwinHall
