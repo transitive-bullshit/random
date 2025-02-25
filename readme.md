@@ -2,7 +2,7 @@
 
 > Seedable random number generator supporting many common distributions.
 
-[![NPM](https://img.shields.io/npm/v/random.svg)](https://www.npmjs.com/package/random) [![Build Status](https://github.com/transitive-bullshit/random/actions/workflows/main.yml/badge.svg)](https://github.com/transitive-bullshit/random/actions/workflows/main.yml) [![Prettier Code Formatting](https://img.shields.io/badge/code_style-prettier-brightgreen.svg)](https://prettier.io)
+[![NPM](https://img.shields.io/npm/v/random.svg)](https://www.npmjs.com/package/random) [![Build Status](https://github.com/transitive-bullshit/random/actions/workflows/main.yml/badge.svg)](https://github.com/transitive-bullshit/random/actions/workflows/main.yml) [![MIT License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/transitive-bullshit/random/blob/main/license) [![Prettier Code Formatting](https://img.shields.io/badge/code_style-prettier-brightgreen.svg)](https://prettier.io)
 
 Welcome to the most **random** module on npm! 😜
 
@@ -444,6 +444,7 @@ Type: `function (lambda, k): function`
 - `k` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** k, the shape parameter (k > 0)
 
 ---
+
 ## Todo <!-- omit in toc -->
 
 - Distributions
