@@ -78,7 +78,7 @@ dist() // [1, 'foo', true]
 **All distribution methods return a thunk** (function with no params), which will return a series of independent, identically distributed random variables from the specified distribution.
 
 ```ts
-// create a normal distribution with default params (mu=1 and sigma=0)
+// create a normal distribution with default params (mu=0 and sigma=1)
 const normal = random.normal()
 normal() // 0.4855465422678824
 normal() // -0.06696771815439678
