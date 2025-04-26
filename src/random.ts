@@ -203,6 +203,33 @@ export class Random {
     }
     return sparseFisherYates(this.rng, array, k)
   }
+
+  /**
+   * Generates a thunk which returns samples of size k from the given array.
+   *
+   * This is for convenience only; there is no gain in efficiency.
+   *
+   * @param {Array<T>} [array] - Input array
+   */
+  sampler<T>(array: Array<T>, k: number): () => Array<T> {
+    if (!Array.isArray(array)) {
+      throw new TypeError(
+        `Random.sampler expected input to be an array, got ${typeof array}`
+      )
+    }
+    if (k < 0 || k > array.length) {
+      throw new Error(
+        `Random.sampler: k must be between 0 and array.length (${array.length}), got ${k}`
+      )
+    }
+
+    const gen = this.rng
+
+    return () => {
+      return sparseFisherYates(gen, array, k)
+    }
+  }
+
   /**
    * Returns a shuffled copy of the given array.
    *

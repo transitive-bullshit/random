@@ -65,3 +65,13 @@ test(
   }
 )
 
+test('random.sampler returns different samples', () => {
+  const src = range(10)
+  const sampler = random.sampler(src, 5)
+  const samples1 = sampler()
+  const samples2 = sampler()
+  const samples3 = sampler()
+  assert.notSameOrderedMembers(src, samples2)
+  assert.notSameOrderedMembers(samples1, samples2)
+  assert.notSameOrderedMembers(samples2, samples3)
+})

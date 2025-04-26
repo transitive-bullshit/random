@@ -69,6 +69,11 @@ random.choice([1, true, 'foo']) // 'foo'
 // sample multiple items without replacement
 random.sample([1, true, 'foo'], 2) // [true, 'foo']
 
+const dist = random.sampler([1, true, 'foo'], 2)
+dist() // [true, 'foo']
+dist() // ['foo', 1]
+dist() // [1, true]
+
 // shuffle arrays
 random.shuffle([1, true, 'foo']) // ['foo', 1, true]
 
