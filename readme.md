@@ -66,6 +66,9 @@ random.boolean() // true
 // random array item
 random.choice([1, true, 'foo']) // 'foo'
 
+// sample multiple items without replacement
+random.sample([1, true, 'foo'], 2) // [true, 'foo']
+
 // shuffle arrays
 random.shuffle([1, true, 'foo']) // ['foo', 1, true]
 
