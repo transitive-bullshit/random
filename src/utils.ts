@@ -56,13 +56,17 @@ export function shuffleInPlace<T>(gen: RNG, array: Array<T>) {
  * O(k) time and space, by using a hash table instead of a full copy of the array
  * see https://arxiv.org/pdf/2104.05091 Algorithm 2
  */
-export function sparseFisherYates<T>(gen: RNG, array: Array<T>, k: number): T[] {  
+export function sparseFisherYates<T>(
+  gen: RNG,
+  array: Array<T>,
+  k: number
+): T[] {
   const H = new Map<number, number>() // stores swapped indices
   const lastIndex = array.length - 1
   const result: T[] = Array.from({ length: k })
 
   for (let i = 0; i < k; i++) {
-    const remaining = lastIndex - i + 1;
+    const remaining = lastIndex - i + 1
     const r = Math.floor(gen.next() * remaining)
     result[i] = array[H.get(r) ?? r]!
     // move the element at the end of the active range into slot r
