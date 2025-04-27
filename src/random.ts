@@ -15,7 +15,7 @@ import { uniformBoolean } from './distributions/uniform-boolean'
 import { uniformInt } from './distributions/uniform-int'
 import { weibull } from './distributions/weibull'
 import { MathRandomRNG } from './generators/math-random'
-import { createRNG, shuffleInPlace } from './utils'
+import { createRNG, shuffleInPlace, sparseFisherYates } from './utils'
 
 /**
  * Distribution function
@@ -184,6 +184,52 @@ export class Random {
       return undefined
     }
   }
+
+  /**
+   * Returns a random subset of k items from the given array (without replacement).
+   *
+   * @param {Array<T>} [array] - Input array
+   */
+  sample<T>(array: Array<T>, k: number): Array<T> {
+    if (!Array.isArray(array)) {
+      throw new TypeError(
+        `Random.sample expected input to be an array, got ${typeof array}`
+      )
+    }
+    if (k < 0 || k > array.length) {
+      throw new Error(
+        `Random.sample: k must be between 0 and array.length (${array.length}), got ${k}`
+      )
+    }
+    return sparseFisherYates(this.rng, array, k)
+  }
+
+  /**
+   * Generates a thunk which returns samples of size k from the given array.
+   *
+   * This is for convenience only; there is no gain in efficiency.
+   *
+   * @param {Array<T>} [array] - Input array
+   */
+  sampler<T>(array: Array<T>, k: number): () => Array<T> {
+    if (!Array.isArray(array)) {
+      throw new TypeError(
+        `Random.sampler expected input to be an array, got ${typeof array}`
+      )
+    }
+    if (k < 0 || k > array.length) {
+      throw new Error(
+        `Random.sampler: k must be between 0 and array.length (${array.length}), got ${k}`
+      )
+    }
+
+    const gen = this.rng
+
+    return () => {
+      return sparseFisherYates(gen, array, k)
+    }
+  }
+
   /**
    * Returns a shuffled copy of the given array.
    *
