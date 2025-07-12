@@ -29,6 +29,13 @@ export class NumberValidator {
     throw new Error(`Expected number to be less than ${v}, got ${this.n}`)
   }
 
+  public lessThanOrEqual = (v: number): this => {
+    if (this.n <= v) {
+      return this
+    }
+    throw new Error(`Expected number to be less than or equal to ${v}, got ${this.n}`)
+  }
+
   public greaterThanOrEqual = (v: number): this => {
     if (this.n >= v) {
       return this
