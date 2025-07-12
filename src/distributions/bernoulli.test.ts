@@ -16,7 +16,7 @@ test('random.bernoulli() p number input', () => {
   const r = random.clone(seedrandom('ZDJjM2IyNmFlNmVjNWQwMGZkMmY1Y2Nk'))
   assert.throws(
     () => r.bernoulli(3),
-    'Expected number to be less than 1, got 3'
+    'Expected number to be less than or equal to 1, got 3'
   )
 })
 
