@@ -4,7 +4,7 @@ export default defineConfig([
   {
     entry: ['src/index.ts'],
     outDir: 'dist',
-    target: 'es2018',
+    target: 'es2020',
     platform: 'neutral',
     format: ['esm', 'cjs'],
     splitting: false,
