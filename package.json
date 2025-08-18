@@ -22,7 +22,7 @@
   ],
   "packageManager": "pnpm@10.4.1",
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "scripts": {
     "build": "tsup",
