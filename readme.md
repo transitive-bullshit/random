@@ -66,6 +66,9 @@ random.boolean() // true
 // random array item
 random.choice([1, true, 'foo']) // 'foo'
 
+// random array item with weights
+random.choice([1, true, 'foo'], [8, 1, 1]) // 1 (80% of the time)
+
 // sample multiple items without replacement
 random.sample([1, true, 'foo'], 2) // [true, 'foo']
 
@@ -300,9 +303,10 @@ Returns an item chosen uniformly at random from the given array.
 
 Convence wrapper around `random.uniformInt()`
 
-Type: `function choice <T> (array: Array<T>): T | undefined`
+Type: `function choice <T> (array: Array<T>, weights?: Array<number>): T | undefined`
 
 - `array` **[Array<T>](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)** Array of items to sample from
+- `weights` **[Array<number>](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)** Optional weights for each item (must be same length as array)
 
 ---
 
