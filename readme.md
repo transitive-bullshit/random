@@ -2,7 +2,7 @@
 
 > Seedable random number generator supporting many common distributions.
 
-[![NPM](https://img.shields.io/npm/v/random.svg)](https://www.npmjs.com/package/random) [![Build Status](https://github.com/transitive-bullshit/random/actions/workflows/main.yml/badge.svg)](https://github.com/transitive-bullshit/random/actions/workflows/main.yml) [![MIT License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/transitive-bullshit/random/blob/main/license) [![Code style enforced by Oxc](https://img.shields.io/badge/code_style-oxc-brightgreen.svg)](https://oxc.rs)
+[![NPM](https://img.shields.io/npm/v/random.svg)](https://www.npmjs.com/package/random) [![Build Status](https://github.com/transitive-bullshit/random/actions/workflows/test.yml/badge.svg)](https://github.com/transitive-bullshit/random/actions/workflows/test.yml) [![MIT License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/transitive-bullshit/random/blob/main/license) [![Code style enforced by Oxc](https://img.shields.io/badge/code_style-oxc-brightgreen.svg)](https://oxc.rs)
 
 Welcome to the most **random** module on npm! 😜
 
@@ -13,7 +13,7 @@ Welcome to the most **random** module on npm! 😜
 - Plugin support for different pseudo random number generators
 - Includes many common distributions
   - uniform, normal, poisson, bernoulli, etc
-- Replacement for `seedrandom` which hasn't been updated in over 5 years
+- Replacement for `seedrandom` which is no longer maintained
 - Supports all modern JS/TS runtimes
 
 ## Install <!-- omit in toc -->
@@ -486,7 +486,7 @@ Type: `function (lambda, k): function`
 - [randombytes](https://github.com/crypto-browserify/randombytes) - Random crypto bytes for Node.js and the browser.
 - [jshash prngs](https://github.com/bryc/code/blob/master/jshash/PRNGs.md)
 
-## Credit <!-- omit in toc -->
+## Credits <!-- omit in toc -->
 
 Thanks go to [Andrew Moss](https://github.com/agmoss) for the TypeScript port and for helping to maintain this package.
 
