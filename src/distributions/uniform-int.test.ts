@@ -1,7 +1,7 @@
 import seedrandom from 'seedrandom'
-import { assert, test } from 'vitest'
+import { assert, expect, test } from 'vitest'
 
-import random from '../random'
+import random, { Random } from '../random'
 
 type distFn = () => number
 
@@ -26,6 +26,11 @@ test('random.uniformInt() with seedrandom has mean 0.5', () => {
   const d = r.uniformInt()
   const mean = calcMean(d)
   assert.closeTo(mean, 0.5, 0.05)
+})
+
+test('random.uniformInt(max) maps deterministic source endpoints exactly', () => {
+  expect(new Random(() => 0).uniformInt(42)()).toBe(0)
+  expect(new Random(() => 1 - 2 ** -53).uniformInt(42)()).toBe(42)
 })
 
 test('random.uniformInt(max) has mean max / 2', () => {

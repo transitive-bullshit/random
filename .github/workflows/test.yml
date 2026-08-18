@@ -11,6 +11,9 @@ jobs:
       fail-fast: true
       matrix:
         node-version:
+          - 20
+          - 22
+          - 24
           - 25
 
     steps:

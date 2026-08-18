@@ -1,5 +1,5 @@
 import seedrandom from 'seedrandom'
-import { assert, expect, test } from 'vitest'
+import { assert, expect, test, vi } from 'vitest'
 
 import random, { Random } from '../src/random'
 import { XOR128RNG } from './generators'
@@ -145,25 +145,11 @@ test('random.use() XOR128RNG different seeds produce different values', () => {
   assert.deepEqual(values1, values5)
 })
 
-test('new Random() uses a different seed each time', () => {
-  const n = 1100
-  const length = 10
+test('new Random() delegates to Math.random', () => {
+  const source = vi.spyOn(Math, 'random').mockReturnValue(0.625)
 
-  let r = new Random()
-  const values0 = Array.from({ length }).map(() => r.int(n))
+  expect(new Random().next()).toBe(0.625)
+  expect(source).toHaveBeenCalledOnce()
 
-  r = new Random()
-  const values1 = Array.from({ length }).map(() => r.int(n))
-  assert.notDeepEqual(values0, values1)
-
-  r = new Random()
-  const values2 = Array.from({ length }).map(() => r.int(n))
-  assert.notDeepEqual(values0, values2)
-  assert.notDeepEqual(values1, values2)
-
-  r = new Random()
-  const values3 = Array.from({ length }).map(() => r.int(n))
-  assert.notDeepEqual(values0, values3)
-  assert.notDeepEqual(values1, values3)
-  assert.notDeepEqual(values2, values3)
+  source.mockRestore()
 })

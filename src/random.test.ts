@@ -113,6 +113,31 @@ test.each(seededBuiltInRNGs)(
 )
 
 test.each(seededBuiltInRNGs)(
+  '%s clone resumes the current stream with independent state',
+  (_, createRNG) => {
+    const source = createRNG('test-seed')
+
+    Array.from({ length: 7 }, () => source.next())
+    const clone = source.clone()
+    const expected = Array.from({ length: 32 }, () => source.next())
+    const actual = Array.from({ length: 32 }, () => clone.next())
+
+    expect(clone).not.toBe(source)
+    expect(actual).toEqual(expected)
+  }
+)
+
+test('Random.clone() without arguments resumes the current stream', () => {
+  const source = new Random('test-seed')
+
+  sample(source, 7)
+  const clone = source.clone()
+  const expected = sample(source, 32)
+
+  expect(sample(clone, 32)).toEqual(expected)
+})
+
+test.each(seededBuiltInRNGs)(
   'Random with %s produces distinct first uniform values for distinct string seeds',
   (_, createRNG) => {
     const seeds = Array.from(

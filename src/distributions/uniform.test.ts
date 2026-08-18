@@ -4,7 +4,7 @@ import { assert, test, expect } from 'vitest'
 import { FunctionRNG } from '../../src/generators/function'
 import { MathRandomRNG } from '../../src/generators/math-random'
 import { XOR128RNG } from '../../src/generators/xor128'
-import random from '../random'
+import random, { Random } from '../random'
 
 type distFn = () => number
 
@@ -63,6 +63,11 @@ test('random.uniform() is in [0, 1)', () => {
     expect(v).toBeGreaterThanOrEqual(0)
     expect(v).toBeLessThan(1)
   }
+})
+
+test('random.uniform(max) maps deterministic source endpoints exactly', () => {
+  expect(new Random(() => 0).uniform(42)()).toBe(0)
+  expect(new Random(() => 1 - 2 ** -53).uniform(42)()).toBe(42 * (1 - 2 ** -53))
 })
 
 test('random.uniform() with seedrandom has mean 0.5', () => {

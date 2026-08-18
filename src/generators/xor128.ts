@@ -56,6 +56,13 @@ export class XOR128RNG extends RNG {
   }
 
   override clone() {
-    return new XOR128RNG(this._seed)
+    const clone = new XOR128RNG(this._seed)
+
+    clone.x = this.x
+    clone.y = this.y
+    clone.z = this.z
+    clone.w = this.w
+
+    return clone
   }
 }

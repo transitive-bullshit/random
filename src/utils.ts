@@ -14,11 +14,13 @@ export function createRNG(seedOrRNG?: SeedOrRNG): RNG {
     case 'function':
       return new FunctionRNG(seedOrRNG)
 
-    default:
+    case 'number':
+    case 'string':
+    case 'undefined':
       return new Xoshiro128StarStarRNG(seedOrRNG)
   }
 
-  throw new TypeError(`Invalid seed or RNG: ${seedOrRNG as string}`)
+  throw new TypeError(`Invalid seed or RNG: ${String(seedOrRNG)}`)
 }
 
 /**

@@ -38,7 +38,7 @@ function cyrb128(seed: Seed): [number, number, number, number] {
   s2 ^= s0
   s3 ^= s0
 
-  return [s0, s1, s2, s3]
+  return [s0 >>> 0, s1 >>> 0, s2 >>> 0, s3 >>> 0]
 }
 
 /**
@@ -52,16 +52,19 @@ function cyrb128(seed: Seed): [number, number, number, number] {
 export class Xoshiro128StarStarRNG extends RNG {
   protected readonly _seed: Seed
 
-  protected s0: number
-  protected s1: number
-  protected s2: number
-  protected s3: number
+  protected s0 = 0
+  protected s1 = 0
+  protected s2 = 0
+  protected s3 = 0
 
   constructor(seed: Seed = crypto.randomUUID()) {
     super()
 
     this._seed = seed
-    const state = cyrb128(seed)
+    this.setState(cyrb128(seed))
+  }
+
+  protected setState(state: [number, number, number, number]): void {
     this.s0 = state[0]
     this.s1 = state[1]
     this.s2 = state[2]
@@ -87,7 +90,11 @@ export class Xoshiro128StarStarRNG extends RNG {
   }
 
   override clone() {
-    return new Xoshiro128StarStarRNG(this._seed)
+    const clone = new Xoshiro128StarStarRNG(this._seed)
+
+    clone.setState([this.s0, this.s1, this.s2, this.s3])
+
+    return clone
   }
 
   protected nextUint32(): number {

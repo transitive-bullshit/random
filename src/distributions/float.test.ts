@@ -1,7 +1,7 @@
 import seedrandom from 'seedrandom'
-import { assert, test } from 'vitest'
+import { assert, expect, test } from 'vitest'
 
-import random from '../random'
+import random, { Random } from '../random'
 
 test('random.float() produces numbers [0,1)', () => {
   const r = random.clone(seedrandom('ZDJjM2IyNmFlNmVjNWQwMGZkMmY1Y2Nk'))
@@ -19,6 +19,14 @@ test('random.float() with max produces numbers in [0, max)', () => {
     assert.isTrue(v >= 0)
     assert.isTrue(v < 100)
   }
+})
+
+test.each([
+  [0, 0],
+  [0.5, 50],
+  [1 - 2 ** -53, 100 * (1 - 2 ** -53)]
+])('random.float(max) maps source value %s exactly', (value, expected) => {
+  expect(new Random(() => value).float(100)).toBe(expected)
 })
 
 test('random.float() with min max produces numbers in [min, max)', () => {

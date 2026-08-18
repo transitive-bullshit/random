@@ -8,7 +8,7 @@ export class FunctionRNG extends RNG {
   constructor(rngFn: RNGFn) {
     super()
 
-    this._name = rngFn.name ?? 'function'
+    this._name = rngFn.name || 'function'
     this._rngFn = rngFn
   }
 

@@ -1,3 +1,4 @@
+import seedrandom from 'seedrandom'
 import { expect, test } from 'vitest'
 
 import { ARC4RNG } from './arc4'
@@ -6,6 +7,24 @@ function sample(seed: string | number, count: number): number[] {
   const rng = new ARC4RNG(seed)
 
   return Array.from({ length: count }, () => rng.next())
+}
+
+const CHECKPOINTS = [0, 63, 255, 999]
+
+function valuesAt(next: () => number, indexes = CHECKPOINTS): number[] {
+  const values: number[] = []
+  let checkpoint = 0
+
+  for (let index = 0; index <= indexes.at(-1)!; index += 1) {
+    const value = next()
+
+    if (index === indexes[checkpoint]) {
+      values.push(value)
+      checkpoint += 1
+    }
+  }
+
+  return values
 }
 
 test('ARC4RNG produces repeatable sequences for the same seed', () => {
@@ -25,3 +44,18 @@ test('ARC4RNG produces distinct first values for distinct string seeds', () => {
 
   expect(collisionRate).toBeLessThan(0.05)
 })
+
+test.each([
+  { name: 'empty', seed: '' },
+  { name: 'NUL', seed: '\0' },
+  { name: 'Unicode', seed: '雪☃️🚀' },
+  { name: 'long', seed: 'long-seed-'.repeat(40) }
+])(
+  'ARC4RNG matches seedrandom at distant checkpoints for a $name seed',
+  ({ seed }) => {
+    const actual = new ARC4RNG(seed)
+    const expected = seedrandom(seed)
+
+    expect(valuesAt(() => actual.next())).toEqual(valuesAt(expected))
+  }
+)

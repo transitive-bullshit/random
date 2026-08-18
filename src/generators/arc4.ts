@@ -106,6 +106,12 @@ export class ARC4RNG extends RNG {
   }
 
   override clone() {
-    return new ARC4RNG(this._seed)
+    const clone = new ARC4RNG(this._seed)
+
+    clone.i = this.i
+    clone.j = this.j
+    clone.S = [...this.S]
+
+    return clone
   }
 }
