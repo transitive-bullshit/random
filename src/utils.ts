@@ -3,7 +3,7 @@ import { ARC4RNG } from './generators/arc4'
 import { FunctionRNG } from './generators/function'
 import { RNG } from './rng'
 
-export function createRNG(seedOrRNG?: SeedOrRNG) {
+export function createRNG(seedOrRNG?: SeedOrRNG): RNG {
   switch (typeof seedOrRNG) {
     case 'object':
       if (seedOrRNG instanceof RNG) {
@@ -18,7 +18,7 @@ export function createRNG(seedOrRNG?: SeedOrRNG) {
       return new ARC4RNG(seedOrRNG)
   }
 
-  throw new Error(`invalid RNG seed or instance "${seedOrRNG}"`)
+  throw new TypeError(`Invalid seed or RNG: ${seedOrRNG as string}`)
 }
 
 /**

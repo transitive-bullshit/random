@@ -1,0 +1,11 @@
+enablePrePostScripts: true
+packageManagerStrict: false
+minimumReleaseAge: 1440
+
+minimumReleaseAgeExclude:
+  - '@fisch0920/config'
+
+allowBuilds:
+  esbuild: true
+  fsevents: set this to true or false
+  simple-git-hooks: true

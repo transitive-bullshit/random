@@ -1,5 +1,5 @@
 import seedrandom from 'seedrandom'
-import { assert, test } from 'vitest'
+import { assert, test, expect } from 'vitest'
 
 import { FunctionRNG } from '../../src/generators/function'
 import { MathRandomRNG } from '../../src/generators/math-random'
@@ -37,8 +37,8 @@ const assertZeroMax = (d: distFn, max: number) => {
   for (let i = 0; i < n; ++i) {
     const v = d()
 
-    assert.isTrue(v >= 0)
-    assert.isTrue(v < max)
+    expect(v).toBeGreaterThanOrEqual(0)
+    expect(v).toBeLessThan(max)
   }
 }
 
@@ -49,8 +49,9 @@ const assertZeroMax = (d: distFn, max: number) => {
 const inMinMax = (d: distFn, min: number, max: number) => {
   for (let i = 0; i < 10_000; ++i) {
     const v = d()
-    assert.isTrue(v >= min)
-    assert.isTrue(v < max)
+
+    expect(v).toBeGreaterThanOrEqual(min)
+    expect(v).toBeLessThan(max)
   }
 }
 
@@ -59,8 +60,8 @@ test('random.uniform() is in [0, 1)', () => {
   const d = r.uniform()
   for (let i = 0; i < 10_000; ++i) {
     const v = d()
-    assert.isTrue(v >= 0)
-    assert.isTrue(v < 1)
+    expect(v).toBeGreaterThanOrEqual(0)
+    expect(v).toBeLessThan(1)
   }
 })
 
@@ -99,24 +100,28 @@ test('random.uniform() with MathRandomRNG has mean 0.5', () => {
   assert.closeTo(mean, 0.5, 0.05)
 })
 
+// oxlint-disable-next-line vitest/expect-expect
 test('random.uniform(max) returns numbers in [0, max)', () => {
   const r = random.clone(seedrandom('ODEzYWI1MjQ2NGEwYWExOTRlZTJjYmI4'))
   const d = r.uniform(undefined, 42)
   assertZeroMax(d, 42)
 })
 
+// oxlint-disable-next-line vitest/expect-expect
 test('random.uniform(max) with XOR128RNG returns numbers in [0, max)', () => {
   const r = random.clone(new XOR128RNG(3))
   const d = r.uniform(undefined, 42)
   assertZeroMax(d, 42)
 })
 
+// oxlint-disable-next-line vitest/expect-expect
 test('random.uniform(max) with FunctionRNG returns numbers in [0, max)', () => {
   const r = random.clone(new FunctionRNG(Math.random))
   const d = r.uniform(undefined, 42)
   assertZeroMax(d, 42)
 })
 
+// oxlint-disable-next-line vitest/expect-expect
 test('random.uniform(max) with MathRandomRNG returns numbers in [0, max)', () => {
   const r = random.clone(new MathRandomRNG())
   const d = r.uniform(undefined, 42)
@@ -151,12 +156,14 @@ test('random.uniform(max) MathRandomRNG  has mean max / 2', () => {
   assert.closeTo(mean, 21, 0.5)
 })
 
+// oxlint-disable-next-line vitest/expect-expect
 test('random.uniform(min, max) returns numbers in [min, max)', () => {
   const r = random.clone(seedrandom('NWI0ZWQ0MDBkMGFmZGZkZGU1YjEwMThk'))
   const d = r.uniform(10, 42)
   inMinMax(d, 10, 42)
 })
 
+// oxlint-disable-next-line vitest/expect-expect
 test('random.uniform(min, max) with XOR128RNG returns numbers in [min, max)', () => {
   const r = random.clone(new XOR128RNG(2))
   const d = r.uniform(10, 42)

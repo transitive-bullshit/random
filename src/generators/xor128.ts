@@ -18,7 +18,7 @@ export class XOR128RNG extends RNG {
     this.z = 0
     this.w = 0
 
-    let strSeed: string = ''
+    let strSeed = ''
 
     if (typeof seed === 'number') {
       this.x = seed

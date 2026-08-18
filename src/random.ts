@@ -45,9 +45,7 @@ interface ICacheEntry<T> {
  */
 export class Random {
   protected _rng!: RNG
-  protected _cache: {
-    [k: string]: ICacheEntry<any>
-  } = {}
+  protected _cache: Record<string, ICacheEntry<any>> = {}
 
   constructor(seedOrRNG: SeedOrRNG = new MathRandomRNG()) {
     this._rng = createRNG(seedOrRNG)
