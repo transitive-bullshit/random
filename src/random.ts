@@ -161,12 +161,15 @@ export class Random {
 
   /**
    * Returns an item chosen uniformly at random from the given array.
+   * If weights are provided, returns an item based on weighted probabilities.
    *
-   * Convenience wrapper around `random.uniformInt()`
+   * Convenience wrapper around `random.uniformInt()` for uniform selection,
+   * or implements weighted selection using cumulative distribution.
    *
    * @param {Array<T>} [array] - Input array
+   * @param {Array<number>} [weights] - Optional weights for each item (must be same length as array)
    */
-  choice<T>(array: Array<T>): T | undefined {
+  choice<T>(array: Array<T>, weights?: Array<number>): T | undefined {
     if (!Array.isArray(array)) {
       throw new TypeError(
         `Random.choice expected input to be an array, got ${typeof array}`
@@ -175,12 +178,59 @@ export class Random {
 
     const length = array.length
 
-    if (length > 0) {
-      const index = this.uniformInt(0, length - 1)()
-      return array[index]
-    } else {
+    if (length === 0) {
       return undefined
     }
+
+    // Uniform selection when no weights provided
+    if (!weights) {
+      const index = this.uniformInt(0, length - 1)()
+      return array[index]
+    }
+
+    // Weighted selection
+    if (!Array.isArray(weights)) {
+      throw new TypeError(
+        `Random.choice expected weights to be an array, got ${typeof weights}`
+      )
+    }
+
+    if (weights.length !== length) {
+      throw new Error(
+        `Random.choice expected weights array length (${weights.length}) to match array length (${length})`
+      )
+    }
+
+    for (const [i, weight] of weights.entries()) {
+      if (
+        typeof weight !== 'number' ||
+        weight < 0 ||
+        !Number.isFinite(weight)
+      ) {
+        throw new Error(
+          `Random.choice expected all weights to be non-negative finite numbers, got ${weight} at index ${i}`
+        )
+      }
+    }
+
+    const totalWeight = weights.reduce((sum, weight) => sum + weight, 0)
+    if (totalWeight === 0) {
+      throw new Error(
+        'Random.choice expected at least one positive weight, got all zeros'
+      )
+    }
+
+    const random = this.float(0, totalWeight)
+    let cumulativeWeight = 0
+    for (let i = 0; i < length; i++) {
+      cumulativeWeight += weights[i]!
+      if (random <= cumulativeWeight) {
+        return array[i]
+      }
+    }
+
+    // Fallback for floating point precision
+    return array[length - 1]
   }
 
   /**
