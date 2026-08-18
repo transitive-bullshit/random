@@ -9,8 +9,8 @@ importers:
   .:
     devDependencies:
       '@fisch0920/config':
-        specifier: ^2.0.2
-        version: 2.0.2(oxfmt@0.63.0)(oxlint-tsgolint@7.0.2001)(oxlint@1.78.0(oxlint-tsgolint@7.0.2001))(typescript@7.0.2)
+        specifier: ^2.0.3
+        version: 2.0.3(oxfmt@0.63.0)(oxlint-tsgolint@7.0.2001)(oxlint@1.78.0(oxlint-tsgolint@7.0.2001))(typescript@7.0.2)
       '@total-typescript/ts-reset':
         specifier: ^0.6.1
         version: 0.6.1
@@ -359,8 +359,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@fisch0920/config@2.0.2':
-    resolution: {integrity: sha512-7/VOekq5zuLfdwuZ/zt1A9zUkkLZgW11xGIuz9F2FbHAZYNNhY9RsUWmoGHYxZ989rumd1bdzmQiJs7FvYHyCQ==}
+  '@fisch0920/config@2.0.3':
+    resolution: {integrity: sha512-VaVoN4+CPyIhHmLBaUElFjLZfuRLUDWB2BSPvAImfN9sLUb8oHh65eLzITA+xcnHGLpzYnDAfuJOw4u+fBls8g==}
     engines: {node: '>=22'}
     peerDependencies:
       oxfmt: '>= 0.63.0'
@@ -2128,9 +2128,10 @@ snapshots:
   '@esbuild/win32-x64@0.28.2':
     optional: true
 
-  '@fisch0920/config@2.0.2(oxfmt@0.63.0)(oxlint-tsgolint@7.0.2001)(oxlint@1.78.0(oxlint-tsgolint@7.0.2001))(typescript@7.0.2)':
+  '@fisch0920/config@2.0.3(oxfmt@0.63.0)(oxlint-tsgolint@7.0.2001)(oxlint@1.78.0(oxlint-tsgolint@7.0.2001))(typescript@7.0.2)':
     dependencies:
       '@total-typescript/ts-reset': 0.6.1
+      '@types/node': 26.2.0
       oxfmt: 0.63.0
       oxlint: 1.78.0(oxlint-tsgolint@7.0.2001)
       oxlint-tsgolint: 7.0.2001

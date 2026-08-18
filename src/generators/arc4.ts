@@ -93,9 +93,9 @@ export class ARC4RNG extends RNG {
     while (count--) {
       i = 0xff & (i + 1)
       const t = S[i]!
-      S[j] = t
       j = 0xff & (j + t)
       S[i] = S[j]!
+      S[j] = t
       r = r * 256 + S[0xff & (S[i]! + t)]!
     }
 

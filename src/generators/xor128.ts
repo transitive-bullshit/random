@@ -31,6 +31,15 @@ export class XOR128RNG extends RNG {
       this.x ^= strSeed.charCodeAt(i) | 0
       this.next()
     }
+
+    // Xorshift generators cannot escape an all-zero state.
+    if ((this.x | this.y | this.z | this.w) === 0) {
+      this.x = 0x6d_2b_79_f5
+
+      for (let i = 0; i < 64; ++i) {
+        this.next()
+      }
+    }
   }
 
   override get name() {
