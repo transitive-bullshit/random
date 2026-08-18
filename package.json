@@ -65,6 +65,7 @@
     "oxfmt": "^0.63.0",
     "oxlint": "^1.78.0",
     "oxlint-tsgolint": "^7.0.2001",
+    "release-it": "^21.0.2",
     "seedrandom": "^3.0.5",
     "simple-git-hooks": "^2.13.1",
     "tsdown": "^0.22.14",
