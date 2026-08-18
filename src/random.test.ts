@@ -1,13 +1,20 @@
 import seedrandom from 'seedrandom'
 import { assert, expect, test } from 'vitest'
 
-import { ARC4RNG, FunctionRNG, MathRandomRNG, XOR128RNG } from './generators'
+import {
+  ARC4RNG,
+  FunctionRNG,
+  MathRandomRNG,
+  XOR128RNG,
+  Xoshiro128StarStarRNG
+} from './generators'
 import type { RNG } from './rng'
 import random, { Random } from './random'
 
 const builtInRNGs: Array<[string, () => RNG]> = [
   ['ARC4RNG', () => new ARC4RNG('test-seed')],
   ['XOR128RNG', () => new XOR128RNG('test-seed')],
+  ['Xoshiro128StarStarRNG', () => new Xoshiro128StarStarRNG('test-seed')],
   [
     'FunctionRNG',
     () => {
@@ -22,7 +29,8 @@ const builtInRNGs: Array<[string, () => RNG]> = [
 
 const seededBuiltInRNGs: Array<[string, (seed: string) => RNG]> = [
   ['ARC4RNG', (seed) => new ARC4RNG(seed)],
-  ['XOR128RNG', (seed) => new XOR128RNG(seed)]
+  ['XOR128RNG', (seed) => new XOR128RNG(seed)],
+  ['Xoshiro128StarStarRNG', (seed) => new Xoshiro128StarStarRNG(seed)]
 ]
 
 function range(count: number): number[] {
@@ -33,11 +41,20 @@ function sample(random: Random, count: number): number[] {
   return Array.from({ length: count }, () => random.float())
 }
 
-test('Seeded Random matches the ARC4 sequence from seedrandom', () => {
-  const actual = new Random('test-seed')
+test('ARC4RNG matches the ARC4 sequence from seedrandom', () => {
+  const actual = new Random(new ARC4RNG('test-seed'))
   const expected = seedrandom('test-seed')
 
-  expect(actual.float()).toBe(expected())
+  expect(sample(actual, 10)).toEqual(
+    Array.from({ length: 10 }, () => expected())
+  )
+})
+
+test('Seeded Random uses xoshiro128**', () => {
+  const actual = new Random('test-seed')
+
+  expect(actual.rng).toBeInstanceOf(Xoshiro128StarStarRNG)
+  expect(actual.rng.name).toBe('xoshiro128**')
 })
 
 test('Seeded Random produces distinct first uniform values for distinct string seeds', () => {

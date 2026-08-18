@@ -39,7 +39,7 @@ test('Random constructor', () => {
   expect(rng3.rng.name).toEqual('random')
 
   const rng4 = new Random('example-seed-string')
-  expect(rng4.rng.name).toEqual('arc4')
+  expect(rng4.rng.name).toEqual('xoshiro128**')
 })
 
 test('random seed consistency', () => {

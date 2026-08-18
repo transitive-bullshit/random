@@ -1,6 +1,6 @@
 import type { Seed, SeedOrRNG } from './types'
-import { ARC4RNG } from './generators/arc4'
 import { FunctionRNG } from './generators/function'
+import { Xoshiro128StarStarRNG } from './generators/xoshiro128-star-star'
 import { RNG } from './rng'
 
 export function createRNG(seedOrRNG?: SeedOrRNG): RNG {
@@ -15,7 +15,7 @@ export function createRNG(seedOrRNG?: SeedOrRNG): RNG {
       return new FunctionRNG(seedOrRNG)
 
     default:
-      return new ARC4RNG(seedOrRNG)
+      return new Xoshiro128StarStarRNG(seedOrRNG)
   }
 
   throw new TypeError(`Invalid seed or RNG: ${seedOrRNG as string}`)
