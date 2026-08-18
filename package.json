@@ -2,75 +2,85 @@
   "name": "random",
   "version": "5.4.1",
   "description": "Seedable random number generator supporting many common distributions.",
-  "repository": "transitive-bullshit/random",
-  "author": "Travis Fischer <travis@transitivebullsh.it>",
+  "keywords": [
+    "bates",
+    "d3-random",
+    "distribution",
+    "exponential",
+    "gaussian",
+    "generator",
+    "irwinhall",
+    "lognormal",
+    "normal",
+    "number",
+    "poisson",
+    "prng",
+    "probability",
+    "pseudorandom",
+    "random",
+    "rng",
+    "seedrandom",
+    "stats",
+    "uniform"
+  ],
   "license": "MIT",
-  "type": "module",
-  "main": "dist/index.js",
+  "author": "Travis Fischer <travis@transitivebullsh.it>",
+  "repository": "transitive-bullshit/random",
   "source": "./src/index.ts",
-  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "type": "module",
   "sideEffects": false,
+  "main": "dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "default": "./dist/index.js"
     }
   },
-  "files": [
-    "dist"
-  ],
-  "packageManager": "pnpm@10.4.1",
-  "engines": {
-    "node": ">=18"
-  },
   "scripts": {
-    "build": "tsup",
-    "dev": "tsup --watch",
-    "prebuild": "run-s clean",
-    "predev": "run-s clean",
-    "clean": "del dist",
+    "build": "tsdown",
+    "dev": "tsdown --watch",
     "pretest": "run-s build",
-    "test": "run-s test:*",
-    "test:lint": "eslint .",
-    "test:prettier": "prettier '**/*.{js,jsx,ts,tsx}' --check",
+    "test": "run-p test:*",
+    "test:format": "oxfmt --check",
+    "test:lint": "oxlint",
     "test:typecheck": "tsc --noEmit",
-    "test:unit": "vitest run"
+    "test:unit": "vitest run",
+    "fix": "run-s fix:*",
+    "fix:format": "oxfmt",
+    "fix:lint": "oxlint --fix"
   },
   "devDependencies": {
-    "@fisch0920/eslint-config": "^1.4.0",
+    "@fisch0920/config": "^2.0.2",
     "@total-typescript/ts-reset": "^0.6.1",
-    "@types/node": "^22.13.5",
+    "@types/node": "^26.2.0",
     "@types/seedrandom": "^3.0.8",
-    "del-cli": "^6.0.0",
-    "eslint": "^8.57.1",
-    "npm-run-all2": "^7.0.2",
-    "prettier": "^3.5.2",
+    "npm-run-all2": "^9.0.3",
+    "oxfmt": "^0.63.0",
+    "oxlint": "^1.78.0",
+    "oxlint-tsgolint": "^7.0.2001",
     "seedrandom": "^3.0.5",
-    "tsup": "^8.3.6",
-    "tsx": "^4.19.3",
-    "typescript": "^5.7.3",
-    "vitest": "^3.0.7"
+    "simple-git-hooks": "^2.13.1",
+    "tsdown": "^0.22.14",
+    "tsx": "^4.23.12",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.10"
   },
-  "keywords": [
-    "random",
-    "number",
-    "generator",
-    "rng",
-    "prng",
-    "stats",
-    "d3-random",
-    "probability",
-    "seedrandom",
-    "distribution",
-    "pseudorandom",
-    "uniform",
-    "normal",
-    "gaussian",
-    "lognormal",
-    "poisson",
-    "exponential",
-    "irwinhall",
-    "bates"
-  ]
+  "simple-git-hooks": {
+    "pre-commit": "npx lint-staged"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "oxfmt",
+      "oxlint --fix"
+    ]
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "packageManager": "pnpm@11.22.0"
 }

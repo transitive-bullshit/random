@@ -2,7 +2,7 @@
 
 > Seedable random number generator supporting many common distributions.
 
-[![NPM](https://img.shields.io/npm/v/random.svg)](https://www.npmjs.com/package/random) [![Build Status](https://github.com/transitive-bullshit/random/actions/workflows/main.yml/badge.svg)](https://github.com/transitive-bullshit/random/actions/workflows/main.yml) [![MIT License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/transitive-bullshit/random/blob/main/license) [![Prettier Code Formatting](https://img.shields.io/badge/code_style-prettier-brightgreen.svg)](https://prettier.io)
+[![NPM](https://img.shields.io/npm/v/random.svg)](https://www.npmjs.com/package/random) [![Build Status](https://github.com/transitive-bullshit/random/actions/workflows/main.yml/badge.svg)](https://github.com/transitive-bullshit/random/actions/workflows/main.yml) [![MIT License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/transitive-bullshit/random/blob/main/license) [![Code style enforced by Oxc](https://img.shields.io/badge/code_style-oxc-brightgreen.svg)](https://oxc.rs)
 
 Welcome to the most **random** module on npm! 😜
 
@@ -185,8 +185,7 @@ Type: `function ()`
 
 - **See: RNG.clone**
 
-Creates a new `Random` instance, optionally specifying parameters to
-set a new seed.
+Creates a new `Random` instance, optionally specifying parameters to set a new seed.
 
 Type: `function (args, seed, opts): Random`
 
@@ -198,11 +197,7 @@ Type: `function (args, seed, opts): Random`
 
 #### [use](https://github.com/transitive-bullshit/random/blob/e11a840a1cfe0f5bd9c43640f9645a0b28f61406/src/random.js#L87-L89)
 
-Sets the underlying pseudorandom number generator used via
-either an instance of `seedrandom`, a custom instance of RNG
-(for PRNG plugins), or a string specifying the PRNG to use
-along with an optional `seed` and `opts` to initialize the
-RNG.
+Sets the underlying pseudorandom number generator used via either an instance of `seedrandom`, a custom instance of RNG (for PRNG plugins), or a string specifying the PRNG to use along with an optional `seed` and `opts` to initialize the RNG.
 
 Type: `function (args)`
 
@@ -234,8 +229,7 @@ Type: `function (): number`
 
 #### [float](https://github.com/transitive-bullshit/random/blob/e11a840a1cfe0f5bd9c43640f9645a0b28f61406/src/random.js#L138-L140)
 
-Samples a uniform random floating point number, optionally specifying
-lower and upper bounds.
+Samples a uniform random floating point number, optionally specifying lower and upper bounds.
 
 Convence wrapper around `random.uniform()`
 
@@ -248,8 +242,7 @@ Type: `function (min, max): number`
 
 #### [int](https://github.com/transitive-bullshit/random/blob/e11a840a1cfe0f5bd9c43640f9645a0b28f61406/src/random.js#L152-L154)
 
-Samples a uniform random integer, optionally specifying lower and upper
-bounds.
+Samples a uniform random integer, optionally specifying lower and upper bounds.
 
 Convence wrapper around `random.uniformInt()`
 
@@ -262,8 +255,7 @@ Type: `function (min, max): number`
 
 #### [integer](https://github.com/transitive-bullshit/random/blob/e11a840a1cfe0f5bd9c43640f9645a0b28f61406/src/random.js#L168-L170)
 
-Samples a uniform random integer, optionally specifying lower and upper
-bounds.
+Samples a uniform random integer, optionally specifying lower and upper bounds.
 
 Convence wrapper around `random.uniformInt()`
 
@@ -330,8 +322,7 @@ Type: `function (min, max): function`
 
 #### [uniformBoolean](https://github.com/transitive-bullshit/random/blob/e11a840a1cfe0f5bd9c43640f9645a0b28f61406/src/random.js#L230-L232)
 
-Generates a [Discrete uniform distribution](https://en.wikipedia.org/wiki/Discrete_uniform_distribution),
-with two possible outcomes, `true` or `false`.
+Generates a [Discrete uniform distribution](https://en.wikipedia.org/wiki/Discrete_uniform_distribution), with two possible outcomes, `true` or `false`.
 
 This method is analogous to flipping a coin.
 
@@ -508,5 +499,3 @@ Some distributions and PRNGs are ported from C++ [boost::random](https://www.boo
 ## License <!-- omit in toc -->
 
 MIT © [Travis Fischer](https://transitivebullsh.it)
-
-Support my OSS work by <a href="https://twitter.com/transitive_bs">following me on twitter <img src="https://storage.googleapis.com/saasify-assets/twitter-logo.svg" alt="twitter" height="24px" align="center"></a>
