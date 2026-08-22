@@ -4,8 +4,9 @@ minimumReleaseAge: 1440
 
 minimumReleaseAgeExclude:
   - '@fisch0920/config'
+  - '@fisch0920/oxlint-plugin-anti-slop'
 
 allowBuilds:
   esbuild: true
-  fsevents: set this to true or false
+  fsevents: true
   simple-git-hooks: true
